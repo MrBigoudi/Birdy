@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { lazy, Suspense } from "react";
+import { 
+    BrowserRouter as Router, 
+    Routes,
+    Route,
+} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import * as ROUTES from "./constants/routes.js";
 
-export default App;
+const Dashboard = lazy(() => import ('./pages/dashboard.js'));
+const Login = lazy(() => import ('./pages/login.js'));
+const Signup = lazy(() => import ('./pages/signup.js'));
+const Profile = lazy(() => import ('./pages/profile.js'));
+const NotFound = lazy(() => import ('./pages/not-found.js'));
+
+export default function App(){
+    return(
+        <Router>
+            <Suspense fallback={<p>Loading...</p>}>
+                <Routes>
+                    <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
+                    <Route path={ROUTES.LOGIN} element={<Login />} />
+                    <Route path={ROUTES.SIGN_UP} element={<Signup />} />
+                    <Route path={ROUTES.PROFILE} element={<Profile />} />
+                    <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
+                </Routes>
+            </Suspense>
+        </Router>
+    )
+};
