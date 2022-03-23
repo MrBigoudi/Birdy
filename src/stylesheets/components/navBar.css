@@ -1,0 +1,8 @@
+.nav-bar{
+    min-width: 200px;
+}
+
+.nav-link{
+    padding-top: 20px;
+    text-align: center;
+}

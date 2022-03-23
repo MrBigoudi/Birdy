@@ -1,0 +1,24 @@
+.menu-icon{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 30px 15px;
+    border-radius: 30px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border: none;
+    cursor:pointer;
+}
+
+.menu-icon:hover{
+    background-color: #44475a;
+}
+
+.menu-icon-img{
+    margin-right: 15px;
+    padding-left: 10px;
+}
+
+.menu-icon-msg{
+    font-size: 18px;
+}

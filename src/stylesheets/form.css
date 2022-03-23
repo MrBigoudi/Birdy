@@ -1,61 +1,69 @@
-.login-main{
+.form-page-main{
     justify-content: center;
     align-items: center;
     height: 100%;
     text-align: center;
 }
 
-.login-main > * {
+.form-page-main > * {
     background-color: #44475a;
     border-radius: 5px;
     padding: 15px;
 }
 
-.login-form-container{
+.form-container{
     align-items: center;
     min-width: 400px;
     padding-top: 20px;
 }
 
-.login-form-container > *{
+.form-container > *{
     width:100%;
 }
 
-.login-form{
+.base-form{
     gap: 5px;
 }
 
-.login-form > input{
+.base-form > input{
     margin-top: 5px;
     padding: 15px;
     border-radius: 10px;
     border: none;
 }
 
-.login-form-input{
+.base-form-footer{
+    min-width: 400px;
+}
+
+.form-input{
+    margin-top: 5px;
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
     background-color: #373949;
     font-size: large;
     color: #f8f8f2;
 }
 
-.login-form-input::placeholder{
+.form-input::placeholder{
     color:#5c5e69;
 }
 
-.login-form-input:hover{
+.form-input:hover{
     background-color: #323444;
 }
 
-.login-form-input:focus{
+.form-input:focus{
     outline: 0;
     background-color: #282a36;
 }
 
-.login-form-input:hover::placeholder, .login-form-input:focus::placeholder{
+.form-input:hover::placeholder, .form-input:focus::placeholder{
     color: #44475a;
 }
 
-.login-form-submit{
+.form-submit{
     background-color: #5dcbe4;
     font-size: large;
     font-weight: bold;
@@ -63,27 +71,27 @@
     color: #282a36;
 }
 
-.login-form-submit:hover{
+.form-submit:hover{
     background-color: #8be9fd;
 }
 
-.login-invalid{
+.form-submit:focus{
+    outline: 0;
+}
+
+.submit-invalid{
     opacity: 0.2;
     cursor: no-drop;
 }
 
-.login-invalid:hover{
+.submit-invalid:hover{
     background-color: #5dcbe4;
 }
 
-.login-no-account{
-    min-width: 400px;
+.form-error {
+    max-width: fit-content;
 }
 
-.login-ref-signup:link, .login-ref-signup:visited{
-    color: #ff79c6;
-}
-
-.login-ref-signup:hover{
-    color: #bd93f9;
+.submit{
+    cursor: pointer;
 }

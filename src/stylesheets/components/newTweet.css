@@ -1,0 +1,15 @@
+.new-tweet-container{
+    margin-left: 2px;
+    width: 100%;
+}
+
+.new-tweet-text{
+    font-size: 1.3em;
+    outline: 0;
+    background-color: #282a36;
+    border: none;
+    min-height: 40px;
+    width: 95%;
+    color: white;
+    resize:none;
+}

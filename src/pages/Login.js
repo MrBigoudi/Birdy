@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 import * as ROUTES from "../constants/routes.js";
+import * as ERROR_MSG from "../constants/errorMessages.js";
 
 import BirdyLogo from "../atomComponents/Birdy-logo.js";
-import "../stylesheets/login.css";
+import "../stylesheets/form.css";
+
+import { checkLogin } from "../database/users.js";
 
 export default function Login(){
+
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState(
         {emailAddress:"", password:""}
     );
 
     const [error, setError] = useState("");
+
     const isInvalid = formData.password === "" || formData.emailAddress === "";
 
     useEffect( () => {
@@ -27,13 +34,27 @@ export default function Login(){
         })
     };
 
+    const handleLogin = async (event) => {
+        event.preventDefault();
+
+        try{
+            await checkLogin(formData.emailAddress, formData.password);
+            navigate(ROUTES.DASHBOARD);
+        } catch (err) {
+            setError(err.message);
+            if(err.message === ERROR_MSG.WRONG_PASSWD){
+                setFormData( prev => {return {...prev, password:""}});
+            }
+        }
+    }
+
     return(
-        <main className="login-main column gap20">
-            <div className="login-form-container column gap20">
+        <main className="form-page-main column gap20">
+            <div className="form-container column gap20">
                 <BirdyLogo />
-                <form className="login-form column" method="POST">
+                <form className="base-form column" onSubmit={handleLogin}>
                     <input
-                        className="login-form-input" 
+                        className="form-input" 
                         type="email" 
                         placeholder="Email address" 
                         aria-label="Enter your email address"
@@ -42,7 +63,7 @@ export default function Login(){
                         value={formData.emailAddress}
                     />
                     <input
-                        className="login-form-input" 
+                        className="form-input" 
                         type="password" 
                         placeholder="Password" 
                         aria-label="Enter your password"
@@ -51,17 +72,18 @@ export default function Login(){
                         value={formData.password}                        
                     />
                     <input 
-                        className={`login-form-submit ${isInvalid && "login-invalid"}`}
+                        className={`form-submit ${isInvalid && "submit-invalid" || "submit"}`}
                         type="submit" 
                         value="Log In"
                         disabled={isInvalid}
                     />
                 </form>
+                {error && <p className="error-message form-error">{error}</p>}
             </div>
-            <div className="login-no-account">
+            <div className="base-form-footer">
                 <p>
                     Don't have an account?&ensp;
-                    <Link className="login-ref-signup" to={ROUTES.SIGN_UP}>
+                    <Link className="link-route" to={ROUTES.SIGN_UP}>
                         Sign up
                     </Link>
                 </p>
