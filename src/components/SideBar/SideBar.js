@@ -6,14 +6,14 @@ import SearchBar from "./SearchBar.js";
 
 import "../../stylesheets/components/sideBar.css"
 
-export default function SideBar(){
+export default function SideBar(props){
     return(
-        <section>
+        <section className="side-bar">
             <SearchBar />
             <div className="side-bar-connections">
                 <div className="link-handler">
-                    <Link className="link-route link-no-style link-blue" to={ROUTES.LOGIN}>
-                        Log In
+                    <Link className="link-route link-no-style link-blue" to={props.logged ? ROUTES.DASHBOARD : ROUTES.LOGIN} >
+                        {props.logged ? "Log Out" : "Log In"}
                     </Link>
                 </div>
                 <div className="link-handler">

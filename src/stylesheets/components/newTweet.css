@@ -1,3 +1,7 @@
+.new-tweet{
+    border-top: 1px solid #44475a;
+}
+
 .new-tweet-container{
     margin-left: 2px;
     width: 100%;

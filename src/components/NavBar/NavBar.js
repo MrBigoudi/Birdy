@@ -1,8 +1,7 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import * as ROUTES from "../../constants/routes.js";
-import * as ERROR_MSG from "../../constants/errorMessages.js";
 
 import BirdyLogo from "../../atomComponents/Birdy-logo.js";
 import MenuIcon from "./MenuIcon.js";
@@ -23,7 +22,7 @@ export default function NavBar(props){
     return (
         <nav className="nav-bar">
             <div className="nav-link">
-                <Link className="link-no-style" to={ROUTES.DASHBOARD}>
+                <Link className="link-no-style" to={props.logged ? ROUTES.PROFILE : ROUTES.DASHBOARD}>
                     <BirdyLogo />
                 </Link>
             </div>

@@ -39,7 +39,7 @@ export default function Login(){
 
         try{
             await checkLogin(formData.emailAddress, formData.password);
-            navigate(ROUTES.DASHBOARD);
+            navigate(ROUTES.PROFILE);
         } catch (err) {
             setError(err.message);
             if(err.message === ERROR_MSG.WRONG_PASSWD){

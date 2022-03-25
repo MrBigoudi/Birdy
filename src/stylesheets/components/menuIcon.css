@@ -1,11 +1,13 @@
 .menu-icon{
     display: flex;
     justify-content: flex-start;
+    width: fit-content;
     align-items: center;
     margin: 30px 15px;
     border-radius: 30px;
     padding-top: 3px;
     padding-bottom: 3px;
+    padding-right: 10px;
     border: none;
     cursor:pointer;
 }

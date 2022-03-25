@@ -15,7 +15,7 @@ export default function TweetDeleted(props){
     }
 
     return (
-        <article className="tweet">
+        <article className="tweet tweet-deleted">
             <span className="tweet-del-msg color-light-grey">This tweet has been successfully deleted</span>
             <input className="tweet-del-res" type="button" value="Res" onClick={(event) => props.onDelete(event, handleDelete())} />
         </article>

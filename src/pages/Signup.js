@@ -48,7 +48,7 @@ export default function Signup(){
         try{
             await checkAlreadyExist(formData.username, formData.emailAddress);
             addUserFromSignup(formData);
-            navigate(ROUTES.DASHBOARD);
+            navigate(ROUTES.PROFILE);
         } catch (err) {
             setError(err.message);
         }

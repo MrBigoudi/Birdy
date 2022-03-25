@@ -14,32 +14,38 @@ export default function Timeline(props){
                                         return [item, false]; //[value, deleted?]
                                     }));
 
-    const tweets = tweetList.map(item => {
-        if (!item[1])
-        {
-            return(
-                <Tweet 
-                    key={item[0].getId()}
-                    id={item[0].getId()}
-                    tweet={item[0]}
-                    default={props.default}
-                    deleted={false}
-                    onDelete={handleDeleteTweet}
-                />
-            );
-        }
-        else
-        {
-            return(
-                <TweetDeleted 
-                    key={item[0].getId()} 
-                    id={item[0].getId()} 
-                    deleted={true} 
-                    onDelete={handleDeleteTweet}
-                />
-            );
-        }
-    });
+    function genTweetsToRender(){
+        return (
+            tweetList.map(item => {
+                if (!item[1])
+                {
+                    return(
+                        <Tweet 
+                            key={item[0].getId()}
+                            id={item[0].getId()}
+                            tweet={item[0]}
+                            default={props.default}
+                            deleted={false}
+                            onDelete={handleDeleteTweet}
+                        />
+                    );
+                }
+                else
+                {
+                    return(
+                        <TweetDeleted 
+                            key={item[0].getId()} 
+                            id={item[0].getId()} 
+                            deleted={true} 
+                            onDelete={handleDeleteTweet}
+                        />
+                    );
+                }
+            })
+        )
+    }
+
+    const tweets = genTweetsToRender();
 
     function handleDeleteTweet(event, id){
         //console.log("handleDeleteTweet");
@@ -60,14 +66,22 @@ export default function Timeline(props){
         });
     }
 
+    function handleRenderNewTweet(event){
+        console.log("handleRenderNewTweet");
+        setTweetList( prev => {
+            prev.unshift([props.tweets[0], false]);
+            return(prev);
+        });
+    }
+
     return (
         <div className="timeline column">
             <header className="timeline-header">
                 <div onClick={props.scroll} className="timeline-home">Home</div>
             </header>
+            {/* if default timeline, no new tweets needed */}
+            {props.default || <NewTweet onPost={handleRenderNewTweet} user={props.user} tweets={props.tweets}/>}
             <main id="timeline-main" className="timeline-main">
-                {/* if default timeline, no new tweets needed */}
-                {props.default || <NewTweet />}
                 <section>
                     {tweets}
                 </section>
