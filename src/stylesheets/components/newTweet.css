@@ -2,6 +2,10 @@
     border-top: 1px solid #44475a;
 }
 
+/* #new-tweet{
+    border:2px solid red;
+} */
+
 .new-tweet-container{
     margin-top: 5px;
     margin-left: 2px;
@@ -19,10 +23,24 @@
     resize:none;
 }
 
-.image-selector{
-    display:none;
+.new-tweet-button{
+    text-align: center;
+    width: 70px;
+    padding: 2px 0;
+    outline:0;
+    border-radius: 10px;
+    background-color: #323444;
+    color: #aaaaaa;
+    border: 1px solid transparent;
 }
 
-.new-tweet-image-selector{
-    width: 50px;
+.new-tweet-button:hover{
+    border: 1px solid #8be9fd;
+    color: #8be9fd;
+}
+
+.new-tweet-icons{
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
 }

@@ -6,9 +6,8 @@ import "../../stylesheets/form.css";
 
 export default function NewTweet(props){
 
-    const [tweetContent, setTweetContent] = useState(
-        {text:"", image:"", imageDom:""}
-    );
+    const initTweetContent = {text:"", image:"", imageDom:"", gifDom:""}
+    const [tweetContent, setTweetContent] = useState(initTweetContent);
 
     const [error, setError] = useState(true);
 
@@ -65,12 +64,12 @@ export default function NewTweet(props){
     }
 
     function clearNewTweet(){
-        setTweetContent(prev => {return {text:"", image:"", imageDom:""};});
+        setTweetContent(prev => {return initTweetContent;});
         setError(prev => true);
     }
 
     return(
-        <div className="tweet new-tweet">
+        <div id="new-tweet" className="tweet new-tweet">
             <div className="left-side-tweet">
             <img src={props.user.getProfilePicture()}
                     alt="profile picture"
@@ -85,7 +84,7 @@ export default function NewTweet(props){
                 </header>
                 <form>
                     <div className="tweet-content">
-                        {tweetContent.image!="" && <img className="tweet-image" src={tweetContent.image} width={"250px"} alt="not found"/>}
+                        {tweetContent.image!=="" && <img className="tweet-image" src={tweetContent.image} width={"250px"} alt="not found"/>}
                         <textarea className="new-tweet-text" 
                             placeholder="What's happening ?" required 
                             maxLength="140" rows="2"
@@ -95,15 +94,25 @@ export default function NewTweet(props){
                         />
                     </div>
                     <footer className="tweet-footer">
-                        <label className="new-tweet-image-selector" htmlFor="imageFile">Img</label>
-                        <input 
-                            type="file" name="imageDom" id="imageFile" 
-                            className="image-selector" 
-                            accept="image/*"
-                            onChange={(event) => {handleChange(event); onImageChange(event);}}
-                            value={tweetContent.imageDom}
-                        />
-                        <input className="submit" onClick={ (event) => handlePostTweet(event) } type="button" value="Tweet"/>
+                        <div className="new-tweet-icons">
+                            <label className="small-font new-tweet-button pointer" htmlFor="imageFile">Img</label>
+                            <input 
+                                type="file" name="imageDom" id="imageFile" 
+                                className="display-none" 
+                                accept="image/png"
+                                onChange={(event) => {handleChange(event); onImageChange(event);}}
+                                value={tweetContent.imageDom}
+                            />
+                            <label className="small-font new-tweet-button pointer" htmlFor="gifFile">Gif</label>
+                            <input 
+                                type="file" name="gifDom" id="gifFile" 
+                                className="display-none" 
+                                accept="image/gif"
+                                onChange={(event) => {handleChange(event); onImageChange(event);}}
+                                value={tweetContent.gifDom}
+                            />
+                        </div>
+                        <input className="small-font new-tweet-button pointer" onClick={ (event) => handlePostTweet(event) } type="button" value="Tweet"/>
                     </footer>
                 </form>
             </div>

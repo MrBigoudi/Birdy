@@ -679,7 +679,7 @@ App
 
 ### Avancement
 
-> <ul><li>En cours (il manque notemment l'intégratioon d'images et de gif animés</li></ul>
+> <ul><li>En cours</li></ul>
 
 ### Preview
 
