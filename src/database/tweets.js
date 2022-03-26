@@ -7,20 +7,23 @@ export class Tweet{
     #id = `tweet${++Tweet.#PRIVATE_ID_GENERATOR}`;
     #author; //a user
     #content;
+    #image;
     #comments = []; //array of tweet id
     #nbReplies = 0;
     #nbRetweets = 0;
     #nbLikes = 0
     #creationDate = new Date();
     
-    constructor(author, content){
+    constructor(author, content, image){
         this.#author = author;
-        this.#content = content;  
+        this.#content = content;
+        this.#image = image;  
     }
 
     getId(){return this.#id;}
     getAuthor(){return this.#author;}
     getContent(){return this.#content;}
+    getImage(){return this.#image;}
     getComments(){return this.#comments;}
     getNbReplies(){return this.#nbReplies;}
     getNbRetweets(){return this.#nbRetweets;}
@@ -46,7 +49,7 @@ export const tweets = [];
 //temporary
 for (let i=0; i<20; i++){    
     const usr = Math.floor(Math.random()*users.length);
-    users[usr].createTweet(`test tweet ${i}`);
+    users[usr].createTweet(`test tweet ${i}`, "");
 }
 
-users[0].createTweet("test www.google.com test");
+users[0].createTweet("test www.google.com test", "");

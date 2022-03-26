@@ -28,7 +28,11 @@
 
 .timeline-main{
     height: 100%;
-    overflow-y: auto;
+    overflow-y: auto; 
+}
+
+.timeline-tweets{
+    width:100%;
 }
 
 ::-webkit-scrollbar{

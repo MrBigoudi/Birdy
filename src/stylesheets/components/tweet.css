@@ -61,7 +61,14 @@
 }
 
 .tweet-content{
+    display: flex;
+    flex-flow: column nowrap;
     padding-left: 15px;
     padding-top: 5px;
     padding-bottom: 5px;
+}
+
+.tweet-image{
+    align-self: center;
+    padding: 10px 0;
 }

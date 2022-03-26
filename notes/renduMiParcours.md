@@ -672,6 +672,9 @@ App
 >    <li>
 >         tweetContent: le contenu du formulaire caché derrière la création du nouveau tweet
 >    </li>
+>    <li>
+>         error: indique s'il y a une erreur dans le tweet
+>    </li>
 > </ul>
 
 ### Avancement

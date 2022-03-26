@@ -49,8 +49,8 @@ export class User{
         return username.toLowerCase() === this.#username.toLowerCase();
     }
 
-    createTweet(content){
-        let twt = new Tweet(this, content);
+    createTweet(content, image){
+        let twt = new Tweet(this, content, image);
         this.#tweets.unshift(twt);
         tweets.unshift(twt);//global tweet array
     }

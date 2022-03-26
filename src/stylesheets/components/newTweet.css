@@ -3,6 +3,7 @@
 }
 
 .new-tweet-container{
+    margin-top: 5px;
     margin-left: 2px;
     width: 100%;
 }
@@ -16,4 +17,12 @@
     width: 95%;
     color: white;
     resize:none;
+}
+
+.image-selector{
+    display:none;
+}
+
+.new-tweet-image-selector{
+    width: 50px;
 }

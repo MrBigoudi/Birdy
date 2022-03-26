@@ -79,6 +79,7 @@ export default function Tweet(props){
                     </span>
                 </header>
                 <main className="tweet-content">
+                    {props.tweet.getImage()!="" && <img className="tweet-image" src={props.tweet.getImage()} alt="Not Found" width={"300px"} />}
                     <AutoLink text={text} 
                         renderText={(txt) => <span className="default-font">{txt}</span>}
                         renderLink={(txt, match) => <CustomLink url={match.getAnchorHref()} msg={txt}/>}

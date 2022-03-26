@@ -15,6 +15,7 @@ export default function Timeline(props){
                                     }));
 
     function genTweetsToRender(){
+        //console.log(tweetList);
         return (
             tweetList.map(item => {
                 if (!item[1])
@@ -67,10 +68,11 @@ export default function Timeline(props){
     }
 
     function handleRenderNewTweet(event){
-        console.log("handleRenderNewTweet");
+        //console.log("handleRenderNewTweet");
         setTweetList( prev => {
+            //console.log("setter");
             prev.unshift([props.tweets[0], false]);
-            return(prev);
+            return([...prev]);
         });
     }
 
@@ -80,9 +82,9 @@ export default function Timeline(props){
                 <div onClick={props.scroll} className="timeline-home">Home</div>
             </header>
             {/* if default timeline, no new tweets needed */}
-            {props.default || <NewTweet onPost={handleRenderNewTweet} user={props.user} tweets={props.tweets}/>}
+            {props.default || <NewTweet onPost={handleRenderNewTweet} user={props.user} />}
             <main id="timeline-main" className="timeline-main">
-                <section>
+                <section className="timeline-tweets">
                     {tweets}
                 </section>
             </main>

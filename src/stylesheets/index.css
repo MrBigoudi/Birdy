@@ -128,3 +128,7 @@ h1{
 .purple{
     color: rgb(189, 147, 249, 0.7);
 }
+
+.huge-font{
+    font-size: 1.5em;
+}
