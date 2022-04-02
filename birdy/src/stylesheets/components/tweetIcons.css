@@ -1,0 +1,39 @@
+.tweet-icon-container{
+    display: flex;
+    align-items: center;
+    /* border:2px solid red; */
+}
+
+.tweet-icon{
+    height: 20px;
+    padding: 10px;
+    text-align: center;
+}
+
+.comments:hover {
+    background-color: rgba(138, 255, 128, 0.7);
+}
+
+.commented{
+    color: #8aff80;
+}
+
+.retweet:hover{
+    background-color:rgba(255, 149, 128, 0.7);
+}
+
+.retweeted{
+    color: #ff9580;
+}
+
+.like:hover{
+    background-color: rgba(255, 121, 198, 0.7);
+}
+
+.liked{
+    color: #ff79c6;
+}
+
+.share:hover{
+    background-color: rgba(189, 147, 249, 0.7);
+}

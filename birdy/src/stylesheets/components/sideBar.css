@@ -1,0 +1,12 @@
+.side-bar-connections{
+    display: flex;
+    justify-content: space-evenly;
+    min-width: 200px;
+    padding: 10px;
+    margin: 0 15px;
+    gap: 25px;
+}
+
+/* .side-bar{
+    border:2px solid red;
+} */
