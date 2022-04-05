@@ -96,7 +96,7 @@ export default function Tweet(props){
                 </footer>
             </div>
             <div className="ride-side-tweet">
-                <input className="tweet-del-res" type="button" value="Del" onClick={(event) => props.onDelete(event, handleDelete())} />
+                <input className="tweet-del-res" type="button" value="Hide" onClick={(event) => props.onDelete(event, handleDelete())} />
             </div>
         </article>
     )

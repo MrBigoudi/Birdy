@@ -14,6 +14,8 @@ function init(db){
     });
 
     const users = new User.default(db);
+
+    // login service
     // si on demande l'url "/user/login" on effectue la lambda
     api.post('/user/login', async (req, res) => {
         try{
@@ -28,9 +30,6 @@ function init(db){
                 return;
             }
 
-            // suite....
-            // Vérificatin existence
-            // acces bd
             // Check email address
             if(!users.checkEmailAddress(emailAddress)){
                 res.status(401).json({
@@ -64,6 +63,8 @@ function init(db){
             });
         }
     });
+
+
 
     return api;
 }
