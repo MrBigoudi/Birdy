@@ -5,7 +5,6 @@ const api = require("./api.js");
 const basedir = path.normalize(path.dirname(__dirname));
 console.debug(`Base directory: ${basedir}`);
 
-
 const express = require('express');
 const app = express();
 

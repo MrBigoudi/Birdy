@@ -41,23 +41,30 @@
                 "status": 401,<br>
                 "message": "Unkown email address"<br>
             }<br><br>
-            Erreur: HTTP 401: Unauthorized<br>
+            Erreur: HTTP 403: Forbidden<br>
             {<br>
-                "status": 401,<br>
+                "status": 403,<br>
                 "message": "Invalid password"<br>
             }<br><br>
             Erreur: HTTP 40O: Bad Request<br>
             {<br>
                 "status": 400,<br>
-                "message": "Fields are missing"<br>
+                "message": "Invalid credentials - email address or password missing"<br>
+            }<br><br>
+            Erreur: HTTP 500: Internal Server Error<br>
+            {<br>
+                "status": 500,<br>
+                "message": "Internal error"<br>
             }<br>
         </td>
         <td>
             Données incomplètes -> 400,<br>
             Mauvaise données d'authentification -> 401,<br>
+            Acces non authorise -> 403<br>
+            Erreur interne -> 500<br>
         </td>
-        <td>A faire</td>
-        <td>...</td>
+        <td>En cours</td>
+        <td>api.js, User (in entities/users.js)</td>
         <td>...</td>
     </tr>
 </table>

@@ -13,14 +13,27 @@
     </tr>
     <tr>        
         <td>Logout</td>
-        <td>api/logout</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>api/user/logout avec DELETE</td>
+        <td>Permet de detruire une session</td>
+        <td>Aucun</td>
+        <td>
+            Succes: HTTP 200: Ok<br>
+            {<br>
+            status: 200,<br>
+            message: "Logout successfully"<br>
+            }<br><br>
+            Erreur: HTTP 400: Bad Request<br>
+            {<br>
+                "status": 400,<br>
+                "message": "Unable to logout"<br>
+            }<br>
+        </td>
+        <td>idem</td>
+        <td>
+            Erreur lors de la destruction de session -> 400
+        </td>
+        <td>Fini</td>
+        <td>api.js</td>
+        <td>...</td>
     </tr>
 </table>

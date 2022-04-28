@@ -45,7 +45,7 @@
             Erreur: HTTP 40O: Bad Request<br>
             {<br>
                 "status": 400,<br>
-                "message": "Fields are missing"<br>
+                "message": "Missing Fields"<br>
             }<br><br>
             Erreur: HTTP 409: Conflict<br>
             {<br>
@@ -69,14 +69,14 @@
             }<br>
         </td>
         <td>
-            Champs manquant,<br>
-            Username existe déjà,<br>
-            Email existe déjà,<br>
-            Date de naissance invalide,<br>
-            Nom interdit<br>
+            Champs manquant -> 400<br>
+            Username existe déjà -> 409<br>
+            Email existe déjà -> 409<br>
+            Date de naissance invalide -> 422<br>
+            Nom interdit -> 422<br>
         </td>
-        <td>A faire</td>
-        <td>src/entities/users.js ...</td>
+        <td>En cours</td>
+        <td>api.js, entities/users.js</td>
         <td>...</td>
     </tr>
 </table>
