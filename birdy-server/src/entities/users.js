@@ -1,7 +1,6 @@
 class User{
     constructor(db){
         this.db = db;
-        this.db.loadDatabase();
         // suite plus tard avec la bd
     }
 
@@ -52,6 +51,7 @@ class User{
         });
     }
 
+    //return true if email already exists
     checkEmailAddress(emailAddress){
         return new Promise((resolve, reject) => {
             if(false) {
@@ -63,7 +63,9 @@ class User{
         });
     }
 
-    checkPasswd(passwd){
+    //renvoie l'id de l'utilisateur de mail emailAddress et de mdp passwd
+    //renvoie une erreur si le mdp ne correspond pas
+    checkPasswd(emailAddress, passwd){
         return new Promise((resolve, reject) => {
             let userid = 1; // À remplacer par une requête bd
             if(false) {
@@ -75,8 +77,40 @@ class User{
         });
     }
 
+    //renvoie true si le pseudo existe deja
     checkUsername(username){
-        return true;
+        return new Promise((resolve, reject) => {
+            if(false) {
+                //erreur
+                reject();
+            } else {
+                resolve(true);
+            }
+        });
+    }
+
+    //renvoie true si le nom est valide
+    checkFullName(fullname){
+        return new Promise((resolve, reject) => {
+            if(false) {
+                //erreur
+                reject();
+            } else {
+                resolve(true);
+            }
+        });
+    }
+
+    //renvoie true si la date est valide
+    checkDateOfBirth(dateOfBirth){
+        return new Promise((resolve, reject) => {
+            if(false) {
+                //erreur
+                reject();
+            } else {
+                resolve(true);
+            }
+        });
     }
 }
 

@@ -1,10 +1,7 @@
 const express = require("express");
-const User = require("./entities/users.js");
+const User = require("../entities/users.js");
 
-const Datastore = require('nedb');
-let db = {};
-
-function init(){
+function init(db){
     const api = express.Router();
     // On utilise JSON
     api.use(express.json());
@@ -16,8 +13,7 @@ function init(){
         next();
     });
 
-    db.users = new Datastore("../database/users.db");
-    const users = new User.default(db.users);
+    const users = new User.default(db);
 
     // login service
     // si on demande l'url "/user/login" on effectue la lambda
@@ -44,7 +40,7 @@ function init(){
             }
 
             // Check password
-            let userid = await users.checkPasswd(passwd)
+            let userid = await users.checkPasswd(emailAddress, passwd)
             if (userid) {
                 // Avec middleware express-session
                 req.session.regenerate(function (err) {
@@ -116,7 +112,7 @@ function init(){
         .delete((req, res, next) => res.send(`delete user ${req.params.user_id}`));
 
     //signup service
-    api.post("/user", async (req, res) => {
+    api.post("/user/signup", async (req, res) => {
         try{
             const { username, fullname, dateOfBirth, emailAddress, passwd } = req.body;
             if (!username || !fullname || !dateOfBirth || !emailAddress || !passwd) {
@@ -125,7 +121,7 @@ function init(){
                     message: "Missing Fields"
                 });
                 return;
-            }if(await users.checkUsername(username)){
+            }if(false /*await users.checkUsername(username)*/){
                 res.status(409).json({
                     status: 409,
                     message: "Username already exists"
@@ -143,7 +139,7 @@ function init(){
                     message: "Invalid date of birth"
                 });
                 return;
-            }if(await users.checkEmailAddress(emailAddress)){
+            }if(false/*await users.checkEmailAddress(emailAddress)*/){
                 res.status(409).json({
                     status: 409,
                     message: "Email address already exists"
@@ -175,4 +171,4 @@ function init(){
     return api;
 }
 
-exports.default = init();
+exports.default = init;

@@ -30,8 +30,6 @@ describe("Test creation d'un utilisateur",  () => {
 				// res : 
 				//	json : 
 				//		{ id : 1 }
-				res.should.have.status(404);
-				/*
 				res.should.have.status(201); // HTTP 201 : created
 				console.log(`Retrieving user ${res.body.id}`);
 				return Promise.all([
@@ -48,7 +46,6 @@ describe("Test creation d'un utilisateur",  () => {
 							res.should.have.status(404); // HTTP 404 : not found
 						}),
 				]);
-				*/
 			})
 			.then( () => done(), (err) => done(err))
 			.finally(() => {

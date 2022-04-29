@@ -1,5 +1,6 @@
 const path = require("path");
-const api = require("./api.js");
+const apiUser = require("./api/apiUser.js");
+const Datastore = require('nedb');
 
 // Détermine le répertoire de base
 const basedir = path.normalize(path.dirname(__dirname));
@@ -14,8 +15,11 @@ app.use(session({
     secret: "technoweb rocks"
 }));
 
+let db = {};
+db.users = new Datastore("./database/users.db");
+db.users.loadDatabase();
 
-app.use('/api', api.default);
+app.use('/api', apiUser.default(db.users));
 
 // Démarrage du serveur
 app.on('close', () => {
