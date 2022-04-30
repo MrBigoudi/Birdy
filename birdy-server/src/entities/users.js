@@ -50,10 +50,10 @@ class User{
                 //console.log('try to insert');
                 let newUser = {
                     user_id: `${++User.#PRIVATE_ID_GENERATOR}`,
-                    username: username,
-                    fullname: fullname,
+                    username: username.toLowerCase(),
+                    fullname: fullname.toLowerCase(),
                     dateOfBirth: dateOfBirth,
-                    emailAddress: emailAddress,
+                    emailAddress: emailAddress.toLowerCase(),
                     passwd: passwd,
                     following: {},
                     followers: {},
@@ -145,7 +145,7 @@ class User{
     //renvoie true si le pseudo existe deja
     checkUsername(username){
         return new Promise((resolve, reject) => {
-            this.db.find({ username: username },function (err, docs) {
+            this.db.find({ username: username }, function (err, docs) {
                 const exists = (docs.length!==0);
                 //console.log('exists in checkUsername: ', exists);
                 if(!exists) {
@@ -161,12 +161,13 @@ class User{
     //renvoie true si le nom est valide
     checkFullName(fullname){
         return new Promise((resolve, reject) => {
-            if(false) {
-                //erreur
-                reject();
+            const regName = /^[a-zA-Z]+(\ *[a-zA-Z]*)*$/;
+            if(!regName.test(fullname)) {
+                resolve(false);
             } else {
                 resolve(true);
             }
+           resolve(true);
         });
     }
 

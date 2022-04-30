@@ -63,8 +63,8 @@
             Acces non authorise -> 403<br>
             Erreur interne -> 500<br>
         </td>
-        <td>En cours</td>
-        <td>api.js, User (in entities/users.js)</td>
+        <td>Fini</td>
+        <td>apiUser.js (in src/api/), users.js (in src/entities/), testLogin.js (in /tests)</td>
         <td>...</td>
     </tr>
 </table>

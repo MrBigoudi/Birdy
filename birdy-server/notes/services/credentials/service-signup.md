@@ -75,8 +75,8 @@
             Date de naissance invalide -> 422<br>
             Nom interdit -> 422<br>
         </td>
-        <td>En cours</td>
-        <td>api.js, entities/users.js</td>
+        <td>Fini</td>
+        <td>apiUser.js (in src/api/), users.js (in src/entities/), testSignup.js (in /tests)</td>
         <td>...</td>
     </tr>
 </table>

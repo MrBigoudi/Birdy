@@ -65,7 +65,7 @@ function init(db){
                 });
                 return;
             }
-            // Faux login : destruction de la session et erreur
+            // Faux passwd : destruction de la session et erreur
             req.session.destroy((err) => { });
             res.status(403).json({
                 status: 403,
@@ -135,48 +135,61 @@ function init(db){
     api.post("/user/signup", async (req, res) => {
         try{
             const { username, fullname, dateOfBirth, emailAddress, passwd } = req.body;
+            //console.log('test missing fields');
             if (!username || !fullname || !dateOfBirth || !emailAddress || !passwd) {
                 res.status(400).json({
                     status: 400,
                     message: "Missing Fields"
                 });
                 return;
-            }if(await users.checkUsername(username)){
+            }
+
+            //console.log('test username');
+            if(await users.checkUsername(username)){
                 res.status(409).json({
                     status: 409,
                     message: "Username already exists"
                 });
                 return;
-            }if(! await users.checkFullName(fullname)){
+            }
+
+            //console.log('test fullname');
+            if(! await users.checkFullName(fullname)){
                 res.status(422).json({
                     status: 422,
                     message: "Invalid name"
                 });
                 return;
-            }if(! await users.checkDateOfBirth(dateOfBirth)){
+            }
+            
+            //console.log('test dateofbirth');
+            if(! await users.checkDateOfBirth(dateOfBirth)){
                 res.status(422).json({
                     status: 422,
                     message: "Invalid date of birth"
                 });
                 return;
-            }if(await users.checkEmailAddress(emailAddress)){
+            }
+            
+            //console.log('test email');
+            if(await users.checkEmailAddress(emailAddress)){
                 res.status(409).json({
                     status: 409,
                     message: "Email address already exists"
                 });
                 return;
-            } else {
-                users.create(username, fullname, dateOfBirth, emailAddress, passwd)
-                    .then((user_id) => res.status(201).json({
-                        status: 201,
-                        message: "New user registered successfully",
-                        id: user_id
-                    }))
-                    .catch((err) => res.status(500).json({
-                        status: 500,
-                        message: "Internal error"
-                    }))
-            }
+            } 
+            
+            users.create(username, fullname, dateOfBirth, emailAddress, passwd)
+                .then((user_id) => res.status(201).json({
+                    status: 201,
+                    message: "New user registered successfully",
+                    id: user_id
+                }))
+                .catch((err) => res.status(500).json({
+                    status: 500,
+                    message: "Internal error"
+                }))
         }
         catch(e){
             // Exception
