@@ -20,7 +20,7 @@ describe("Test connection d'un utilisateur",  () => {
 			.post('/api/user/login')
 			.send(login)
 			.then( (res) => {
-				res.should.have.status(200); // HTTP 200 : Ok
+				res.should.have.status(401);
 			})
 			.then( () => done(), (err) => done(err))
 			.finally(() => {

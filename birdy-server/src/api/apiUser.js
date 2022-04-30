@@ -31,7 +31,10 @@ function init(db){
             }
 
             // Check email address
-            if(! await users.checkEmailAddress(emailAddress)){
+            //console.log('test check email address');
+            let checkEmailAddress = await users.checkEmailAddress(emailAddress);
+            //console.log('checkEmailAddress in apiUser: ', checkEmailAddress);
+            if(! checkEmailAddress){
                 res.status(401).json({
                     status: 401,
                     message: "Unkown email address"
@@ -94,22 +97,39 @@ function init(db){
         }
     });
 
-    //delete user service
     api
         .route("/user/:user_id(\\d+)")
+        //get user service
         .get(async (req, res) => {
-        try {
-            const user = await users.get(req.params.user_id);
-            if (!user)
-                res.sendStatus(404);
-            else
-                res.send(user);
-        }
-        catch (e) {
-            res.status(500).send(e);
-        }
-    })
-        .delete((req, res, next) => res.send(`delete user ${req.params.user_id}`));
+            //console.log('test api.get');
+            try {
+                //console.log('test api.get await user');
+                //console.log('id: ', req.params.user_id);
+                const user = await users.get(`${req.params.user_id}`);
+                //console.log('user in api: ', user);
+                if (!user)
+                    res.sendStatus(404);
+                else
+                    res.send(user);
+            }
+            catch (e) {
+                res.status(500).send(e);
+            }
+        })
+        //delete user service
+        .delete(async (req, res, next) => {
+            //console.log('test api.delete');
+            try{
+                //console.log('test api.delete await user');
+                //console.log('id: ', req.params.user_id);
+                const deletedUser = await users.delete(`${req.params.user_id}`);
+                //console.log('deleted user: ', deletedUser);
+                res.send(`delete user ${req.params.user_id}`);
+            }
+            catch (e) {
+                res.status(500).send(e);
+            }
+        });
 
     //signup service
     api.post("/user/signup", async (req, res) => {
@@ -121,7 +141,7 @@ function init(db){
                     message: "Missing Fields"
                 });
                 return;
-            }if(false /*await users.checkUsername(username)*/){
+            }if(await users.checkUsername(username)){
                 res.status(409).json({
                     status: 409,
                     message: "Username already exists"
@@ -139,7 +159,7 @@ function init(db){
                     message: "Invalid date of birth"
                 });
                 return;
-            }if(false/*await users.checkEmailAddress(emailAddress)*/){
+            }if(await users.checkEmailAddress(emailAddress)){
                 res.status(409).json({
                     status: 409,
                     message: "Email address already exists"
