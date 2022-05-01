@@ -72,8 +72,8 @@
             Champs manquant -> 400<br>
             Username existe déjà -> 409<br>
             Email existe déjà -> 409<br>
-            Date de naissance invalide -> 422<br>
-            Nom interdit -> 422<br>
+            Date de naissance au format invalide ou age < 13 ans -> 422<br>
+            Nom au format invalide ou nom inapproprie -> 422<br>
         </td>
         <td>Fini</td>
         <td>apiUser.js (in src/api/), users.js (in src/entities/), testSignup.js (in /tests)</td>

@@ -1,3 +1,6 @@
+const Filter = require('bad-words');
+const filter = new Filter();
+
 class User{
     static #PRIVATE_ID_GENERATOR = 0;
     static #MIN_AGE = 13;
@@ -163,7 +166,7 @@ class User{
     checkFullName(fullname){
         return new Promise((resolve, reject) => {
             const regName = /^[a-zA-Z]+(\ *[a-zA-Z]*)*$/;
-            if(!regName.test(fullname)) {
+            if(!regName.test(filter.clean(fullname))) {
                 resolve(false);
             } else {
                 resolve(true);

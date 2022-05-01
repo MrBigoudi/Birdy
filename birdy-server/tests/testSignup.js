@@ -97,6 +97,14 @@ describe("Test creation d'un utilisateur",  () => {
     		emailAddress: "user11@gmail.com",
 			passwd: "1234"
 		}
+
+		const user12 = {
+			username: "user12",
+			fullname: "ash0le",
+    		dateOfBirth: "2000-05-12",
+    		emailAddress: "user12@gmail.com",
+			passwd: "1234"
+		}
 		
 		// Test create user
 		request
@@ -175,10 +183,18 @@ describe("Test creation d'un utilisateur",  () => {
 							res.should.have.status(400); // HTTP 40O: Bad Request
 						}),
 
-					// Test invalid fullname
+					// Test fullname mauvais format
 					request
 						.post('/api/user/signup')
 						.send(user9)
+						.then( (res) => {
+							res.should.have.status(422); // HTTP 422: Unprocessable Entity
+						}),
+					
+					// Test inappropriate fullname
+					request
+						.post('/api/user/signup')
+						.send(user12)
 						.then( (res) => {
 							res.should.have.status(422); // HTTP 422: Unprocessable Entity
 						}),
