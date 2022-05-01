@@ -68,7 +68,7 @@ class User{
                 this.db.insert(newUser);
             }
 
-            let userid = await this.getUserId(username);
+            let userid = await this.getUserId(username.toLowerCase());
 
             if(exists) {
                 //erreur
@@ -162,6 +162,18 @@ class User{
         });
     }
 
+    //renvoie true si le pseudo n'est pas inapproprie
+    validUsername(username){
+        return new Promise((resolve, reject) => {
+            const regName = /^[a-zA-Z0-9]+$/;
+            if(!regName.test(filter.clean(username))) {
+                resolve(false);
+            } else {
+                resolve(true);
+            }
+        });
+    }
+
     //renvoie true si le nom est valide
     checkFullName(fullname){
         return new Promise((resolve, reject) => {
@@ -171,7 +183,6 @@ class User{
             } else {
                 resolve(true);
             }
-           resolve(true);
         });
     }
 

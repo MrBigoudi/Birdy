@@ -153,6 +153,15 @@ function init(db){
                 return;
             }
 
+            //console.log('test valid username');
+            if(! await users.validUsername(username)){
+                res.status(422).json({
+                    status: 422,
+                    message: "Invalid username"
+                });
+                return;
+            }
+
             //console.log('test fullname');
             if(! await users.checkFullName(fullname)){
                 res.status(422).json({

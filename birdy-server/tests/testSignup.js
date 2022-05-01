@@ -8,6 +8,7 @@ chai.should();
 
 describe("Test creation d'un utilisateur",  () => {
 	it("user", (done) => {
+		let id = 0;
 		const request = chai.request(app.default).keepOpen();
 		const user1 = {
 			user_id:"1",
@@ -105,6 +106,22 @@ describe("Test creation d'un utilisateur",  () => {
     		emailAddress: "user12@gmail.com",
 			passwd: "1234"
 		}
+
+		const user13 = {
+			username: "fuk",
+			fullname: "user13",
+    		dateOfBirth: "2000-05-12",
+    		emailAddress: "user13@gmail.com",
+			passwd: "1234"
+		}
+
+		const user14 = {
+			username: "wrong username",
+			fullname: "user14",
+    		dateOfBirth: "2000-05-12",
+    		emailAddress: "user14@gmail.com",
+			passwd: "1234"
+		}
 		
 		// Test create user
 		request
@@ -112,12 +129,12 @@ describe("Test creation d'un utilisateur",  () => {
 			.send(user1)
 			.then( (res) => {
 				res.should.have.status(201); // HTTP 201 : created
-				let userId = res.body.id;
-				console.log(`Retrieving user ${userId}`);
+				id = res.body.id;
+				console.log(`Retrieving user ${id}`);
 				return Promise.all([
 					// Test acces user infos 
 					request
-						.get(`/api/user/${userId}`)
+						.get(`/api/user/${id}`)
 						.then( (res) => {
 							res.should.have.status(200); // HTTP 200: Ok
 							//chai.assert.deepEqual(res.body, user1);
@@ -214,17 +231,33 @@ describe("Test creation d'un utilisateur",  () => {
 						.then( (res) => {
 							res.should.have.status(422); // HTTP 422: Unprocessable Entity
 						}),
+
+					// Test inappropriate username
+					request
+						.post('/api/user/signup')
+						.send(user13)
+						.then( (res) => {
+							res.should.have.status(422); // HTTP 422: Unprocessable Entity
+						}),
+					
+					// Test username mauvais format
+					request
+						.post('/api/user/signup')
+						.send(user14)
+						.then( (res) => {
+							res.should.have.status(422); // HTTP 422: Unprocessable Entity
+						}),
 				]);
 			})
 			.then( () => {
 				console.log('test delete');
 				// Test delete
 				return request
-					.delete(`/api/user/1`)
+					.delete(`/api/user/${id}`)
 			})
 			.then( () => {
 				return request
-					.get(`/api/user/1`)
+					.get(`/api/user/${id}`)
 					.then( (res) => {
 						res.should.have.status(404);
 					});
