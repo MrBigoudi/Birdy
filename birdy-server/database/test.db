@@ -1,2 +1,2 @@
-{"user_id":"1","username":"pikachu","fullname":"ash pikachu","dateOfBirth":{"$$date":958089600000},"emailAddress":"pika@pokemon.com","passwd":"1234","following":{},"followers":{},"tweets":{},"profilePicture":"../../../birdy-client/images/icons/outline_account_circle_white_36dp_2x.png","dateCreated":{"$$date":1651391351247},"_id":"hCgI1gZynQN79S8B"}
-{"$$deleted":true,"_id":"hCgI1gZynQN79S8B"}
+{"user_id":"1","username":"pikachu","fullname":"ash pikachu","dateOfBirth":{"$$date":958089600000},"emailAddress":"pika@pokemon.com","passwd":"1234","following":{},"followers":{},"tweets":{},"profilePicture":"../../../birdy-client/images/icons/outline_account_circle_white_36dp_2x.png","dateCreated":{"$$date":1651396014364},"_id":"gqORBk2IBFl5bBvi"}
+{"$$deleted":true,"_id":"gqORBk2IBFl5bBvi"}

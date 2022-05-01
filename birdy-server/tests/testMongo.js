@@ -1,8 +1,13 @@
+const path = require("path");
 const Datastore = require('nedb');
+
+// Détermine le répertoire de base
+const basedir = path.normalize(path.dirname(__dirname));
+console.debug(`Base directory: ${basedir}`);
 
 let db = {};
 
-db.test = new Datastore("./database/test.db");
+db.test = new Datastore(`${basedir}/database/test.db`);
 
 db.test.loadDatabase();
 

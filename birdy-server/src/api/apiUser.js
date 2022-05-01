@@ -124,7 +124,7 @@ function init(db){
                 //console.log('id: ', req.params.user_id);
                 const deletedUser = await users.delete(`${req.params.user_id}`);
                 //console.log('deleted user: ', deletedUser);
-                res.send(`delete user ${req.params.user_id}`);
+                res.status(200).send(`delete user ${req.params.user_id}`);
             }
             catch (e) {
                 res.status(500).send(e);

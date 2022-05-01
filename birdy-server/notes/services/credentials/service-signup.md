@@ -82,7 +82,7 @@
             Nom au format invalide ou nom inapproprie -> 422<br>
         </td>
         <td>Fini</td>
-        <td>apiUser.js (in src/api/), users.js (in src/entities/), testSignup.js (in /tests)</td>
+        <td>apiUser.js (in src/api/), users.js (in src/entities/), testSignup.js (in tests/)</td>
         <td>...</td>
     </tr>
 </table>

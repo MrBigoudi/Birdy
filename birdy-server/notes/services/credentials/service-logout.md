@@ -33,7 +33,7 @@
             Erreur lors de la destruction de session -> 400
         </td>
         <td>Fini</td>
-        <td>api.js</td>
+        <td>apiUser.js (in src/api/), users.js (in src/entities/), testLogin.js (in tests/)</td>
         <td>...</td>
     </tr>
 </table>

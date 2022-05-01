@@ -93,7 +93,17 @@ describe("Test connection d'un utilisateur",  () => {
 			})
 			.then( () => {
 				return request
+					.delete(`/api/user/logout`)
+					.then( (res) => {
+						res.should.have.status(200); // HTTP 200: Ok
+					})
+			})
+			.then( () => {
+				return request
 					.delete(`/api/user/${id}`)
+					.then( (res) => {
+						res.should.have.status(200); // HTTP 200: Ok
+					})
 			})
 			.then( () => done(), (err) => done(err))
 			.finally(() => {
