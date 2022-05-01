@@ -8,7 +8,7 @@ import BirdyLogo from "../atomComponents/Birdy-logo.js";
 import "../stylesheets/pages/signup.css";
 import "../stylesheets/form.css";
 
-import { checkAlreadyExist, addUserFromSignup } from "../database/users.js";
+// import { checkAlreadyExist, addUserFromSignup } from "../database/users.js";
 
 export default function Signup(){
     const server_config = {
