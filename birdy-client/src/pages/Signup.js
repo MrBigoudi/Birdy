@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import * as ROUTES from "../constants/routes.js";
 
@@ -10,6 +11,13 @@ import "../stylesheets/form.css";
 import { checkAlreadyExist, addUserFromSignup } from "../database/users.js";
 
 export default function Signup(){
+    const server_config = {
+        headers: {
+            'Access-Control-Allow-Origin': "*",
+            'Content-Type': 'application/json:charset=UTF-8',
+        }
+    }
+
     useEffect( () => {
         document.title = "Signup - Birdy";
     },[]);
@@ -25,12 +33,12 @@ export default function Signup(){
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState(
-        {username:"", dateOfBirth:"", fullname:"", emailAddress:"", password:""}
+        {username:"", dateOfBirth:"", fullname:"", emailAddress:"", passwd:""}
     );
 
     const [error, setError] = useState(true);
 
-    const isInvalid = formData.password === "" || formData.emailAddress === "" 
+    const isInvalid = formData.passwd === "" || formData.emailAddress === "" 
                         || formData.username === "" || formData.dateOfBirth === ""
                         || formData.fullname === "";
 
@@ -43,8 +51,52 @@ export default function Signup(){
         })
     };
 
+    const answer_signup = (res) => {
+        console.log('res.data: ', res.data);
+        if(res.data['status'] !== 201){
+            setError(res.data['message']);
+            console.log('error: ', error);
+        }else{
+            const _id = res.data['id'];
+            console.log('user_id: ', _id);
+            navigate(`/p/${_id}`);
+        }
+    }
+
+    const answer_signup_err = (err) => {
+        if (err.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.log('err.response.data: ',    err.response.data);
+            console.log('err.response.status: ',  err.response.status);
+            console.log('err.response.headers: ', err.response.headers);
+            setError(err.response.data['message']);
+        } else if (err.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(err.request);
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log('Error', err.message);
+        }
+        
+        console.log(err.config);
+    }
+
     const handleSignup = async (event) => {
         event.preventDefault();
+        axios
+            .post("/api/user/signup", formData)
+            .then( (res) => {
+                console.log('then');
+                answer_signup(res);
+            })
+            .catch( (err) => {
+                console.log('catch');
+                answer_signup_err(err);
+            });
+        /*
         try{
             await checkAlreadyExist(formData.username, formData.emailAddress);
             addUserFromSignup(formData);
@@ -52,6 +104,7 @@ export default function Signup(){
         } catch (err) {
             setError(err.message);
         }
+        */
     }
     
     return(
@@ -102,9 +155,9 @@ export default function Signup(){
                         type="password" 
                         placeholder="Password" 
                         aria-label="Enter your password"
-                        name="password"
+                        name="passwd"
                         onChange={handleChange}
-                        value={formData.password}                   
+                        value={formData.passwd}                   
                     />
                     <input 
                         className={`form-submit ${isInvalid && "submit-invalid" || "submit"}`}

@@ -2,7 +2,6 @@ const Filter = require('bad-words');
 const filter = new Filter();
 
 class User{
-    static #PRIVATE_ID_GENERATOR = 0;
     static #MIN_AGE = 13;
 
     constructor(db){
@@ -17,7 +16,7 @@ class User{
                 // docs is [{ planet: 'Mars', system: 'solar', _id: 'id1' }]
                 //console.log('docs in getUserId: ', docs);
                 if(docs.length===1){
-                    resolve(docs[0]['user_id'])
+                    resolve(docs[0]['_id'])
                 } else {
                     reject(-1);
                 }
@@ -44,7 +43,7 @@ class User{
         });
     }
 
-    //cree un utilisateur et l'ajoute dans la db
+    //cree un utilisateur et l'ajoute dans la db et renvoie son id
     create(username, fullname, dateOfBirth, emailAddress, passwd) {
         return new Promise(async (resolve, reject) => {            
             const exists = await this.exists(username, emailAddress);
@@ -53,7 +52,6 @@ class User{
             if(!exists){
                 //console.log('try to insert');
                 let newUser = {
-                    user_id: `${++User.#PRIVATE_ID_GENERATOR}`,
                     username: username.toLowerCase(),
                     fullname: fullname.toLowerCase(),
                     dateOfBirth: new Date(dateOfBirth),
@@ -83,7 +81,7 @@ class User{
     get(userid) {
         return new Promise((resolve, reject) => {
             //console.log('test get, id: ', userid);
-            this.db.find({ user_id: userid }, { _id: 0 }, function(err, docs) {
+            this.db.find({ _id: userid }, { _id: 0 }, function(err, docs) {
                 //console.log('docs in get: ', docs);
                 if(docs.length !== 1){
                     resolve(null);
@@ -105,7 +103,7 @@ class User{
     delete(userid) {
         return new Promise((resolve, reject) => {
             //console.log('test delete, id: ', userid);
-            this.db.remove({ user_id: userid }, {}, function(err, numRemoved) {
+            this.db.remove({ _id: userid }, {}, function(err, numRemoved) {
                 //console.log('numRemoved: ', numRemoved);
                 if(numRemoved === 0){
                     reject(err);
@@ -136,7 +134,7 @@ class User{
     //renvoie une erreur si le mdp ne correspond pas
     checkPasswd(emailAddress, passwd){
         return new Promise((resolve, reject) => {
-            this.db.find({ emailAddress: emailAddress, passwd: passwd }, {user_id: 1, _id: 0}, function (err, docs) {
+            this.db.find({ emailAddress: emailAddress, passwd: passwd }, { _id: 1}, function (err, docs) {
                 if(docs.length > 1){
                     reject('too many results');
                 }
@@ -146,7 +144,7 @@ class User{
                     //erreur
                     resolve(false);
                 } else {
-                    resolve(docs[0]['user_id']);
+                    resolve(docs[0]['_id']);
                 }
             });
         });

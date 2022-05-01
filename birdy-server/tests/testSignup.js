@@ -11,17 +11,11 @@ describe("Test creation d'un utilisateur",  () => {
 		let id = 0;
 		const request = chai.request(app.default).keepOpen();
 		const user1 = {
-			user_id:"1",
     		username: "pikachu",
     		fullname: "ash pikachu",
     		dateOfBirth: "2000-05-12",
     		emailAddress: "pika@pokemon.com",
-    		passwd: "1234",
-			following:{},
-			followers:{},
-			tweets:{},
-			profilePicture:"../../../birdy-client/images/icons/outline_account_circle_white_36dp_2x.png",
-			dateCreated:"2022-04-02"
+    		passwd: "1234"
 		}
 
 		const user2 = {

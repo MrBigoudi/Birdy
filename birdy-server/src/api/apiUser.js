@@ -98,14 +98,14 @@ function init(db){
     });
 
     api
-        .route("/user/:user_id(\\d+)")
+        .route("/user/:_id")
         //get user service
         .get(async (req, res) => {
             //console.log('test api.get');
             try {
                 //console.log('test api.get await user');
-                //console.log('id: ', req.params.user_id);
-                const user = await users.get(`${req.params.user_id}`);
+                //console.log('id: ', req.params._id);
+                const user = await users.get(`${req.params._id}`);
                 //console.log('user in api: ', user);
                 if (!user)
                     res.sendStatus(404);
@@ -121,10 +121,10 @@ function init(db){
             //console.log('test api.delete');
             try{
                 //console.log('test api.delete await user');
-                //console.log('id: ', req.params.user_id);
-                const deletedUser = await users.delete(`${req.params.user_id}`);
+                //console.log('id: ', req.params._id);
+                const deletedUser = await users.delete(`${req.params._id}`);
                 //console.log('deleted user: ', deletedUser);
-                res.status(200).send(`delete user ${req.params.user_id}`);
+                res.status(200).send(`delete user ${req.params._id}`);
             }
             catch (e) {
                 res.status(500).send(e);
@@ -191,10 +191,10 @@ function init(db){
             
             //console.log('creation');
             users.create(username, fullname, dateOfBirth, emailAddress, passwd)
-                .then((user_id) => res.status(201).json({
+                .then((_id) => res.status(201).json({
                     status: 201,
                     message: "New user registered successfully",
-                    id: user_id
+                    id: _id
                 }))
                 .catch((err) => res.status(500).json({
                     status: 500,

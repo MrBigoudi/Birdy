@@ -1,4 +1,1 @@
-{"user_id":"1","username":"test","fullname":"fulltest","dateOfBirth":{"$$date":958089600000},"emailAddress":"test@test.com","passwd":"1234","following":{},"followers":{},"tweets":{},"profilePicture":"../../../birdy-client/images/icons/outline_account_circle_white_36dp_2x.png","dateCreated":{"$$date":1651396014498},"_id":"GZlCKlDoZcYsUvA7"}
-{"$$deleted":true,"_id":"GZlCKlDoZcYsUvA7"}
-{"user_id":"2","username":"pikachu","fullname":"ash pikachu","dateOfBirth":{"$$date":958089600000},"emailAddress":"pika@pokemon.com","passwd":"1234","following":{},"followers":{},"tweets":{},"profilePicture":"../../../birdy-client/images/icons/outline_account_circle_white_36dp_2x.png","dateCreated":{"$$date":1651396014534},"_id":"Ne6UL1P8gXUWngRp"}
-{"$$deleted":true,"_id":"Ne6UL1P8gXUWngRp"}
+{"username":"test","fullname":"test","dateOfBirth":{"$$date":958089600000},"emailAddress":"test@test.com","passwd":"test","following":{},"followers":{},"tweets":{},"profilePicture":"../../../birdy-client/images/icons/outline_account_circle_white_36dp_2x.png","dateCreated":{"$$date":1651428370808},"_id":"8WwS6P2AZT9UThtr"}
