@@ -81,6 +81,22 @@ describe("Test creation d'un utilisateur",  () => {
     		emailAddress: "user9@gmail.com",
 			passwd: "1234"
 		}
+
+		const user10 = {
+			username: "user10",
+			fullname: "user10",
+    		dateOfBirth: "wrong birthday",
+    		emailAddress: "user10@gmail.com",
+			passwd: "1234"
+		}
+
+		const user11 = {
+			username: "user11",
+			fullname: "user11",
+    		dateOfBirth: "2021-05-12",
+    		emailAddress: "user11@gmail.com",
+			passwd: "1234"
+		}
 		
 		// Test create user
 		request
@@ -163,6 +179,22 @@ describe("Test creation d'un utilisateur",  () => {
 					request
 						.post('/api/user/signup')
 						.send(user9)
+						.then( (res) => {
+							res.should.have.status(422); // HTTP 422: Unprocessable Entity
+						}),
+
+					// Test invalid date of birth
+					request
+						.post('/api/user/signup')
+						.send(user10)
+						.then( (res) => {
+							res.should.have.status(422); // HTTP 422: Unprocessable Entity
+						}),
+
+					// Test underaged
+					request
+						.post('/api/user/signup')
+						.send(user11)
 						.then( (res) => {
 							res.should.have.status(422); // HTTP 422: Unprocessable Entity
 						}),

@@ -16,7 +16,7 @@ app.use(session({
 }));
 
 let db = {};
-db.users = new Datastore("./database/users.db");
+db.users = new Datastore(`${basedir}/database/users.db`);
 db.users.loadDatabase();
 
 app.use('/api', apiUser.default(db.users));

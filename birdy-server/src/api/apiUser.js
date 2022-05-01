@@ -180,6 +180,7 @@ function init(db){
                 return;
             } 
             
+            //console.log('creation');
             users.create(username, fullname, dateOfBirth, emailAddress, passwd)
                 .then((user_id) => res.status(201).json({
                     status: 201,

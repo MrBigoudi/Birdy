@@ -1,5 +1,6 @@
 class User{
     static #PRIVATE_ID_GENERATOR = 0;
+    static #MIN_AGE = 13;
 
     constructor(db){
         this.db = db;
@@ -52,14 +53,14 @@ class User{
                     user_id: `${++User.#PRIVATE_ID_GENERATOR}`,
                     username: username.toLowerCase(),
                     fullname: fullname.toLowerCase(),
-                    dateOfBirth: dateOfBirth,
+                    dateOfBirth: new Date(dateOfBirth),
                     emailAddress: emailAddress.toLowerCase(),
                     passwd: passwd,
                     following: {},
                     followers: {},
                     tweets: {},
                     profilePicture: "../../../birdy-client/images/icons/outline_account_circle_white_36dp_2x.png",
-                    dateCreated: "2022-04-02"
+                    dateCreated: new Date()
                 }
                 this.db.insert(newUser);
             }
@@ -173,13 +174,33 @@ class User{
 
     //renvoie true si la date est valide
     checkDateOfBirth(dateOfBirth){
+        //console.log('check date of birth in users');
         return new Promise((resolve, reject) => {
-            if(false) {
-                //erreur
-                reject();
-            } else {
-                resolve(true);
+            // check format
+            //console.log('check format');
+            const birth = new Date(dateOfBirth);
+            let error = (birth instanceof Date && !isNaN(birth.value));
+            if(error) {
+                resolve(false);
             }
+
+            // check value
+            //console.log('check value');
+            const curDate = new Date();
+            let age = curDate.getFullYear() - birth.getFullYear();
+            //console.log('age: ', age);
+            const month = curDate.getMonth() - birth.getMonth();
+            //console.log('month: ', month);
+            if( month<0 || (month===0 && curDate.getDate() < birth.getDate() )){
+                age--;
+            }
+            if(age < User.#MIN_AGE){
+                resolve(false);
+            }
+
+            // ok
+            resolve(true);
+
         });
     }
 }
