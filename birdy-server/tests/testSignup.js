@@ -250,7 +250,7 @@ describe("Test creation d'un utilisateur",  () => {
 				]);
 			})
 			.then( () => {
-				console.log('test delete');
+				//console.log('test delete');
 				// Test delete
 				return request
 					.delete(`/api/user/${id}`)

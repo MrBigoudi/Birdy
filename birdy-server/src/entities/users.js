@@ -136,13 +136,19 @@ class User{
     //renvoie une erreur si le mdp ne correspond pas
     checkPasswd(emailAddress, passwd){
         return new Promise((resolve, reject) => {
-            let userid = 1; // À remplacer par une requête bd
-            if(false) {
-                //erreur
-                reject();
-            } else {
-                resolve(userid);
-            }
+            this.db.find({ emailAddress: emailAddress, passwd: passwd }, {user_id: 1, _id: 0}, function (err, docs) {
+                if(docs.length > 1){
+                    reject('too many results');
+                }
+                const exists = (docs.length===1);
+                //console.log('exists in checkPassword: ', exists);
+                if(!exists) {
+                    //erreur
+                    resolve(false);
+                } else {
+                    resolve(docs[0]['user_id']);
+                }
+            });
         });
     }
 

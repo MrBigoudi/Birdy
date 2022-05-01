@@ -4,7 +4,7 @@
   "description": "Birdy app server side",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests/testSignup.js",
+    "test": "mocha tests/**",
     "serve": "node src/index.js"
   },
   "author": "",

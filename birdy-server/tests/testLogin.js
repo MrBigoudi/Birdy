@@ -9,11 +9,12 @@ chai.should();
 describe("Test connection d'un utilisateur",  () => {
 	it("user", (done) => {
         const request = chai.request(app.default).keepOpen();
+		let id = 0;
 
 		const user = {
     		username: "test",
     		fullname: "fulltest",
-    		dateOfBirth: "2000-07-24",
+    		dateOfBirth: "2000-05-12",
     		emailAddress: "test@test.com",
     		passwd: "1234"
 		}
@@ -45,7 +46,9 @@ describe("Test connection d'un utilisateur",  () => {
 		request
 			.post('/api/user/signup')
 			.send(user)
-			.then( () => {
+			.then( (res) => {
+				//console.log('res body: ', res.body);
+				id = res.body.id;
 				return Promise.all([
 					// Test login valid
 					request
@@ -87,6 +90,10 @@ describe("Test connection d'un utilisateur",  () => {
 							res.should.have.status(403); // HTTP 403: Forbidden
 					}),
 				]);
+			})
+			.then( () => {
+				return request
+					.delete(`/api/user/${id}`)
 			})
 			.then( () => done(), (err) => done(err))
 			.finally(() => {

@@ -66,11 +66,17 @@
             {<br>
                 "status": 422,<br>
                 "message": "Invalid name"<br>
+            }<br><br>
+            Erreur: HTTP 422: Unprocessable Entity<br>
+            {<br>
+                "status": 422,<br>
+                "message": "Invalid username"<br>
             }<br>
         </td>
         <td>
             Champs manquant -> 400<br>
             Username existe déjà -> 409<br>
+            Username au format invalid -> 409<br>
             Email existe déjà -> 409<br>
             Date de naissance au format invalide ou age < 13 ans -> 422<br>
             Nom au format invalide ou nom inapproprie -> 422<br>
