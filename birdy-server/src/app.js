@@ -1,5 +1,6 @@
 const path = require("path");
 const apiUser = require("./api/apiUser.js");
+const apiTweet = require("./api/apiTweet.js");
 const Datastore = require('nedb');
 
 // Détermine le répertoire de base
@@ -17,13 +18,16 @@ app.use(session({
 
 let db = {};
 db.users = new Datastore(`${basedir}/database/users.db`);
+db.tweets = new Datastore(`${basedir}/database/tweets.db`);
 db.users.loadDatabase();
+db.tweets.loadDatabase();
 
 app.use('/api', apiUser.default(db.users));
+app.use('/api', apiTweet.default(db.tweets));
 
 // Démarrage du serveur
 app.on('close', () => {
-    //db.close
+    db.close();
 });
 
 exports.default = app;

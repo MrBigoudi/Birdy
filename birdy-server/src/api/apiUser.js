@@ -109,12 +109,12 @@ function init(db){
                 const user = await users.get(`${req.params._id}`);
                 //console.log('user in api: ', user);
                 if (!user)
-                    res.sendStatus(404);
+                    res.status(404).send("User not found");
                 else
                     res.send(user);
             }
             catch (e) {
-                res.status(500).send(e);
+                res.status(500).send("Internal error");
             }
         })
         //delete user service
@@ -128,7 +128,7 @@ function init(db){
                 res.status(200).send(`delete user ${req.params._id}`);
             }
             catch (e) {
-                res.status(500).send(e);
+                res.status(500).send("Internal error");
             }
         });
 
