@@ -7,4 +7,4 @@ class Tweet{
     }
 }
 
-exports.default = User;
+exports.default = Tweet;
