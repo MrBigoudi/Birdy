@@ -60,7 +60,7 @@ class User{
                     following: {},
                     followers: {},
                     tweets: {},
-                    profilePicture: "../../../birdy-client/images/icons/outline_account_circle_white_36dp_2x.png",
+                    profilePicture: "",
                     dateCreated: new Date()
                 }
                 this.db.insert(newUser);

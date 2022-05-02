@@ -35,15 +35,15 @@ export default function Login(){
         })
     };
 
-    const answer_login = (res) => {
-        console.log('res.data: ', res.data);
+    const answer_login = async (res) => {
+        //console.log('res.data: ', res.data);
         if(res.data['status'] !== 200){
             setError(res.data['message']);
             console.log('error: ', error);
         }else{
             const _id = res.data['id'];
-            console.log('user_id: ', _id);
-            navigate(`/p/${_id}`);
+            //console.log('user_id: ', _id);
+            navigate(`/p/${_id}`, { state: {}, replace: true, });
         }
     }
 
@@ -76,11 +76,11 @@ export default function Login(){
         axios
             .post("/api/user/login", formData)
             .then( (res) => {
-                console.log('then');
+                //console.log('then');
                 answer_login(res);
             })
             .catch( (err) => {
-                console.log('catch');
+                //console.log('catch');
                 answer_login_err(err);
             });
     }

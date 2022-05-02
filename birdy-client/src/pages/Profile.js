@@ -1,4 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 import NavBar from "../components/NavBar/NavBar.js";
 import Timeline from "../components/Timeline/Timeline.js";
@@ -15,7 +17,7 @@ import logoProfile from "../images/icons/navBarIcons/outline_person_white_24dp_2
 import logoMoreOptions from "../images/icons/navBarIcons/outline_more_horiz_white_24dp_2x.png";
 
 import { tweets } from "../database/tweets.js";
-import { users } from "../database/users.js";
+// import { users } from "../database/users.js";
 
 export default function Profile(){
     useEffect( () => {
@@ -33,6 +35,20 @@ export default function Profile(){
         {id:"profile-more", src:logoMoreOptions, alt:"more option menu", msg:"More"}
     ];
 
+    //console.log('params: ', useParams())
+    const user_id = useParams()['id'];
+
+    const [user, setUser] = useState(
+        async () => {
+            await axios
+                .get(`/api/user/${user_id}`)
+                .then( (res) => {
+                    //console.log('user: ', res.data);
+                    setUser(res.data);
+                });
+        }
+    );
+
     function scrollToTop() {
         document.getElementById("timeline-main").scrollTo({
           top: 0,
@@ -43,7 +59,7 @@ export default function Profile(){
     return(
         <div className="profile row max-height">
             <NavBar logged={true} menuIcons={menuIcons}/>
-            <Timeline scroll={scrollToTop} default={false} tweets={tweets} user={users[0]}/>
+            <Timeline scroll={scrollToTop} default={false} tweets={tweets} user={user}/>
             <SideBar logged={true}/>
         </div>
     )

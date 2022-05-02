@@ -59,7 +59,8 @@ function init(db){
                         req.session.userid = userid;
                         res.status(200).json({
                         status: 200,
-                        message: "Email address and password accepted"
+                        message: "Email address and password accepted",
+                        id: userid
                         });
                     }
                 });

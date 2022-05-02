@@ -4,6 +4,8 @@ import "../../stylesheets/components/tweet.css";
 import "../../stylesheets/components/newTweet.css";
 import "../../stylesheets/form.css";
 
+import DEFAULT_PP from "../../images/icons/outline_account_circle_white_36dp_2x.png";
+
 export default function NewTweet(props){
 
     const initTweetContent = {text:"", image:"", imageDom:"", gifDom:""}
@@ -71,7 +73,7 @@ export default function NewTweet(props){
     return(
         <div id="new-tweet" className="tweet new-tweet">
             <div className="left-side-tweet">
-            <img src={props.user.getProfilePicture()}
+            <img src={props.user['profilePicture']!=="" ? props.user['profilePicture'] : DEFAULT_PP}
                     alt="profile picture"
                     height="70" width="70"
                 />
@@ -79,7 +81,7 @@ export default function NewTweet(props){
             <div className="new-tweet-container">
                 <header className="tweet-header">
                     <span className="color-light-pink bold huge-font">
-                        {props.user.getUsername()}
+                        {props.user['username']}
                     </span>
                 </header>
                 <form>

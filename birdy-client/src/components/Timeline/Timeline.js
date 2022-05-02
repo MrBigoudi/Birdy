@@ -9,7 +9,7 @@ import "../../stylesheets/components/timeline.css";
 //props an array of tweets to render
 //default: boolean
 export default function Timeline(props){
-
+    
     const [tweetList, setTweetList] = useState(props.tweets.map( item => {
                                         return [item, false]; //[value, deleted?]
                                     }));

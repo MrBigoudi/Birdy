@@ -52,14 +52,14 @@ export default function Signup(){
     };
 
     const answer_signup = (res) => {
-        console.log('res.data: ', res.data);
+        //console.log('res.data: ', res.data);
         if(res.data['status'] !== 201){
             setError(res.data['message']);
             console.log('error: ', error);
         }else{
             const _id = res.data['id'];
-            console.log('user_id: ', _id);
-            navigate(`/p/${_id}`);
+            //console.log('user_id: ', _id);
+            navigate(`/p/${_id}`, { user_id: _id, state: {}, replace: true, });
         }
     }
 
@@ -89,11 +89,11 @@ export default function Signup(){
         axios
             .post("/api/user/signup", formData)
             .then( (res) => {
-                console.log('then');
+                //console.log('then');
                 answer_signup(res);
             })
             .catch( (err) => {
-                console.log('catch');
+                //console.log('catch');
                 answer_signup_err(err);
             });
         /*
