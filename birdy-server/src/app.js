@@ -23,7 +23,7 @@ db.users.loadDatabase();
 db.tweets.loadDatabase();
 
 app.use('/api', apiUser.default(db.users));
-app.use('/api', apiTweet.default(db.tweets));
+app.use('/apiTweet', apiTweet.default(db.tweets, db.users));
 
 // Démarrage du serveur
 app.on('close', () => {

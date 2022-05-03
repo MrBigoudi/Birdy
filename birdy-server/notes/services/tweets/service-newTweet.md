@@ -43,7 +43,7 @@
             Erreur: HTTP 40O: Bad Request<br>
             {<br>
                 "status": 400,<br>
-                "message": "At least 'content' or 'image' should be fill up"<br>
+                "message": "Missing Fields"<br>
             }<br><br>
             Erreur: HTTP 422: Unprocessable Entity<br>
             {<br>
