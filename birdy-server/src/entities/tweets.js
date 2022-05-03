@@ -126,27 +126,46 @@ class Tweet{
         });
     }
 
-        // renvoie l'auteur du teweet tweetid
-        getAuthor(tweetid) {
-            return new Promise((resolve, reject) => {
-                //console.log('test get, id: ', tweetid);
-                this.db.find({ _id: tweetid }, { _id: 0 }, function(err, docs) {
-                    //console.log('docs in get: ', docs);
-                    if(docs.length !== 1){
-                        reject("Tweet doesn't exists");
-                    }
-    
-                    const author = docs[0]['author'];
-                    //console.log('author in getAuthor: ', author);
-                    if(!author) {
-                        //erreur
-                        reject(err);
-                    } else {
-                        resolve(author);
-                    }
-                });
+    // renvoie l'auteur du teweet tweetid
+    getAuthor(tweetid) {
+        return new Promise((resolve, reject) => {
+            //console.log('test get, id: ', tweetid);
+            this.db.find({ _id: tweetid }, { _id: 0 }, function(err, docs) {
+                //console.log('docs in get: ', docs);
+                if(docs.length !== 1){
+                    reject("Tweet doesn't exists");
+                }
+
+                const author = docs[0]['author'];
+                //console.log('author in getAuthor: ', author);
+                if(!author) {
+                    //erreur
+                    reject(err);
+                } else {
+                    resolve(author);
+                }
             });
-        }
+        });
+    }
+
+    // supprime tous les tweets d'une liste donnee de la db
+    deleteTweets(tweetsList){
+        return new Promise( (resolve, reject) => {
+            console.log('tweetsList: ', tweetsList);
+            let tweetIdList = [];
+            for(let tweetid of tweetsList){
+                tweetIdList.push({ _id: tweetid });
+            }
+            console.log('tweetIdList: ', tweetIdList);
+            this.db.remove( { $or: tweetIdList }, { multi: true }, function(err, numRemoved) {
+                if(err){
+                    reject(err);
+                } else {
+                    resolve(true);
+                }
+            });
+        });
+    }
 }
 
 exports.default = Tweet;

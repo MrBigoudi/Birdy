@@ -2,7 +2,7 @@ const express = require("express");
 const Tweet = require("../entities/tweets.js");
 const User = require("../entities/users.js");
 
-function init(dbtweet, dbuser){
+function init(dbtweets, dbusers){
     const api = express.Router();
     // On utilise JSON
     api.use(express.json());
@@ -14,8 +14,8 @@ function init(dbtweet, dbuser){
         next();
     });
 
-    const tweets = new Tweet.default(dbtweet);
-    const users = new User.default(dbuser);
+    const tweets = new Tweet.default(dbtweets);
+    const users = new User.default(dbusers);
 
 
     api
@@ -98,7 +98,7 @@ function init(dbtweet, dbuser){
                 //console.log('creation');
                 tweets.create(author, content, image)
                     .then( async (_id) => {
-                        console.log('test ajout tweet dans user');
+                        //console.log('test ajout tweet dans user');
                         let tweet_id = await users.addTweet(author, _id);
                         if(! tweet_id){
                             res.status(404).json({
@@ -107,7 +107,7 @@ function init(dbtweet, dbuser){
                             });
                             return;
                         } else {
-                            console.log('success?');
+                            //console.log('success?');
                             return tweet_id;
                         }
                     })

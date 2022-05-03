@@ -49,7 +49,8 @@
         <td>
             apiTweet.js (in src/api/),<br>
             tweets.js (in src/entities/),<br>
-            testNewTweet.js (in tests/)
+            testNewTweet.js (in tests/),<br>
+            testDeleteTweets.js (in tests/)
         </td>
         <td>...</td>
     </tr>

@@ -1,9 +1,14 @@
 {"username":"q","fullname":"q","dateOfBirth":{"$$date":976579200000},"emailAddress":"q@q.q","passwd":"q","following":[],"followers":[],"tweets":[],"profilePicture":"","dateCreated":{"$$date":1651506274058},"_id":"2C5Qwmfp18MP0cYD"}
-{"username":"test","fullname":"fulltest","dateOfBirth":{"$$date":958089600000},"emailAddress":"test@test.com","passwd":"1234","following":[],"followers":[],"tweets":[],"profilePicture":"","dateCreated":{"$$date":1651610111736},"_id":"iP4HNXudNRwf2zJI"}
-{"$$deleted":true,"_id":"iP4HNXudNRwf2zJI"}
-{"username":"testtweet","fullname":"fulltest","dateOfBirth":{"$$date":958089600000},"emailAddress":"testtweet@test.com","passwd":"1234","following":[],"followers":[],"tweets":[],"profilePicture":"","dateCreated":{"$$date":1651610111801},"_id":"0itiIdLLCLqoarxh"}
-{"username":"testtweet","fullname":"fulltest","dateOfBirth":{"$$date":958089600000},"emailAddress":"testtweet@test.com","passwd":"1234","following":[],"followers":[],"tweets":["3Ibwlu7xQzcHE8Fr"],"profilePicture":"","dateCreated":{"$$date":1651610111801},"_id":"0itiIdLLCLqoarxh"}
-{"username":"testtweet","fullname":"fulltest","dateOfBirth":{"$$date":958089600000},"emailAddress":"testtweet@test.com","passwd":"1234","following":[],"followers":[],"tweets":[],"profilePicture":"","dateCreated":{"$$date":1651610111801},"_id":"0itiIdLLCLqoarxh"}
-{"$$deleted":true,"_id":"0itiIdLLCLqoarxh"}
-{"username":"pikachu","fullname":"ash pikachu","dateOfBirth":{"$$date":958089600000},"emailAddress":"pika@pokemon.com","passwd":"1234","following":[],"followers":[],"tweets":[],"profilePicture":"","dateCreated":{"$$date":1651610111891},"_id":"tbgDMg587M92dDGm"}
-{"$$deleted":true,"_id":"tbgDMg587M92dDGm"}
+{"username":"testtweet","fullname":"fulltest","dateOfBirth":{"$$date":958089600000},"emailAddress":"testtweet@test.com","passwd":"1234","following":[],"followers":[],"tweets":[],"profilePicture":"","dateCreated":{"$$date":1651614563611},"_id":"cZvNG7Crsoq6YJiH"}
+{"username":"testtweet","fullname":"fulltest","dateOfBirth":{"$$date":958089600000},"emailAddress":"testtweet@test.com","passwd":"1234","following":[],"followers":[],"tweets":["l5mMvEFiW56yeTJ8"],"profilePicture":"","dateCreated":{"$$date":1651614563611},"_id":"cZvNG7Crsoq6YJiH"}
+{"username":"testtweet","fullname":"fulltest","dateOfBirth":{"$$date":958089600000},"emailAddress":"testtweet@test.com","passwd":"1234","following":[],"followers":[],"tweets":["l5mMvEFiW56yeTJ8","iHdDnEPvJs8Lh5hG"],"profilePicture":"","dateCreated":{"$$date":1651614563611},"_id":"cZvNG7Crsoq6YJiH"}
+{"username":"testtweet","fullname":"fulltest","dateOfBirth":{"$$date":958089600000},"emailAddress":"testtweet@test.com","passwd":"1234","following":[],"followers":[],"tweets":["l5mMvEFiW56yeTJ8","iHdDnEPvJs8Lh5hG","9XdntRR4eAyrTucW"],"profilePicture":"","dateCreated":{"$$date":1651614563611},"_id":"cZvNG7Crsoq6YJiH"}
+{"$$deleted":true,"_id":"cZvNG7Crsoq6YJiH"}
+{"username":"test","fullname":"fulltest","dateOfBirth":{"$$date":958089600000},"emailAddress":"test@test.com","passwd":"1234","following":[],"followers":[],"tweets":[],"profilePicture":"","dateCreated":{"$$date":1651614563680},"_id":"Hd0ptYW3bWHLSQ68"}
+{"$$deleted":true,"_id":"Hd0ptYW3bWHLSQ68"}
+{"username":"testtweet","fullname":"fulltest","dateOfBirth":{"$$date":958089600000},"emailAddress":"testtweet@test.com","passwd":"1234","following":[],"followers":[],"tweets":[],"profilePicture":"","dateCreated":{"$$date":1651614563703},"_id":"1LTXuVjWH8cRiF3Z"}
+{"username":"testtweet","fullname":"fulltest","dateOfBirth":{"$$date":958089600000},"emailAddress":"testtweet@test.com","passwd":"1234","following":[],"followers":[],"tweets":["k7QR0tZtvZ5ni6nW"],"profilePicture":"","dateCreated":{"$$date":1651614563703},"_id":"1LTXuVjWH8cRiF3Z"}
+{"username":"testtweet","fullname":"fulltest","dateOfBirth":{"$$date":958089600000},"emailAddress":"testtweet@test.com","passwd":"1234","following":[],"followers":[],"tweets":[],"profilePicture":"","dateCreated":{"$$date":1651614563703},"_id":"1LTXuVjWH8cRiF3Z"}
+{"$$deleted":true,"_id":"1LTXuVjWH8cRiF3Z"}
+{"username":"pikachu","fullname":"ash pikachu","dateOfBirth":{"$$date":958089600000},"emailAddress":"pika@pokemon.com","passwd":"1234","following":[],"followers":[],"tweets":[],"profilePicture":"","dateCreated":{"$$date":1651614563755},"_id":"I3D8eDU1UMvPwxFX"}
+{"$$deleted":true,"_id":"I3D8eDU1UMvPwxFX"}

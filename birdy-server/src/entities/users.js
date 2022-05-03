@@ -247,6 +247,27 @@ class User{
             });
         });
     }
+
+    //renvoie la liste des tweets d'un utilisateur
+    getTweets(userid){
+        return new Promise( (resolve, reject) => {
+            //console.log('test get, id: ', userid);
+            this.db.find({ _id: userid }, { _id: 0 }, function(err, docs) {
+                if(docs.length !== 1){
+                    reject(null);
+                }
+
+                const tweets = docs[0]['tweets'];
+
+                if(!tweets) {
+                    //erreur
+                    reject(err);
+                } else {
+                    resolve(tweets);
+                }
+            });
+        });
+    }
 }
 
 exports.default = User;

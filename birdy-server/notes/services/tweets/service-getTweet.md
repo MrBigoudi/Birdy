@@ -60,8 +60,8 @@
         <td>
             apiUser.js (in src/api/),<br>
             users.js (in src/entities/),<br>
-            testSignup.js (in tests/),<br>
-            testLogin.js (in tests/)
+            testNewTweet.js (in tests/),<br>
+            testDeleteTweets.js (in tests/)
         </td>
         <td>...</td>
     </tr>

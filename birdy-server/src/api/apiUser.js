@@ -1,7 +1,8 @@
 const express = require("express");
 const User = require("../entities/users.js");
+const Tweet = require("../entities/tweets.js");
 
-function init(db){
+function init(dbusers, dbtweets){
     const api = express.Router();
     // On utilise JSON
     api.use(express.json());
@@ -13,7 +14,8 @@ function init(db){
         next();
     });
 
-    const users = new User.default(db);
+    const users = new User.default(dbusers);
+    const tweets = new Tweet.default(dbtweets);
 
     // login service
     // si on demande l'url "/user/login" on effectue la lambda
@@ -123,11 +125,15 @@ function init(db){
             try{
                 //console.log('test api.delete await user');
                 //console.log('id: ', req.params._id);
+                const tweetList = await users.getTweets(`${req.params._id}`);
                 const deletedUser = await users.delete(`${req.params._id}`);
+                //console.log('tweet list in apiUser: ', tweetList);
+                const deletedTweetsInTweetDB = await tweets.deleteTweets(tweetList);
                 //console.log('deleted user: ', deletedUser);
                 res.status(200).send(`delete user ${req.params._id}`);
             }
             catch (e) {
+                //console.log('erreur?');
                 res.status(500).send("Internal error");
             }
         });
