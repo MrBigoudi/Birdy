@@ -84,6 +84,7 @@ class Tweet{
                     nbLikes: tweet["nbLikes"],
                     nbRetweets: tweet["nbRetweets"],
                     nbComments: tweet["nbComments"],
+                    comments: {},
                     dateCreated: tweet["dateCreated"] 
                 },function (err, docs) {
                     //console.log('docs in getTweetId: ', docs);

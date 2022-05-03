@@ -12,18 +12,23 @@
         <th>INFOS SUPPLEMENTAIRES</th>
     </tr>
     <tr>        
-        <td>DeleteTweet</td>
-        <td>apiTweet/tweet/:_id avec DELETE</td>
-        <td>
-            Permet de supprimer un tweet de la base de donnees a partir de son identifiant
-        </td>
+        <td>GetTweet</td>
+        <td>apiTweet/tweet/:_id avec GET</td>
+        <td>Permet d'obtenir les informations sur un tweet a partir de son identifiant</td>
         <td>
             _id: l'identifiant du tweet,<br>
         </td>
         <td>
             Succes: HTTP 200: Ok<br>
             {<br>
-                "delete tweet ${_id}"
+                "author": ${author},<br>
+                "content": ${content},<br>
+                "image": ${image},<br>
+                "nbLikes": ${nbLikes},<br>
+                "nbRetweets": ${nbRetweets},<br>
+                "nbComments": ${nbReplies},<br>
+                "comments": { ${_idTweet1}, ${_idTweet2}, ... },<br>
+                "dateCreated": ${dateCreated}<br>
             }<br><br>
             Erreur: <br>
             {<br>
@@ -36,6 +41,11 @@
             {<br>
                 ...
             }<br><br>
+            Erreur: HTTP 404: Not Found<br>
+            {<br>
+                "status": 404,<br>
+                "message": "Tweet not found"<br>
+            }<br><br>
             Erreur: HTTP 500: Internal Server Error<br>
             {<br>
                 "status": 500,<br>
@@ -43,13 +53,15 @@
             }<br>
         </td>
         <td>
+            Tweet pas dans la base de donnees -> 404<br>
             Erreur interne -> 500<br>
         </td>
         <td>Fini</td>
         <td>
-            apiTweet.js (in src/api/),<br>
-            tweets.js (in src/entities/),<br>
-            testNewTweet.js (in tests/)
+            apiUser.js (in src/api/),<br>
+            users.js (in src/entities/),<br>
+            testSignup.js (in tests/),<br>
+            testLogin.js (in tests/)
         </td>
         <td>...</td>
     </tr>

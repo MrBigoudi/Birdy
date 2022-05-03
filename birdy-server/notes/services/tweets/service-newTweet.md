@@ -13,7 +13,7 @@
     </tr>
     <tr>        
         <td>NewTweet</td>
-        <td>api/tweet/newTweet avec POST</td>
+        <td>apiTweet/tweet/newTweet avec POST</td>
         <td>Permet de creer un nouveau tweet et de le placer dans la liste des tweets de l'auteur</td>
         <td>
             author: l'id de l'auteur,<br>
