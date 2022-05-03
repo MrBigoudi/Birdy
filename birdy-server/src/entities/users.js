@@ -57,9 +57,9 @@ class User{
                     dateOfBirth: new Date(dateOfBirth),
                     emailAddress: emailAddress.toLowerCase(),
                     passwd: passwd,
-                    following: {},
-                    followers: {},
-                    tweets: {},
+                    following: [],
+                    followers: [],
+                    tweets: [],
                     profilePicture: "",
                     dateCreated: new Date()
                 }
@@ -219,6 +219,32 @@ class User{
             // ok
             resolve(true);
 
+        });
+    }
+
+    //ajoute un tweet dans la liste des tweets d'un utilisateur
+    addTweet(userId, tweetId){
+        return new Promise( (resolve, reject) => {
+            this.db.update({ _id: userId }, { $push: { tweets: tweetId } }, {}, function (err, numReplaced) {
+                if(numReplaced === 0){
+                    resolve(false);
+                } else {
+                    resolve(tweetId);
+                }
+            });
+        });
+    }
+
+    //enleve un tweet dans la liste des tweets d'un utilisateur
+    deleteTweet(userId, tweetId){
+        return new Promise( (resolve, reject) => {
+            this.db.update({ _id: userId }, { $pull: { tweets: tweetId } }, {}, function (err, numReplaced) {
+                if(numReplaced === 0){
+                    reject("Tweet doesn't exists");
+                } else {
+                    resolve(tweetId);
+                }
+            });
         });
     }
 }

@@ -1,3 +1,5 @@
-{"username":"q","fullname":"q","dateOfBirth":{"$$date":976579200000},"emailAddress":"q@q.q","passwd":"q","following":{},"followers":{},"tweets":{},"profilePicture":"","dateCreated":{"$$date":1651506274058},"_id":"2C5Qwmfp18MP0cYD"}
-{"username":"testtweet","fullname":"fulltest","dateOfBirth":{"$$date":958089600000},"emailAddress":"testtweet@test.com","passwd":"1234","following":{},"followers":{},"tweets":{},"profilePicture":"","dateCreated":{"$$date":1651595027189},"_id":"FxuwM4ehFLzDWS16"}
-{"$$deleted":true,"_id":"FxuwM4ehFLzDWS16"}
+{"username":"q","fullname":"q","dateOfBirth":{"$$date":976579200000},"emailAddress":"q@q.q","passwd":"q","following":[],"followers":[],"tweets":[],"profilePicture":"","dateCreated":{"$$date":1651506274058},"_id":"2C5Qwmfp18MP0cYD"}
+{"username":"testtweet","fullname":"fulltest","dateOfBirth":{"$$date":958089600000},"emailAddress":"testtweet@test.com","passwd":"1234","following":[],"followers":[],"tweets":[],"profilePicture":"","dateCreated":{"$$date":1651609995859},"_id":"GgWiR8jdGqnm2Jx5"}
+{"username":"testtweet","fullname":"fulltest","dateOfBirth":{"$$date":958089600000},"emailAddress":"testtweet@test.com","passwd":"1234","following":[],"followers":[],"tweets":["owfHVccuajD35BcW"],"profilePicture":"","dateCreated":{"$$date":1651609995859},"_id":"GgWiR8jdGqnm2Jx5"}
+{"username":"testtweet","fullname":"fulltest","dateOfBirth":{"$$date":958089600000},"emailAddress":"testtweet@test.com","passwd":"1234","following":[],"followers":[],"tweets":[],"profilePicture":"","dateCreated":{"$$date":1651609995859},"_id":"GgWiR8jdGqnm2Jx5"}
+{"$$deleted":true,"_id":"GgWiR8jdGqnm2Jx5"}

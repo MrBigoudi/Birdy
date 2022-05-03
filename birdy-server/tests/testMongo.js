@@ -28,7 +28,7 @@ const user1 = {
 db.test.insert(user1);
 
 db.test.find({}, {_id : 0}, (err, docs) => {
-    console.log(docs);
+    console.log('docs: ', docs);
 })
 
 db.test.remove({}, {multi:1}, (err, nbRemoved) => {})

@@ -11,7 +11,7 @@ class Tweet{
     // renvoie les infos du teweet tweetid
     get(tweetid) {
         return new Promise((resolve, reject) => {
-            //console.log('test get, id: ', userid);
+            //console.log('test get, id: ', tweetid);
             this.db.find({ _id: tweetid }, { _id: 0 }, function(err, docs) {
                 //console.log('docs in get: ', docs);
                 if(docs.length !== 1){
@@ -59,14 +59,14 @@ class Tweet{
     //renvoie true si l'image est au bon format
     checkImage(image){
         return new Promise((resolve, reject) => {
-            console.log('image: ', image);
+            //console.log('image: ', image);
             //only .gif and .png are accepted
             const regName = /^.*\.(png|gif)$/;
             if(image!=="" && !regName.test(image)){
-                console.log('image resolve(false)');
+                //console.log('image resolve(false)');
                 resolve(false);
             } else {
-                console.log('image resolve(true)');
+                //console.log('image resolve(true)');
                 resolve(true);
             }
         })
@@ -84,7 +84,7 @@ class Tweet{
                     nbLikes: tweet["nbLikes"],
                     nbRetweets: tweet["nbRetweets"],
                     nbComments: tweet["nbComments"],
-                    comments: {},
+                    comments: [],
                     dateCreated: tweet["dateCreated"] 
                 },function (err, docs) {
                     //console.log('docs in getTweetId: ', docs);
@@ -109,7 +109,7 @@ class Tweet{
                 nbLikes: 0,
                 nbRetweets: 0,
                 nbComments: 0,
-                comments: 0,
+                comments: [],
                 dateCreated: new Date()
             }
             this.db.insert(newTweet);
@@ -120,10 +120,33 @@ class Tweet{
                 //erreur
                 reject();
             } else {
+                //console.log('tweetid: ', tweetid);
                 resolve(tweetid);
             }
         });
     }
+
+        // renvoie l'auteur du teweet tweetid
+        getAuthor(tweetid) {
+            return new Promise((resolve, reject) => {
+                //console.log('test get, id: ', tweetid);
+                this.db.find({ _id: tweetid }, { _id: 0 }, function(err, docs) {
+                    //console.log('docs in get: ', docs);
+                    if(docs.length !== 1){
+                        reject("Tweet doesn't exists");
+                    }
+    
+                    const author = docs[0]['author'];
+                    //console.log('author in getAuthor: ', author);
+                    if(!author) {
+                        //erreur
+                        reject(err);
+                    } else {
+                        resolve(author);
+                    }
+                });
+            });
+        }
 }
 
 exports.default = Tweet;

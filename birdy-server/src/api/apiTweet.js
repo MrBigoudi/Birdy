@@ -43,8 +43,9 @@ function init(dbtweet, dbuser){
             try{
                 //console.log('test api.delete await tweet');
                 //console.log('id: ', req.params._id);
+                const authorId = await tweets.getAuthor(`${req.params._id}`);
                 const deletedTweet = await tweets.delete(`${req.params._id}`);
-                //const deleteTweetInUserDB = await users.deleteTweet(`${req.params._id}`);
+                const deleteTweetInUserDB = await users.deleteTweet(authorId, `${req.params._id}`);
                 //console.log('deleted tweet: ', deletedTweet);
                 res.status(200).send(`delete tweet ${req.params._id}`);
             }
@@ -58,7 +59,7 @@ function init(dbtweet, dbuser){
         .post("/tweet/newTweet", async (req, res) => {
             try{
                 const { author, content, image } = req.body;
-                console.log('test missing fields');
+                //console.log('test missing fields');
                 if (!author || (!content && !image) ) {
                     res.status(400).json({
                         status: 400,
@@ -67,7 +68,7 @@ function init(dbtweet, dbuser){
                     return;
                 }
 
-                console.log('test author');
+                //console.log('test author');
                 if(! await users.get(author)){
                     res.status(404).json({
                         status: 404,
@@ -76,7 +77,7 @@ function init(dbtweet, dbuser){
                     return;
                 }
     
-                console.log('test content');
+                //console.log('test content');
                 if(! await tweets.checkContent(content)){
                     res.status(422).json({
                         status: 422,
@@ -85,7 +86,7 @@ function init(dbtweet, dbuser){
                     return;
                 }
     
-                console.log('test image');
+                //console.log('test image');
                 if(! await tweets.checkImage(image)){
                     res.status(422).json({
                         status: 422,
@@ -94,8 +95,22 @@ function init(dbtweet, dbuser){
                     return;
                 } 
                 
-                console.log('creation');
+                //console.log('creation');
                 tweets.create(author, content, image)
+                    .then( async (_id) => {
+                        console.log('test ajout tweet dans user');
+                        let tweet_id = await users.addTweet(author, _id);
+                        if(! tweet_id){
+                            res.status(404).json({
+                                status: 404,
+                                message: "Author doesn't exist"
+                            });
+                            return;
+                        } else {
+                            console.log('success?');
+                            return tweet_id;
+                        }
+                    })
                     .then((_id) => res.status(201).json({
                         status: 201,
                         message: "New tweet registered successfully",
