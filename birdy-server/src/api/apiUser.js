@@ -158,11 +158,10 @@ function init(dbusers, dbtweets){
     // unlikeTweet service
     api
         .route("/user/:_id/tweet/:_tweetId/unlike")
-        
         .put(async (req, res) => {
-            //console.log('test like tweet before try');
+            //console.log('test unlike tweet before try');
             try{
-                //console.log('checkAlreadyLiked');
+                //console.log('checkAlreadyUnliked');
                 if(!await tweets.checkAlreadyLiked(`${req.params._id}`, `${req.params._tweetId}`)){
                     res.status(400).json({
                         status: 400,
@@ -341,6 +340,116 @@ function init(dbusers, dbtweets){
             res.status(500).send("Internal error");
         }
     })
+
+    // reTweet service
+    api
+        .route("/user/:_id/tweet/:_tweetId/retweet")
+        .put(async (req, res) => {
+            //console.log('test retweet before try');
+            try{
+                //console.log('checkAlreadyRetweeted');
+                if(await tweets.checkAlreadyRetweeted(`${req.params._id}`, `${req.params._tweetId}`)){
+                    res.status(409).json({
+                        status: 409,
+                        message: "Tweet has already been retweeted by this user"
+                    });
+                    return;
+                }
+                
+                //console.log('test retweet tweet');
+                const retweetedInTweets = await tweets.retweetTweet(`${req.params._id}`, `${req.params._tweetId}`);
+                const retweetedInUsers = await users.addRetweetedTweet(`${req.params._id}`, `${req.params._tweetId}`);
+
+                //console.log('checkRetweetedInTweets');
+                if(!retweetedInTweets){
+                    res.status(404).json({
+                        status: 404,
+                        message: "Tweet not found"
+                    });
+                    return;
+                }
+
+                //console.log('checkRetweetedInUsers');
+                if(!retweetedInUsers){
+                    res.status(404).json({
+                        status: 404,
+                        message: "Retweeter not found"
+                    });
+                    return;
+                } 
+                else {
+                    //console.log('success?');
+                    res.status(200).json({
+                        status: 200,
+                        message: `Tweet '${req.params._id}' retweeted successfully`
+                    });
+                    return;
+                }
+            } catch(e) {
+                //console.log('test retweet tweet in catch');
+                // Exception
+                res.status(500).json({
+                    status: 500,
+                    message: "Internal error",
+                    details: (e || "Unknown error").toString()
+                });
+            }
+        });
+
+    // unRetweetTweet service
+    api
+        .route("/user/:_id/tweet/:_tweetId/unretweet")
+        .put(async (req, res) => {
+            //console.log('test unretweet tweet before try');
+            try{
+                //console.log('checkAlreadyRetweeted');
+                if(!await tweets.checkAlreadyRetweeted(`${req.params._id}`, `${req.params._tweetId}`)){
+                    res.status(400).json({
+                        status: 400,
+                        message: "Tweet hasn't been retweeted by this user"
+                    });
+                    return;
+                }
+                
+                //console.log('test unretweet tweet');
+                const unretweetedInTweets = await tweets.unretweetTweet(`${req.params._id}`, `${req.params._tweetId}`);
+                const unretweetedInUsers = await users.removeRetweetedTweet(`${req.params._id}`, `${req.params._tweetId}`);
+
+                //console.log('checkUnretweetedInTweets');
+                if(!unretweetedInTweets){
+                    res.status(404).json({
+                        status: 404,
+                        message: "Tweet not found"
+                    });
+                    return;
+                }
+
+                //console.log('checkUnretweetedInUsers');
+                if(!unretweetedInUsers){
+                    res.status(404).json({
+                        status: 404,
+                        message: "Unliker not found"
+                    });
+                    return;
+                } 
+                else {
+                    //console.log('success?');
+                    res.status(200).json({
+                        status: 200,
+                        message: `Tweet '${req.params._id}' unretweeted successfully`
+                    });
+                    return;
+                }
+            } catch(e) {
+                //console.log('test unretweet tweet in catch');
+                // Exception
+                res.status(500).json({
+                    status: 500,
+                    message: "Internal error",
+                    details: (e || "Unknown error").toString()
+                });
+            }
+        });
 
     return api;
 }

@@ -105,7 +105,7 @@ class Tweet{
                 nbLikes: 0,
                 likers: [], //pour assurer un like max par utilisateurs
                 nbRetweets: 0,
-                retweeteers: [], //pour assurer un retweet max par utilisateurs
+                retweeters: [], //pour assurer un retweet max par utilisateurs
                 nbComments: 0,
                 comments: [],
                 dateCreated: new Date()
@@ -169,6 +169,9 @@ class Tweet{
     checkAlreadyLiked(userid, tweetid) {
         return new Promise((resolve, reject) => {
             this.db.find({ _id: tweetid }, { _id: 0 }, function(err, docs) {
+                if(err){
+                    reject(err);
+                }
                 //console.log('docs in get: ', docs);
                 if(docs.length !== 1){
                     reject("Tweet doesn't exists");
@@ -176,6 +179,29 @@ class Tweet{
                 const likers = docs[0]['likers'];
                 //console.log('likers: ', likers, '\nuserid: ', userid);
                 if(likers.includes(userid)) {
+                    //erreur
+                    resolve(true);
+                } else {
+                    resolve(false);
+                }
+            });
+        });
+    }
+
+    // renvoie true si un utilisateur a deja retweet un tweet
+    checkAlreadyRetweeted(userid, tweetid) {
+        return new Promise((resolve, reject) => {
+            this.db.find({ _id: tweetid }, { _id: 0 }, function(err, docs) {
+                if(err){
+                    reject(err);
+                }
+                //console.log('docs in get: ', docs);
+                if(docs.length !== 1){
+                    reject("Tweet doesn't exists");
+                }
+                const retweeters = docs[0]['retweeters'];
+                //console.log('retweeters: ', retweeters, '\nuserid: ', userid);
+                if(retweeters.includes(userid)) {
                     //erreur
                     resolve(true);
                 } else {
@@ -203,6 +229,32 @@ class Tweet{
     unlikeTweet(userid, tweetid){
         return new Promise( (resolve, reject) => {
             this.db.update( { _id: tweetid }, { $inc: { nbLikes: -1 },  $pull: { likers: userid } }, function(err, numReplaced){
+                if(err){
+                    reject(err);
+                } else {
+                    resolve(true);
+                }
+            })
+        });
+    }
+
+    // incrmente le compteur de retweet d'un tweet
+    retweetTweet(userid, tweetid){
+        return new Promise( (resolve, reject) => {
+            this.db.update( { _id: tweetid }, { $inc: { nbRetweets: 1 },  $push: { retweeters: userid } }, function(err, numReplaced){
+                if(err){
+                    reject(err);
+                } else {
+                    resolve(true);
+                }
+            })
+        });
+    }
+
+    // decremente le compteur de retweet d'un tweet
+    unretweetTweet(userid, tweetid){
+        return new Promise( (resolve, reject) => {
+            this.db.update( { _id: tweetid }, { $inc: { nbRetweets: -1 },  $pull: { retweeters: userid } }, function(err, numReplaced){
                 if(err){
                     reject(err);
                 } else {

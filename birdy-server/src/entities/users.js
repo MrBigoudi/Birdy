@@ -329,6 +329,38 @@ class User{
             });
         });
     }
+
+    //ajoute un tweet dans la liste des tweetRetweeted d'un utilisateur
+    addRetweetedTweet(userId, tweetId){
+        return new Promise( (resolve, reject) => {
+            this.db.update({ _id: userId }, { $push: { tweetsRetweeted: tweetId } }, {}, function (err, numReplaced) {
+                if(err){
+                    reject(err);
+                }
+                if(numReplaced === 0){
+                    resolve(false);
+                } else {
+                    resolve(tweetId);
+                }
+            });
+        });
+    }
+
+    //enleve un tweet dans la liste des tweetRetweeted d'un utilisateur
+    removeRetweetedTweet(userId, tweetId){
+        return new Promise( (resolve, reject) => {
+            this.db.update({ _id: userId }, { $pull: { tweetsRetweeted: tweetId } }, {}, function (err, numReplaced) {
+                if(err){
+                    reject(err);
+                }
+                if(numReplaced === 0){
+                    resolve(false);
+                } else {
+                    resolve(tweetId);
+                }
+            });
+        });
+    }
 }
 
 exports.default = User;

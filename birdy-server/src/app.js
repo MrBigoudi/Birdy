@@ -13,7 +13,9 @@ const app = express();
 // Session
 const session = require('express-session');
 app.use(session({
-    secret: "technoweb rocks"
+    secret: "technoweb rocks",
+    resave: true,
+    saveUninitialized: true
 }));
 
 let db = {};

@@ -54,15 +54,50 @@ export default function Tweet(props){
         });
     }
 
-    function handleRetweetChange(event){
-        setNbRetweets( prev => {
-            let retweeted = nbRetweets[1]
-            if(!retweeted)
-                props.tweet.addRetweet();
-            else
-                props.tweet.removeRetweet();
-            return [props.tweet.getNbRetweets(), !retweeted];
-        });
+    async function handleRetweetChange(event){
+        event.preventDefault();
+        //console.log('tweet: ', props.tweet);
+        let userId = '';
+        let tweetId = '';
+        await Promise.all([
+            axios
+                .get(`/api/user/getUserId/${props.user['username']}`)
+                .then( (res) => { userId = res.data; }),
+
+            axios
+                .post("/apiTweet/tweet/getTweetId", props.tweet)
+                .then( (res) => { tweetId = res.data; }),
+        ]);
+        //console.log('tweetId: ', tweetId);
+        //console.log('userId: ', userId);
+        //console.log('retweeted? ', nbRetweets[1]);
+        if(!nbRetweets[1]){
+            axios
+                .put(`/api/user/${userId}/tweet/${tweetId}/retweet`)
+                .then( () => {
+                    axios
+                        .get(`/apiTweet/tweet/${tweetId}`)
+                        .then( (res) => {
+                            //console.log('res last get: ', res);
+                            setNbRetweets( prev => {
+                                return [res.data['nbRetweets'], true];
+                        });
+                    });
+                });
+        } else {
+            axios
+                .put(`/api/user/${userId}/tweet/${tweetId}/unretweet`)
+                .then( () => {
+                    axios
+                        .get(`/apiTweet/tweet/${tweetId}`)
+                        .then( (res) => {
+                            //console.log('res last get: ', res);
+                            setNbRetweets( prev => {
+                                return [res.data['nbRetweets'], false];
+                        });
+                    });
+                });
+        }
     }
 
     async function handleLikeChange(event){

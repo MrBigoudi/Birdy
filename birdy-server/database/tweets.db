@@ -1,8 +1,17 @@
-{"index":2,"author":"wjMXsPvfg2YzI4dY","content":"2","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeteers":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651680302204},"_id":"3TRMrdACyG4dSWoK"}
-{"index":1,"author":"wjMXsPvfg2YzI4dY","content":"1","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeteers":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651680302202},"_id":"BTeztmyfdmunoGE2"}
-{"index":6,"author":"y38w071D3CPTPiky","content":"3","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeteers":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651680302239},"_id":"CgDURBAJPzfuVpxe"}
-{"index":3,"author":"wjMXsPvfg2YzI4dY","content":"3","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeteers":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651680302205},"_id":"KX7RWYb6kWkZKndf"}
-{"index":4,"author":"y38w071D3CPTPiky","content":"1","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeteers":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651680302237},"_id":"btzZAXUNGHS57vEg"}
-{"index":7,"author":"jDjnTZHQodHTcHUy","content":"this is a test tweet","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeteers":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651680302270},"_id":"dRf1nxD6Bh2FmTM9"}
-{"index":8,"author":"jsg1K4oO7x5FEFqL","content":"this is a test tweet","image":"","nbLikes":1,"likers":["jsg1K4oO7x5FEFqL"],"nbRetweets":0,"retweeteers":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651680302319},"_id":"k6KYhR8YRnjhDQ8X"}
-{"index":5,"author":"y38w071D3CPTPiky","content":"2","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeteers":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651680302238},"_id":"pvDpagzchkmgGqNK"}
+{"index":1,"author":"dpSHBmd94uLKSun9","content":"1","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeters":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651696853625},"_id":"20IJAjSHU1FBkPQU"}
+{"index":2,"author":"dpSHBmd94uLKSun9","content":"2","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeters":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651696853626},"_id":"wtd0p7Ls4RF0SYCn"}
+{"index":3,"author":"dpSHBmd94uLKSun9","content":"3","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeters":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651696853628},"_id":"62jRQPBVk8TnDs3S"}
+{"$$deleted":true,"_id":"20IJAjSHU1FBkPQU"}
+{"$$deleted":true,"_id":"62jRQPBVk8TnDs3S"}
+{"$$deleted":true,"_id":"wtd0p7Ls4RF0SYCn"}
+{"index":4,"author":"O2chjhvwp6T0OxEz","content":"1","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeters":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651696853660},"_id":"YpZgTyc5hECjarRW"}
+{"index":5,"author":"O2chjhvwp6T0OxEz","content":"2","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeters":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651696853662},"_id":"ndYrrP0nidExCyhC"}
+{"index":6,"author":"O2chjhvwp6T0OxEz","content":"3","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeters":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651696853663},"_id":"EE4EzT9Oo52OlmRJ"}
+{"$$deleted":true,"_id":"EE4EzT9Oo52OlmRJ"}
+{"$$deleted":true,"_id":"YpZgTyc5hECjarRW"}
+{"$$deleted":true,"_id":"ndYrrP0nidExCyhC"}
+{"index":7,"author":"dK7XNVAxMY33rpxP","content":"this is a test tweet","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeters":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651696853694},"_id":"4VnagmeMi17jrBSx"}
+{"$$deleted":true,"_id":"4VnagmeMi17jrBSx"}
+{"index":8,"author":"FYoOAhKKzjuWkGX9","content":"this is a test tweet","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeters":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651696853744},"_id":"Rhpirm1mpoEAXTxn"}
+{"index":8,"author":"FYoOAhKKzjuWkGX9","content":"this is a test tweet","image":"","nbLikes":1,"likers":["FYoOAhKKzjuWkGX9"],"nbRetweets":0,"retweeters":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651696853744},"_id":"Rhpirm1mpoEAXTxn"}
+{"$$deleted":true,"_id":"Rhpirm1mpoEAXTxn"}
