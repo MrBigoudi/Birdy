@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+//import axios from "axios";
 
 import Tweet from "./Tweet.js";
 import NewTweet from "./NewTweet.js";
@@ -9,6 +10,11 @@ import "../../stylesheets/components/timeline.css";
 //props an array of tweets to render
 //default: boolean
 export default function Timeline(props){
+    useEffect( () => {
+        setTweetList(props.tweets.map( item => {
+            return [item, false]; //[value, deleted?]
+        }));
+    }, [props.tweets]); 
     
     const [tweetList, setTweetList] = useState(props.tweets.map( item => {
                                         return [item, false]; //[value, deleted?]
@@ -22,8 +28,8 @@ export default function Timeline(props){
                 {
                     return(
                         <Tweet 
-                            key={item[0].getId()}
-                            id={item[0].getId()}
+                            key={item[0]['index']}
+                            id={item[0]['index']}
                             tweet={item[0]}
                             default={props.default}
                             deleted={false}
@@ -35,8 +41,8 @@ export default function Timeline(props){
                 {
                     return(
                         <TweetDeleted 
-                            key={item[0].getId()} 
-                            id={item[0].getId()} 
+                            key={item[0]['index']} 
+                            id={item[0]['index']} 
                             deleted={true} 
                             onDelete={handleDeleteTweet}
                         />
