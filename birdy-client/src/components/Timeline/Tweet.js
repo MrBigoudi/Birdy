@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AutoLink from "react-native-autolink";
 import axios from "axios";
+import moment from "moment";
 
 import CustomLink from "../../atomComponents/CustomLink.js";
 import TweetIcon from "./TweetIcon.js";
@@ -92,7 +93,7 @@ export default function Tweet(props){
                         {author['username']}
                     </span>
                     <span className="color-light-grey">
-                        {props.tweet["dateCreated"]}
+                        {moment(props.tweet["dateCreated"]).fromNow()}
                     </span>
                 </header>
                 <main className="tweet-content">
