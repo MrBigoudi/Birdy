@@ -65,15 +65,50 @@ export default function Tweet(props){
         });
     }
 
-    function handleLikeChange(event){
-        setNbLikes( prev => {
-            let liked = nbLikes[1]
-            if(!liked)
-                props.tweet.addLike();
-            else
-                props.tweet.removeLike();
-            return [props.tweet.getNbLikes(), !liked];
-        });
+    async function handleLikeChange(event){
+        event.preventDefault();
+        //console.log('tweet: ', props.tweet);
+        let userId = '';
+        let tweetId = '';
+        await Promise.all([
+            axios
+                .get(`/api/user/getUserId/${props.user['username']}`)
+                .then( (res) => { userId = res.data; }),
+
+            axios
+                .post("/apiTweet/tweet/getTweetId", props.tweet)
+                .then( (res) => { tweetId = res.data; }),
+        ]);
+        //console.log('tweetId: ', tweetId);
+        //console.log('userId: ', userId);
+        //console.log('liked? ', nbLikes[1]);
+        if(!nbLikes[1]){
+            axios
+                .put(`/api/user/${userId}/tweet/${tweetId}/like`)
+                .then( () => {
+                    axios
+                        .get(`/apiTweet/tweet/${tweetId}`)
+                        .then( (res) => {
+                            //console.log('res last get: ', res);
+                            setNbLikes( prev => {
+                                return [res.data['nbLikes'], true];
+                        });
+                    });
+                });
+        } else {
+            axios
+                .put(`/api/user/${userId}/tweet/${tweetId}/unlike`)
+                .then( () => {
+                    axios
+                        .get(`/apiTweet/tweet/${tweetId}`)
+                        .then( (res) => {
+                            //console.log('res last get: ', res);
+                            setNbLikes( prev => {
+                                return [res.data['nbLikes'], false];
+                        });
+                    });
+                });
+        }
     }
 
     const text = props.tweet['content'];

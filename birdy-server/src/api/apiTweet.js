@@ -22,7 +22,20 @@ function init(dbtweets, dbusers){
         .get("/tweet/getNTweets/:nbTweets", async (req, res) => {
             try{
                 const nTweets = await tweets.getNTweets(`${req.params.nbTweets}`);
-                res.status(200).send(nTweets);
+                res.send(nTweets);
+            } catch(e){
+                res.status(500).send("Internal error");
+            }
+        })
+
+    //get tweet id
+    api
+        .post("/tweet/getTweetId", async (req, res) => {
+            try{
+                //console.log('tweet in api getTweetId: ', req.body);
+                const tweetId = await tweets.getTweetId(req.body);
+                //console.log('tweetId in api getTweetId: ', tweetId);
+                res.status(200).send(tweetId);
             } catch(e){
                 res.status(500).send("Internal error");
             }
@@ -64,22 +77,6 @@ function init(dbtweets, dbusers){
                 res.status(500).send("Internal error");
             }
         });
-
-    api
-        .route("tweet/:_id/like")
-        // get nbLikes service
-        .get(async (req, res) => {
-            try {
-                const nbLikes = await tweets.getNbLikes(`${req.params._id}`);
-                if (!nbLikes)
-                    res.status(404).send("Tweet not found");
-                else
-                    res.status(200).send(nbLikes);
-            }
-            catch (e) {
-                res.status(500).send("Internal error");
-            }
-        })
 
     //newTweet service
     api

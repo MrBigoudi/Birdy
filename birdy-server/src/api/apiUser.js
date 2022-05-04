@@ -100,9 +100,9 @@ function init(dbusers, dbtweets){
         }
     });
 
+    // likeTweet service
     api
         .route("/user/:_id/tweet/:_tweetId/like")
-        // likeTweet service
         .put(async (req, res) => {
             //console.log('test like tweet before try');
             try{
@@ -146,6 +146,62 @@ function init(dbusers, dbtweets){
                 }
             } catch(e) {
                 //console.log('test like tweet in catch');
+                // Exception
+                res.status(500).json({
+                    status: 500,
+                    message: "Internal error",
+                    details: (e || "Unknown error").toString()
+                });
+            }
+        });
+
+    // unlikeTweet service
+    api
+        .route("/user/:_id/tweet/:_tweetId/unlike")
+        
+        .put(async (req, res) => {
+            //console.log('test like tweet before try');
+            try{
+                //console.log('checkAlreadyLiked');
+                if(!await tweets.checkAlreadyLiked(`${req.params._id}`, `${req.params._tweetId}`)){
+                    res.status(400).json({
+                        status: 400,
+                        message: "Tweet hasn't been liked by this user"
+                    });
+                    return;
+                }
+                
+                //console.log('test unlike tweet');
+                const unlikedInTweets = await tweets.unlikeTweet(`${req.params._id}`, `${req.params._tweetId}`);
+                const unlikedInUsers = await users.removeLikedTweet(`${req.params._id}`, `${req.params._tweetId}`);
+
+                //console.log('checkUnlikedInTweets');
+                if(!unlikedInTweets){
+                    res.status(404).json({
+                        status: 404,
+                        message: "Tweet not found"
+                    });
+                    return;
+                }
+
+                //console.log('checkUnlikedInUsers');
+                if(!unlikedInUsers){
+                    res.status(404).json({
+                        status: 404,
+                        message: "Unliker not found"
+                    });
+                    return;
+                } 
+                else {
+                    //console.log('success?');
+                    res.status(200).json({
+                        status: 200,
+                        message: `Tweet '${req.params._id}' unliked successfully`
+                    });
+                    return;
+                }
+            } catch(e) {
+                //console.log('test unlike tweet in catch');
                 // Exception
                 res.status(500).json({
                     status: 500,
@@ -273,6 +329,18 @@ function init(dbusers, dbtweets){
             });
         }
     });
+
+    //get user id
+    api.get("/user/getUserId/:username", async (req, res) => {
+        try{
+            //console.log('username in api getUserId: ', req.params.username);
+            const userId = await users.getUserId(req.params.username);
+            //console.log('userId in api getUserId: ', userId);
+            res.status(200).send(userId);
+        } catch(e){
+            res.status(500).send("Internal error");
+        }
+    })
 
     return api;
 }

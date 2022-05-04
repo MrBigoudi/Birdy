@@ -32,6 +32,7 @@ export default function Timeline(props){
                             id={item[0]['index']}
                             tweet={item[0]}
                             default={props.default}
+                            user={props.user}
                             deleted={false}
                             onDelete={handleDeleteTweet}
                         />

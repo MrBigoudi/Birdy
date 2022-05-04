@@ -75,16 +75,13 @@ class Tweet{
     //renvoie l'id du tweet passe en parametre
     getTweetId(tweet){
         return new Promise( (resolve, reject) => {
+            //console.log('tweet in getTweetId: ', tweet);
             this.db.find(
                 { 
                     index: tweet["index"],
                     author: tweet["author"],
                     content: tweet["content"],
-                    image: tweet["image"],
-                    nbLikes: tweet["nbLikes"],
-                    nbRetweets: tweet["nbRetweets"],
-                    nbComments: tweet["nbComments"],
-                    dateCreated: tweet["dateCreated"] 
+                    image: tweet["image"]
                 },function (err, docs) {
                     //console.log('docs in getTweetId: ', docs);
                     if(docs.length===1){
@@ -202,23 +199,16 @@ class Tweet{
         });
     }
 
-    // renvoie le nombre de likes du teweet tweetid
-    getNbLikes(tweetid) {
-        return new Promise((resolve, reject) => {
-            this.db.find({ _id: tweetid }, { _id: 0 }, function(err, docs) {
-                //console.log('docs in get: ', docs);
-                if(docs.length !== 1){
-                    reject("Tweet doesn't exists");
-                }
-
-                const nbLikes = docs[0]['nbLikes'];
-                if(!nbLikes) {
-                    //erreur
+    // decremente le compteur de like d'un tweet
+    unlikeTweet(userid, tweetid){
+        return new Promise( (resolve, reject) => {
+            this.db.update( { _id: tweetid }, { $inc: { nbLikes: -1 },  $pull: { likers: userid } }, function(err, numReplaced){
+                if(err){
                     reject(err);
                 } else {
-                    resolve(nbLikes);
+                    resolve(true);
                 }
-            });
+            })
         });
     }
 

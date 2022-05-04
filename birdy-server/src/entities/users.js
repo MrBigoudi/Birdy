@@ -13,7 +13,9 @@ class User{
     getUserId(username){
         return new Promise( (resolve, reject) => {
             this.db.find({ username: username },function (err, docs) {
-                // docs is [{ planet: 'Mars', system: 'solar', _id: 'id1' }]
+                if(err){
+                    reject(err);
+                }
                 //console.log('docs in getUserId: ', docs);
                 if(docs.length===1){
                     resolve(docs[0]['_id'])
@@ -85,6 +87,9 @@ class User{
         return new Promise((resolve, reject) => {
             //console.log('test get, id: ', userid);
             this.db.find({ _id: userid }, { _id: 0 }, function(err, docs) {
+                if(err){
+                    reject(err);
+                }
                 //console.log('docs in get: ', docs);
                 if(docs.length !== 1){
                     resolve(null);
@@ -107,6 +112,9 @@ class User{
         return new Promise((resolve, reject) => {
             //console.log('test delete, id: ', userid);
             this.db.remove({ _id: userid }, {}, function(err, numRemoved) {
+                if(err){
+                    reject(err);
+                }
                 //console.log('numRemoved: ', numRemoved);
                 if(numRemoved === 0){
                     reject(err);
@@ -121,6 +129,9 @@ class User{
     checkEmailAddress(emailAddress){
         return new Promise((resolve, reject) => {
             this.db.find({ emailAddress: emailAddress },function (err, docs) {
+                if(err){
+                    reject(err);
+                }
                 const exists = (docs.length!==0);
                 //console.log('exists in checkEmailAddress: ', exists);
                 if(!exists) {
@@ -138,6 +149,9 @@ class User{
     checkPasswd(emailAddress, passwd){
         return new Promise((resolve, reject) => {
             this.db.find({ emailAddress: emailAddress, passwd: passwd }, { _id: 1}, function (err, docs) {
+                if(err){
+                    reject(err);
+                }
                 if(docs.length > 1){
                     reject('too many results');
                 }
@@ -158,6 +172,9 @@ class User{
         return new Promise((resolve, reject) => {
             this.db.find({ username: username }, function (err, docs) {
                 const exists = (docs.length!==0);
+                if(err){
+                    reject(err);
+                }
                 //console.log('exists in checkUsername: ', exists);
                 if(!exists) {
                     //erreur
@@ -229,6 +246,9 @@ class User{
     addTweet(userId, tweetId){
         return new Promise( (resolve, reject) => {
             this.db.update({ _id: userId }, { $push: { tweets: tweetId } }, {}, function (err, numReplaced) {
+                if(err){
+                    reject(err);
+                }
                 if(numReplaced === 0){
                     resolve(false);
                 } else {
@@ -242,6 +262,9 @@ class User{
     deleteTweet(userId, tweetId){
         return new Promise( (resolve, reject) => {
             this.db.update({ _id: userId }, { $pull: { tweets: tweetId } }, {}, function (err, numReplaced) {
+                if(err){
+                    reject(err);
+                }
                 if(numReplaced === 0){
                     reject("Tweet doesn't exists");
                 } else {
@@ -256,6 +279,9 @@ class User{
         return new Promise( (resolve, reject) => {
             //console.log('test get, id: ', userid);
             this.db.find({ _id: userid }, { _id: 0 }, function(err, docs) {
+                if(err){
+                    reject(err);
+                }
                 if(docs.length !== 1){
                     reject(null);
                 }
@@ -276,6 +302,25 @@ class User{
     addLikedTweet(userId, tweetId){
         return new Promise( (resolve, reject) => {
             this.db.update({ _id: userId }, { $push: { tweetsLiked: tweetId } }, {}, function (err, numReplaced) {
+                if(err){
+                    reject(err);
+                }
+                if(numReplaced === 0){
+                    resolve(false);
+                } else {
+                    resolve(tweetId);
+                }
+            });
+        });
+    }
+
+    //enleve un tweet dans la liste des tweetLiked d'un utilisateur
+    removeLikedTweet(userId, tweetId){
+        return new Promise( (resolve, reject) => {
+            this.db.update({ _id: userId }, { $pull: { tweetsLiked: tweetId } }, {}, function (err, numReplaced) {
+                if(err){
+                    reject(err);
+                }
                 if(numReplaced === 0){
                     resolve(false);
                 } else {

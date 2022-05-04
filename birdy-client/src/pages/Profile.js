@@ -16,13 +16,26 @@ import logoLists from "../images/icons/navBarIcons/outline_list_alt_white_24dp_2
 import logoProfile from "../images/icons/navBarIcons/outline_person_white_24dp_2x.png";
 import logoMoreOptions from "../images/icons/navBarIcons/outline_more_horiz_white_24dp_2x.png";
 
-import { tweets } from "../database/tweets.js";
+// import { tweets } from "../database/tweets.js";
 // import { users } from "../database/users.js";
+
+const MAX_NB_TWEETS = 100;
 
 export default function Profile(){
     useEffect( () => {
         document.title = "Profile - Birdy";
+        async function getListTweets() {
+            await axios
+                    .get(`/apiTweet/tweet/getNTweets/${MAX_NB_TWEETS}`)
+                    .then( (res) => {
+                        //console.log('tweets: ', res.data);
+                        setTweets(res.data);
+                    });
+            }
+        getListTweets();
     }, []);
+
+    const [tweets, setTweets] = useState([]);
 
     const menuIcons = [
         {id:"profile-home", src:logoHome, alt:"home menu", msg:"Home", onClick:scrollToTop},
