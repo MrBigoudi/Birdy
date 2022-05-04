@@ -1,12 +1,12 @@
 const chaiHttp = require('chai-http');
 const chai = require('chai');
-const app = require('../src/app.js'); //app express
+const app = require('../../src/app.js'); //app express
 
 // Configurer chai
 chai.use(chaiHttp);
 chai.should();
 
-describe("Test suppression des tweets d'un utilisateur",  () => {
+describe("Test acces a une liste de tweets",  () => {
 	it("tweet", (done) => {
 		let userid = 0;
 		let tweetid = [0,0,0];
@@ -49,7 +49,9 @@ describe("Test suppression des tweets d'un utilisateur",  () => {
 					content: "3",
 					image: ""
 				}
-
+			})
+			.then( () => { 
+				// Test create tweet
 				return Promise.all([
 					// Creation de 3 tweets pour l'utilisateur
 					request
@@ -74,7 +76,17 @@ describe("Test suppression des tweets d'un utilisateur",  () => {
 							res.should.have.status(201); // HTTP 201 : created
 						}),
 				]);
-
+			})
+			.then( () => {
+				//console.log('test get');
+				// Test get list tweets tweet
+				return request
+					.get(`/apiTweet/tweet/getNTweets/2`)
+					.then( (res) => {
+						res.should.have.status(200); // HTTP 200 : ok
+						chai.assert.equal(res.body.length,2);
+						console.log('res n tweets: ', res.body);
+					})
 			})
 			.then( () => {
 				//delete temporary user
@@ -106,4 +118,4 @@ describe("Test suppression des tweets d'un utilisateur",  () => {
 				request.close();
 			});
 		});
-});
+})

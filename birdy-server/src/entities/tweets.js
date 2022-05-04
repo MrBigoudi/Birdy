@@ -152,12 +152,12 @@ class Tweet{
     // supprime tous les tweets d'une liste donnee de la db
     deleteTweets(tweetsList){
         return new Promise( (resolve, reject) => {
-            console.log('tweetsList: ', tweetsList);
+            //console.log('tweetsList: ', tweetsList);
             let tweetIdList = [];
             for(let tweetid of tweetsList){
                 tweetIdList.push({ _id: tweetid });
             }
-            console.log('tweetIdList: ', tweetIdList);
+            //console.log('tweetIdList: ', tweetIdList);
             this.db.remove( { $or: tweetIdList }, { multi: true }, function(err, numRemoved) {
                 if(err){
                     reject(err);
@@ -217,6 +217,22 @@ class Tweet{
                     reject(err);
                 } else {
                     resolve(nbLikes);
+                }
+            });
+        });
+    }
+
+    // renvoie une liste de n tweets les plus recents
+    getNTweets(n) {
+        return new Promise((resolve, reject) => {
+            //console.log('test get, id: ', tweetid);
+            this.db.find({}, { _id: 0 }).sort({ dateCreated: -1 }).limit(n).exec(function(err, docs) {
+                //console.log('docs in getNTweets: ', docs);
+                if(err) {
+                    //erreur
+                    reject(err);
+                } else {
+                    resolve(docs);
                 }
             });
         });

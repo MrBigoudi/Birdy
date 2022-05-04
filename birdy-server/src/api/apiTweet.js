@@ -17,6 +17,17 @@ function init(dbtweets, dbusers){
     const tweets = new Tweet.default(dbtweets);
     const users = new User.default(dbusers);
 
+    //get all tweets
+    api
+        .get("/tweet/getNTweets/:nbTweets", async (req, res) => {
+            try{
+                const nTweets = await tweets.getNTweets(`${req.params.nbTweets}`);
+                res.status(200).send(nTweets);
+            } catch(e){
+                res.status(500).send("Internal error");
+            }
+        })
+
 
     api
         .route("/tweet/:_id")
