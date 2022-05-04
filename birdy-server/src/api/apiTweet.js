@@ -54,6 +54,22 @@ function init(dbtweets, dbusers){
             }
         });
 
+    api
+        .route("tweet/:_id/like")
+        // get nbLikes service
+        .get(async (req, res) => {
+            try {
+                const nbLikes = await tweets.getNbLikes(`${req.params._id}`);
+                if (!nbLikes)
+                    res.status(404).send("Tweet not found");
+                else
+                    res.status(200).send(nbLikes);
+            }
+            catch (e) {
+                res.status(500).send("Internal error");
+            }
+        })
+
     //newTweet service
     api
         .post("/tweet/newTweet", async (req, res) => {

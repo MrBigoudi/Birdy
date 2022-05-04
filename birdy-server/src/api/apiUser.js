@@ -101,6 +101,61 @@ function init(dbusers, dbtweets){
     });
 
     api
+        .route("/user/:_id/tweet/:_tweetId/like")
+        // likeTweet service
+        .put(async (req, res) => {
+            //console.log('test like tweet before try');
+            try{
+                //console.log('checkAlreadyLiked');
+                if(await tweets.checkAlreadyLiked(`${req.params._id}`, `${req.params._tweetId}`)){
+                    res.status(409).json({
+                        status: 409,
+                        message: "Tweet has already been liked by this user"
+                    });
+                    return;
+                }
+                
+                //console.log('test like tweet');
+                const likedInTweets = await tweets.likeTweet(`${req.params._id}`, `${req.params._tweetId}`);
+                const likedInUsers = await users.addLikedTweet(`${req.params._id}`, `${req.params._tweetId}`);
+
+                //console.log('checkLikedInTweets');
+                if(!likedInTweets){
+                    res.status(404).json({
+                        status: 404,
+                        message: "Tweet not found"
+                    });
+                    return;
+                }
+
+                //console.log('checkLikedInUsers');
+                if(!likedInUsers){
+                    res.status(404).json({
+                        status: 404,
+                        message: "Liker not found"
+                    });
+                    return;
+                } 
+                else {
+                    //console.log('success?');
+                    res.status(200).json({
+                        status: 200,
+                        message: `Tweet '${req.params._id}' liked successfully`
+                    });
+                    return;
+                }
+            } catch(e) {
+                //console.log('test like tweet in catch');
+                // Exception
+                res.status(500).json({
+                    status: 500,
+                    message: "Internal error",
+                    details: (e || "Unknown error").toString()
+                });
+            }
+        });
+
+    api
         .route("/user/:_id")
         //get user service
         .get(async (req, res) => {
@@ -137,6 +192,7 @@ function init(dbusers, dbtweets){
                 res.status(500).send("Internal error");
             }
         });
+
 
     //signup service
     api.post("/user/signup", async (req, res) => {

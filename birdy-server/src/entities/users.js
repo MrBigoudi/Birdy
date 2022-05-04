@@ -60,6 +60,9 @@ class User{
                     following: [],
                     followers: [],
                     tweets: [],
+                    tweetsLiked: [],
+                    tweetsRetweeted: [],
+                    tweetsReplied: [],
                     profilePicture: "",
                     dateCreated: new Date()
                 }
@@ -264,6 +267,19 @@ class User{
                     reject(err);
                 } else {
                     resolve(tweets);
+                }
+            });
+        });
+    }
+
+    //ajoute un tweet dans la liste des tweetLiked d'un utilisateur
+    addLikedTweet(userId, tweetId){
+        return new Promise( (resolve, reject) => {
+            this.db.update({ _id: userId }, { $push: { tweetsLiked: tweetId } }, {}, function (err, numReplaced) {
+                if(numReplaced === 0){
+                    resolve(false);
+                } else {
+                    resolve(tweetId);
                 }
             });
         });
