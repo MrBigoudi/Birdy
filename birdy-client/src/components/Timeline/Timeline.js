@@ -60,7 +60,7 @@ export default function Timeline(props){
         setTweetList( prev => {
             //console.log("setTweetList");
             return( prev.map(item => {
-                if(item[0].getId()===id)
+                if(item[0]['index']===id)
                 {
                     //console.log("deleted");
                     return [item[0], !item[1]];
