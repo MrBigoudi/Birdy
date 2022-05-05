@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-//import axios from "axios";
+import axios from "axios";
 
 import Tweet from "./Tweet.js";
 import NewTweet from "./NewTweet.js";
@@ -7,34 +7,99 @@ import TweetDeleted from "./TweetDeleted.js";
 
 import "../../stylesheets/components/timeline.css";
 
+const MAX_NB_TWEETS = 100;
+
 //props an array of tweets to render
 //default: boolean
 export default function Timeline(props){
-    useEffect( () => {
-        setTweetList(props.tweets.map( item => {
-            return [item, false]; //[value, deleted?]
-        }));
-    }, [props.tweets]); 
-    
-    const [tweetList, setTweetList] = useState(props.tweets.map( item => {
-                                        return [item, false]; //[value, deleted?]
-                                    }));
+    const [tweetList, setTweetList] = useState([]);
+    const [tweets, setTweets] = useState([]);
 
-    function genTweetsToRender(){
-        //console.log(tweetList);
-        return (
-            tweetList.map(item => {
+    //console.log('props.tweets: ', props.tweets);
+    //console.log('tweetList: ', tweetList);
+
+    useEffect( () => {
+        let listTmp = props.tweets.map( item => {
+           return [item, false]; //[value, deleted?]
+        })
+
+        function handleHideTweet(event, id){
+            //console.log("handleHideTweet");
+            setTweetList( prev => {
+                //console.log("setTweetList");
+                const tweetListTmp = ( prev.map(item => {
+                    if(item[0]['index']===id)
+                    {
+                        //console.log("hidden");
+                        return [item[0], !item[1]];
+                    }
+                    else
+                    {
+                        //console.log(id);
+                        return item;
+                    }
+                }));
+                setTweets(genTweetsToRender(tweetListTmp));
+                return tweetListTmp;
+            });
+        }
+
+        function genTweetsToRender(listToMap){
+            //console.log('list to map: ', listToMap);
+            const listResult = 
+                listToMap.map((item) => {
+                    const tweetId = item[0]['index']; 
+                    if (!item[1])
+                    {
+                        return(
+                            <Tweet 
+                                key={tweetId}
+                                id={tweetId}
+                                tweet={item[0]}
+                                default={props.default}
+                                user={props.user}
+                                deleted={false}
+                                onDelete={handleHideTweet}
+                            />
+                        );
+                    }
+                    else
+                    {
+                        return(
+                            <TweetDeleted 
+                                key={tweetId} 
+                                id={tweetId} 
+                                deleted={true} 
+                                onDelete={handleHideTweet}
+                            />
+                        );
+                    }
+                });
+            //console.log('listResult: ', listResult);
+            return listResult;
+        }
+
+        setTweetList(listTmp);
+        setTweets(genTweetsToRender(listTmp));
+
+    }, [props.tweets, props.default, props.user]);
+
+    function genTweetsToRender(listToMap){
+        //console.log('list to map: ', listToMap);
+        const listResult = 
+            listToMap.map((item) => {
+                const tweetId = item[0]['index']; 
                 if (!item[1])
                 {
                     return(
                         <Tweet 
-                            key={item[0]['index']}
-                            id={item[0]['index']}
+                            key={tweetId}
+                            id={tweetId}
                             tweet={item[0]}
                             default={props.default}
                             user={props.user}
                             deleted={false}
-                            onDelete={handleDeleteTweet}
+                            onDelete={handleHideTweet}
                         />
                     );
                 }
@@ -42,27 +107,26 @@ export default function Timeline(props){
                 {
                     return(
                         <TweetDeleted 
-                            key={item[0]['index']} 
-                            id={item[0]['index']} 
+                            key={tweetId} 
+                            id={tweetId} 
                             deleted={true} 
-                            onDelete={handleDeleteTweet}
+                            onDelete={handleHideTweet}
                         />
                     );
                 }
-            })
-        )
+            });
+        //console.log('listResult: ', listResult);
+        return listResult;
     }
 
-    const tweets = genTweetsToRender();
-
-    function handleDeleteTweet(event, id){
-        //console.log("handleDeleteTweet");
+    function handleHideTweet(event, id){
+        //console.log("handleHideTweet");
         setTweetList( prev => {
             //console.log("setTweetList");
-            return( prev.map(item => {
+            const tweetListTmp = ( prev.map(item => {
                 if(item[0]['index']===id)
                 {
-                    //console.log("deleted");
+                    //console.log("hidden");
                     return [item[0], !item[1]];
                 }
                 else
@@ -71,16 +135,24 @@ export default function Timeline(props){
                     return item;
                 }
             }));
+            setTweets(genTweetsToRender(tweetListTmp));
+            return tweetListTmp;
         });
     }
 
-    function handleRenderNewTweet(event){
-        //console.log("handleRenderNewTweet");
-        setTweetList( prev => {
-            //console.log("setter");
-            prev.unshift([props.tweets[0], false]);
-            return([...prev]);
-        });
+    function handleRenderNewTweet(event, newTweetId){
+        axios
+            .get(`/apiTweet/tweet/getNTweets/${MAX_NB_TWEETS}`)
+            .then( (res) => {
+                //console.log('tweets: ', res.data);
+                setTweetList(prev => {
+                    const tweetListTmp = res.data.map( item => {
+                        return [item, false];
+                    })
+                    setTweets(genTweetsToRender(tweetListTmp));
+                    return tweetListTmp;
+                });
+            });        
     }
 
     return (
@@ -92,7 +164,7 @@ export default function Timeline(props){
             {props.default || <NewTweet onPost={handleRenderNewTweet} user={props.user} />}
             <main id="timeline-main" className="timeline-main">
                 <section className="timeline-tweets">
-                    {tweets}
+                    {tweets===[] ? "" : tweets}
                 </section>
             </main>
         </div>

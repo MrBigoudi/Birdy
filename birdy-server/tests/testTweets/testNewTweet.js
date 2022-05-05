@@ -44,7 +44,7 @@ describe("Test creation d'un nouveau tweet",  () => {
 				tweet2 = {
 					author: "",
 					content: "this is a test tweet",
-					image: "image.png"
+					image: "blob:http://localhost:3000/114c6775-2bea-48b9-90bf-2f3b1a86b08d"
 				}
 		
 				tweet3 = {
@@ -56,19 +56,19 @@ describe("Test creation d'un nouveau tweet",  () => {
 				tweet4 = {
 					author: "error author doesn't exist",
 					content: "this is a test tweet",
-					image: "image.png"
+					image: "blob:http://localhost:3000/114c6775-2bea-48b9-90bf-2f3b1a86b08d"
 				}
 
 				tweet5 = {
 					author: `${userid}`,
 					content: "this is a fuCKing awesome message but it generates an error",
-					image: "image.png"
+					image: "blob:http://localhost:3000/114c6775-2bea-48b9-90bf-2f3b1a86b08d"
 				}
 
 				tweet6 = {
 					author: `${userid}`,
 					content: "",
-					image: "wrongImage.jpeg"
+					image: "blob:http://invalidimage:3000/114c6775-2bea-48b9-90bf-2f3b1a"
 				}
 			})
 			.then( () => { 

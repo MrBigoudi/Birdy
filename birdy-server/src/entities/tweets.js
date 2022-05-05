@@ -2,10 +2,14 @@ const Filter = require('bad-words');
 const filter = new Filter();
 
 class Tweet{
-    static #PRIVATE_INDEX_GENERATOR = 0;
+    //static #PRIVATE_INDEX_GENERATOR = 0;
 
     constructor(db){
         this.db = db;
+    }
+
+    genIndex(date){
+        return date.getTime();
     }
 
     // renvoie les infos du teweet tweetid
@@ -74,7 +78,7 @@ class Tweet{
         return new Promise((resolve, reject) => {
             //console.log('image: ', image);
             //only .gif and .png are accepted
-            const regName = /^.*\.(png|gif)$/;
+            const regName = /^blob:http(s)?:\/\/(.*)\/[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}$/;
             if(image!=="" && !regName.test(image)){
                 //console.log('image resolve(false)');
                 resolve(false);
@@ -110,8 +114,9 @@ class Tweet{
     //cree un tweet et l'ajoute dans la db et renvoie son id
     create(author, content, image) {
         return new Promise(async (resolve, reject) => {
+            const dateCreated = new Date();
             let newTweet = {
-                index: ++Tweet.#PRIVATE_INDEX_GENERATOR,
+                index: this.genIndex(dateCreated),
                 author: author,
                 content: content,
                 image: image,
@@ -121,7 +126,7 @@ class Tweet{
                 retweeters: [], //pour assurer un retweet max par utilisateurs
                 nbComments: 0,
                 comments: [],
-                dateCreated: new Date()
+                dateCreated: dateCreated
             }
             this.db.insert(newTweet);
 

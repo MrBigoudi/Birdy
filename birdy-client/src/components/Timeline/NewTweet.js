@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 import "../../stylesheets/components/tweet.css";
 import "../../stylesheets/components/newTweet.css";
@@ -8,7 +9,7 @@ import DEFAULT_PP from "../../images/icons/outline_account_circle_white_36dp_2x.
 
 export default function NewTweet(props){
 
-    const initTweetContent = {text:"", image:"", imageDom:"", gifDom:""}
+    const initTweetContent = {content:"", image:"", imageDom:"", gifDom:""}
     const [tweetContent, setTweetContent] = useState(initTweetContent);
 
     const [error, setError] = useState(true);
@@ -18,15 +19,35 @@ export default function NewTweet(props){
         event.preventDefault();
         //console.log(tweetContent);
         if(!error){
-            await props.user.createTweet(tweetContent.text, tweetContent.image);
+            //on recupere l'id de l'auteur
+            let userId = '';
+            await axios
+                .get(`/api/user/getUserId/${props.user['username']}`)
+                .then( (res) => { userId = res.data; });
+
+            const formData = {
+                author: `${userId}`,
+                content: tweetContent['content'],
+                image: tweetContent['image']
+            }
+
+            //on recupere l'id du tweet
+            await axios
+                .post("/apiTweet/tweet/newTweet", formData)
+                .then( async (res) => { 
+                    let newTweetId = res.data.id; 
+                    await props.onPost(event, newTweetId);
+                });
+
+            //await props.user.createTweet(tweetContent.content, tweetContent.image);
+            //console.log('newTweetId: ', newTweetId);
             clearNewTweet();
-            props.onPost(event);
         }
     }
 
     function resetError(){
         setError(prev => {
-            if(tweetContent.text!=="" || tweetContent.image!==""){
+            if(tweetContent.content!=="" || tweetContent.image!==""){
                 return false;
             }
             return true;
@@ -90,9 +111,9 @@ export default function NewTweet(props){
                         <textarea className="new-tweet-text" 
                             placeholder="What's happening ?" required 
                             maxLength="140" rows="2"
-                            name="text"
+                            name="content"
                             onChange={handleChange}
-                            value={tweetContent.text}
+                            value={tweetContent.content}
                         />
                     </div>
                     <footer className="tweet-footer">
