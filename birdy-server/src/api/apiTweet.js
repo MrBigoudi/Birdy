@@ -17,6 +17,18 @@ function init(dbtweets, dbusers){
     const tweets = new Tweet.default(dbtweets);
     const users = new User.default(dbusers);
 
+    //clean tweetdb service
+    api.delete('/tweet/clean/', async (req, res) => {
+        //console.log('test api clean tweetdb');
+        try{
+            const nbRemoved = await tweets.cleanDB();
+            res.status(200).send(`${nbRemoved} tweets deleted successfully from the database`);
+        }
+        catch (e) {
+            res.status(500).send("Internal error");
+        }
+    })
+
     //get all tweets
     api
         .get("/tweet/getNTweets/:nbTweets", async (req, res) => {

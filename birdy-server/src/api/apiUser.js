@@ -17,6 +17,18 @@ function init(dbusers, dbtweets){
     const users = new User.default(dbusers);
     const tweets = new Tweet.default(dbtweets);
 
+    //clean userdb service
+    api.delete('/user/clean/', async (req, res) => {
+        //console.log('test api clean userdb');
+        try{
+            const nbRemoved = await users.cleanDB();
+            res.status(200).send(`${nbRemoved} users deleted successfully from the database`);
+        }
+        catch (e) {
+            res.status(500).send("Internal error");
+        }
+    })
+
     // login service
     // si on demande l'url "/user/login" on effectue la lambda
     api.post('/user/login', async (req, res) => {

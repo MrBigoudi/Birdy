@@ -125,6 +125,19 @@ class User{
         });
     }
 
+    //nettoie la database
+    cleanDB(){
+        return new Promise((resolve, reject) => {
+            this.db.remove({}, { multi: true }, function(err, numRemoved) {
+                if(err){
+                    reject(err);
+                } else {
+                    resolve(numRemoved);
+                }
+            });
+        });
+    }
+
     //return true if email already exists
     checkEmailAddress(emailAddress){
         return new Promise((resolve, reject) => {

@@ -45,6 +45,19 @@ class Tweet{
         });
     }
 
+    //nettoie la database
+    cleanDB(){
+        return new Promise((resolve, reject) => {
+            this.db.remove({}, { multi: true }, function(err, numRemoved) {
+                if(err){
+                    reject(err);
+                } else {
+                    resolve(numRemoved);
+                }
+            });
+        });
+    }
+
     //renvoie true si le contenu est valide
     checkContent(content){
         return new Promise((resolve, reject) => {
