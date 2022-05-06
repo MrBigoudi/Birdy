@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import NavBar from "../components/NavBar/NavBar.js";
@@ -23,6 +23,8 @@ const MAX_NB_TWEETS = 100;
 
 export default function Profile(){
     const {state} = useLocation();
+    const navigate = useNavigate();
+
     useEffect( () => {
         document.title = "Profile - Birdy";
         async function getListTweets() {
@@ -50,13 +52,23 @@ export default function Profile(){
     const [tweets, setTweets] = useState([]);
     const [alreadyLogged, setAlreadyLogged] = useState({})
 
+    function handleBackToUserPage(event){
+        event.preventDefault();
+        navigate(`/p/${user_id}`, { state: { alreadyLogged: false, userId: user_id }, replace: false, });
+    }
+
+    function handleListTweet(event){
+        event.preventDefault();
+        navigate(`/p/${user_id}`, { state: { alreadyLogged: true, userId: user_id }, replace: false, });
+    }
+
     const menuIcons = [
-        {id:"profile-home", src:logoHome, alt:"home menu", msg:"Home", onClick:scrollToTop},
+        {id:"profile-home", src:logoHome, alt:"home menu", msg:"Home", onClick:handleBackToUserPage},
         {id:"profile-explore", src:logoExplore, alt:"explore menu", msg:"Explore"},
         {id:"profile-notifications", src:logoNotifications, alt:"notification menu", msg:"Notifications"},
         {id:"profile-messages", src:logoMessages, alt:"messages menu", msg:"Messages"},
         {id:"profile-bookmarks", src:logoBookmark, alt:"bookmarks menu", msg:"Bookmarks"},
-        {id:"profile-lists", src:logoLists, alt:"lists menu", msg:"Lists"},
+        {id:"profile-lists", src:logoLists, alt:"lists menu", msg:"Lists", onClick:handleListTweet},
         {id:"profile-profile", src:logoProfile, alt:"profile menu", msg:"Profile"},
         {id:"profile-more", src:logoMoreOptions, alt:"more option menu", msg:"More"}
     ];
