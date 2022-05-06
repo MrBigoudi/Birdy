@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import "../../stylesheets/components/tweet.css";
@@ -11,6 +12,7 @@ export default function NewTweet(props){
 
     const initTweetContent = {content:"", image:"", imageDom:"", gifDom:""}
     const [tweetContent, setTweetContent] = useState(initTweetContent);
+    const navigate = useNavigate();
 
     const [error, setError] = useState(true);
 
@@ -20,10 +22,7 @@ export default function NewTweet(props){
         //console.log(tweetContent);
         if(!error){
             //on recupere l'id de l'auteur
-            let userId = '';
-            await axios
-                .get(`/api/user/getUserId/${props.user['username']}`)
-                .then( (res) => { userId = res.data; });
+            let userId = `${props.user['_id']}`;
 
             const formData = {
                 author: `${userId}`,
@@ -42,6 +41,7 @@ export default function NewTweet(props){
             //await props.user.createTweet(tweetContent.content, tweetContent.image);
             //console.log('newTweetId: ', newTweetId);
             clearNewTweet();
+            navigate(`/p/${userId}`, { state: { alreadyLogged: false, userId: userId }, replace: false, });
         }
     }
 

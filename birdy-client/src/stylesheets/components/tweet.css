@@ -73,3 +73,7 @@
     align-self: center;
     padding: 10px 0;
 }
+
+.tweet-username:hover, .tweet-username:focus{
+    color: #ff79c6;
+}

@@ -15,6 +15,8 @@ import SHARE_ICON from "../../images/icons/tweetIcons/outline_file_upload_white_
 
 import DEFAULT_PP from "../../images/icons/outline_account_circle_white_36dp_2x.png";
 
+import "../../stylesheets/components/tweet.css";
+
 
 //a tweet as a prop
 export default function Tweet(props){
@@ -59,17 +61,17 @@ export default function Tweet(props){
     async function handleRetweetChange(event){
         event.preventDefault();
         //console.log('tweet: ', props.tweet);
-        let userId = '';
+        let userId = props.user['_id'];
         let tweetId = props.tweet['_id'];
-        await Promise.all([
-            axios
-                .get(`/api/user/getUserId/${props.user['username']}`)
-                .then( (res) => { userId = res.data; }),
+        // await Promise.all([
+        //     axios
+        //         .get(`/api/user/getUserId/${props.user['username']}`)
+        //         .then( (res) => { userId = res.data; }),
 
-            // axios
-            //     .post("/apiTweet/tweet/getTweetId", props.tweet)
-            //     .then( (res) => { tweetId = res.data; }),
-        ]);
+        //     axios
+        //         .post("/apiTweet/tweet/getTweetId", props.tweet)
+        //         .then( (res) => { tweetId = res.data; }),
+        // ]);
         //console.log('tweetId: ', tweetId);
         //console.log('userId: ', userId);
         //console.log('retweeted? ', nbRetweets[1]);
@@ -148,11 +150,19 @@ export default function Tweet(props){
         }
     }
 
-    function handleCheckUserPage(event){
+    async function handleCheckUserPage(event){
         event.preventDefault();
-        const userId = props.tweet['author'];
+        //console.log('tweet: ', props.tweet);
+        let userId = '';
+        await axios
+                .get(`/api/user/getUserId/${props.user['username']}`)
+                .then( (res) => { userId = res.data; });
+
+        const author = props.tweet['author'];
         //console.log('test handle check user page');
-        navigate(`/p/${userId}`, { state: { alreadyLogged: true, userId: userId }, replace: false, });
+        if(author!==userId){
+            navigate(`/p/${userId}`, { state: { alreadyLogged: true, userId: author }, replace: false, });
+        }
     }
 
     const text = props.tweet['content'];
@@ -164,13 +174,13 @@ export default function Tweet(props){
                 <img src={author['profilePicture']==="" ? DEFAULT_PP : author['profilePicture']}
                     alt="tweet author's profile picture"
                     height="60" width="60"
-                    onClick={props.default? undefined : handleCheckUserPage}
-                    className={props.default? undefined : "pointer"}
                 />
             </div>
             <div className="tweet-container">
                 <header className="tweet-header">
-                    <span className="color-light-pink bold">
+                    <span className={`color-light-pink bold tweet-username ${props.default? "disabled-pointer" : "pointer"}`}
+                        onClick={props.default? undefined : handleCheckUserPage}
+                    >
                         {author['username']}
                     </span>
                     <span className="color-light-grey">
@@ -185,13 +195,13 @@ export default function Tweet(props){
                     />
                 </main>
                 <footer className="tweet-footer">
-                    <TweetIcon onClick={props.default? undefined : undefined/*handleReplyChange*/} imageSrc={COMMENT_ICON} 
+                    <TweetIcon default={props.default} onClick={props.default? undefined : undefined/*handleReplyChange*/} imageSrc={COMMENT_ICON} 
                         name="comments" cpt={nbReplies[0]} action={nbReplies[1] && "commented"}/>
-                    <TweetIcon onClick={props.default? undefined : handleRetweetChange} imageSrc={RETWEET_ICON} 
+                    <TweetIcon default={props.default} onClick={props.default? undefined : handleRetweetChange} imageSrc={RETWEET_ICON} 
                         name="retweet" cpt={nbRetweets[0]} action={nbRetweets[1] && "retweeted"}/>
-                    <TweetIcon onClick={props.default? undefined : handleLikeChange} imageSrc={LIKE_ICON} 
+                    <TweetIcon default={props.default} onClick={props.default? undefined : handleLikeChange} imageSrc={LIKE_ICON} 
                         name="like" cpt={nbLikes[0]} action={nbLikes[1] && "liked"}/>
-                    <TweetIcon imageSrc={SHARE_ICON} name="share" cpt={0} />
+                    <TweetIcon default={props.default} imageSrc={SHARE_ICON} name="share" cpt={0} />
                 </footer>
             </div>
             <div className="ride-side-tweet">

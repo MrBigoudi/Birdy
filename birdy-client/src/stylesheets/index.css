@@ -107,6 +107,10 @@ h1{
     cursor: pointer;
 }
 
+.disabled-pointer{
+    cursor: no-drop;
+}
+
 .default-font{
     color: #f8f8f2;
     font-family: Poppins, sans-serif;

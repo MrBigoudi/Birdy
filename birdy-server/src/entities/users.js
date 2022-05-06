@@ -86,7 +86,7 @@ class User{
     get(userid) {
         return new Promise((resolve, reject) => {
             //console.log('test get, id: ', userid);
-            this.db.find({ _id: userid }, { _id: 0 }, function(err, docs) {
+            this.db.find({ _id: userid }, { }, function(err, docs) {
                 if(err){
                     reject(err);
                 }

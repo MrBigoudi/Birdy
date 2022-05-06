@@ -5,7 +5,9 @@ import "../../stylesheets/components/tweetIcons.css";
 export default function TweetIcon(props){
     return(
         <div className="tweet-icon-container">
-            <div onClick={props.onClick} className={`tweet-icon round pointer ${props.name}`}>
+            <div onClick={props.onClick} 
+                className={`tweet-icon round ${props.name} ${props.default? 'disabled-pointer' : 'pointer' }`}
+            >
                 <img src={props.imageSrc} alt={props.name} />
             </div>
             {props.cpt > 0 && <span className={`tweet-icon-cpt ${props.action}`}>{props.cpt}</span>}
