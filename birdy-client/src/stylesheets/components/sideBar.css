@@ -7,6 +7,42 @@
     gap: 25px;
 }
 
+.follow-button-handler{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+
+.follow-button{
+    text-align: center;
+    width: 80px;
+    background-color: #323444;
+    border-radius: 25px;
+    border: 2px solid #323444;
+    text-decoration: none;
+    cursor: pointer;
+    color: #8be9fd;
+    margin: 20px;
+}
+
+.follow-button:hover{
+    color: #bd93f9;
+    border: 2px solid #bd93f9;
+}
+
+.follow-list{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: auto;
+    gap: 5px;
+}
+
+.follow-list-title{
+    align-self: center;
+    color: #bd93f9;
+}
+
 /* .side-bar{
     border:2px solid red;
 } */

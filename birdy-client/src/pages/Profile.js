@@ -26,9 +26,10 @@ export default function Profile(){
     useEffect( () => {
         document.title = "Profile - Birdy";
         async function getListTweets() {
-            const {alreadyLogged, userId} = state;
+            let {alreadyLogged, userId} = state;
+            setAlreadyLogged({alreadyLogged, userId});
             if(alreadyLogged){
-                console.log('test already logged');
+                //console.log('test already logged');
                 await axios
                     .get(`/apiTweet/tweet/${userId}/${MAX_NB_TWEETS}`)
                     .then( (res) => {
@@ -47,6 +48,7 @@ export default function Profile(){
     }, [state]);
 
     const [tweets, setTweets] = useState([]);
+    const [alreadyLogged, setAlreadyLogged] = useState({})
 
     const menuIcons = [
         {id:"profile-home", src:logoHome, alt:"home menu", msg:"Home", onClick:scrollToTop},
@@ -84,7 +86,7 @@ export default function Profile(){
         <div className="profile row max-height">
             <NavBar logged={true} menuIcons={menuIcons}/>
             <Timeline scroll={scrollToTop} default={false} tweets={tweets} user={user}/>
-            <SideBar logged={true}/>
+            <SideBar logged={true} user={alreadyLogged['alreadyLogged']? alreadyLogged['userId'] : user_id} connectedUser={alreadyLogged['alreadyLogged']? user_id : false}/>
         </div>
     )
 };

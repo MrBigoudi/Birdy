@@ -260,6 +260,24 @@ function init(dbusers, dbtweets){
             }
         });
 
+    //folow services
+    api
+        .route("/user/:_id/follows")
+        //get user follows service
+        .get(async (req, res) => {
+            try {
+                const follows = await users.getFollows(`${req.params._id}`);
+                console.log('follows in api: ', follows);
+                if (follows===null)
+                    res.status(404).send("User not found");
+                else
+                    res.send(follows);
+            }
+            catch (e) {
+                res.status(500).send("Internal error");
+            }
+        });
+
 
     //signup service
     api.post("/user/signup", async (req, res) => {

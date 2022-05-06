@@ -374,6 +374,32 @@ class User{
             });
         });
     }
+
+    // renvoie la liste des follows du user userid
+    getFollows(userid) {
+        return new Promise(async (resolve, reject) => {
+            let followsId = [];
+            await this.db.find({ _id: userid }, {}, function(err, docs) {
+                if(err){
+                    reject(err);
+                }
+                //console.log('docs in get: ', docs);
+                if(docs.length !== 1){
+                    resolve(null);
+                }
+
+                followsId = docs[0]['following'];
+            });
+
+            this.db.find({ $or: followsId}, {multi: true}, function(err, docs){
+                if(err){
+                    reject(err);
+                } else {
+                    resolve(docs);
+                }
+            });
+        });
+    }
 }
 
 exports.default = User;
