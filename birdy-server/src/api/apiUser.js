@@ -303,6 +303,23 @@ function init(dbusers, dbtweets){
             }
         });
 
+    //unfolow service
+    api
+        .route("/user/:_id/follows/:_unfollowId")
+        .delete(async (req, res) => {
+            try {
+                //console.log('deleteFollow');
+                await users.deleteFollow(`${req.params._id}`, `${req.params._unfollowId}`);
+                //console.log('deleteFollower');
+                await users.deleteFollower(`${req.params._unfollowId}`, `${req.params._id}`);
+                res.status(200).send("Follow successfully removed");
+            }
+            catch (e) {
+                //console.log('catch');
+                res.status(500).send("Internal error");
+            }
+        });
+
 
     //signup service
     api.post("/user/signup", async (req, res) => {

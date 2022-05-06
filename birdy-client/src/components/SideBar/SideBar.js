@@ -63,11 +63,19 @@ export default function SideBar(props){
 
     const handleClickFollowButton = () => {
         //console.log('userCurPage: ', { followId: userCurPage });
-        axios
-            .post(`/api/user/${props.connectedUser}/follows`, { followId: userCurPage })
-            .then( () => {
-                setFollowed(prev => {return !prev});
-            })
+        if(!followed){
+            axios
+                .post(`/api/user/${props.connectedUser}/follows`, { followId: userCurPage })
+                .then( () => {
+                    setFollowed(prev => {return !prev});
+                })
+        } else {
+            axios
+                .delete(`/api/user/${props.connectedUser}/follows/${props.user}`)
+                .then( () => {
+                    setFollowed(prev => {return !prev});
+                })
+        }
     }
 
     async function handleCheckUserPage(event, userId){

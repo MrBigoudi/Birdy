@@ -442,6 +442,32 @@ class User{
             });
         });
     }
+
+    //supprime un utilisateur de la liste des following d'un utilisateur
+    deleteFollow(userId, unfollowId){
+        return new Promise((resolve, reject) => {
+            this.db.update({ _id: userId }, { $pull: { following: unfollowId } }, {}, function (err, numReplaced) {
+                if(err){
+                    reject(err);
+                } else {
+                    resolve(unfollowId);
+                }
+            });
+        });
+    }
+
+    //supprime un utilisateur de la liste des followers d'un utilisateur
+    deleteFollower(userId, unfollowerId){
+        return new Promise((resolve, reject) => {
+            this.db.update({ _id: userId }, { $pull: { followers: unfollowerId } }, {}, function (err, numReplaced) {
+                if(err){
+                    reject(err);
+                } else {
+                    resolve(unfollowerId);
+                }
+            });
+        });
+    }
 }
 
 exports.default = User;
