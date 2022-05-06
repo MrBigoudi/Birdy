@@ -266,14 +266,39 @@ function init(dbusers, dbtweets){
         //get user follows service
         .get(async (req, res) => {
             try {
-                const follows = await users.getFollows(`${req.params._id}`);
-                console.log('follows in api: ', follows);
-                if (follows===null)
+                const user = await users.get(`${req.params._id}`);
+                if (!user){
                     res.status(404).send("User not found");
-                else
-                    res.send(follows);
+                    return;
+                }
+                const follows = await users.getFollows(user['following']);
+                console.log('follows in api: ', follows);
+                res.send(follows);
             }
             catch (e) {
+                res.status(500).send("Internal error");
+            }
+        })
+        //add new follow
+        .post(async (req, res) => {
+            try{
+                const { followId } = req.body;
+                //console.log('followId in api: ', followId);
+                //console.log('check already following');
+                if(await users.checkAlreadyFollowing(`${req.params._id}`, followId)){
+                    res.status(409).send(`Already following user ${followId}`);
+                    return;
+                }
+                else{
+                    //console.log('addFollow');
+                    await users.addFollow(`${req.params._id}`, followId);
+                    //console.log('addFollower');
+                    await users.addFollower(followId, `${req.params._id}`);
+                    res.status(200).send("New follow successfully added");
+                }
+            }
+            catch (e) {
+                //console.log('catch');
                 res.status(500).send("Internal error");
             }
         });

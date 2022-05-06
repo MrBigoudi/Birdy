@@ -1,3 +1,7 @@
+.side-bar{
+    height:100%;
+}
+
 .side-bar-connections{
     display: flex;
     justify-content: space-evenly;
@@ -15,7 +19,7 @@
 
 .follow-button{
     text-align: center;
-    width: 80px;
+    width: 90px;
     background-color: #323444;
     border-radius: 25px;
     border: 2px solid #323444;
@@ -30,18 +34,39 @@
     border: 2px solid #bd93f9;
 }
 
+.follow-list-handler{
+    height:100%;
+}
+
 .follow-list{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin: auto;
-    gap: 5px;
 }
 
 .follow-list-title{
     align-self: center;
     color: #bd93f9;
+    margin: 10px 50px;
 }
+
+.follow-list-elem{
+    margin-left: 10px;
+    color: #ffd6f1;
+    list-style-type: none;
+    margin: 0 20px;
+    padding: 5px 0;
+}
+
+.follow-list-username:hover, .follow-list-username:focus{
+    color: #ff79c6;
+}
+
+.follow-list-username{
+    cursor: pointer;
+}
+
+
 
 /* .side-bar{
     border:2px solid red;

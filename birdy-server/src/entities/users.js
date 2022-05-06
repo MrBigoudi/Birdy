@@ -375,27 +375,69 @@ class User{
         });
     }
 
-    // renvoie la liste des follows du user userid
-    getFollows(userid) {
-        return new Promise(async (resolve, reject) => {
-            let followsId = [];
-            await this.db.find({ _id: userid }, {}, function(err, docs) {
-                if(err){
-                    reject(err);
-                }
-                //console.log('docs in get: ', docs);
-                if(docs.length !== 1){
-                    resolve(null);
-                }
+    // renvoie la liste des utilisateurs dont la liste des ids est donnee en parametres
+    getFollows(listIds) {
+        return new Promise((resolve, reject) => {
+            let followsId = listIds.map( (id) => {
+                    return { _id: id }
+                });
 
-                followsId = docs[0]['following'];
-            });
-
+            console.log('followsId in users.js: ', followsId);
+    
             this.db.find({ $or: followsId}, {multi: true}, function(err, docs){
                 if(err){
                     reject(err);
                 } else {
                     resolve(docs);
+                }
+            });
+        });
+    }
+
+    //ajoute un utilisateur dans la liste des following d'un utilisateur
+    addFollow(userId, followId){
+        return new Promise((resolve, reject) => {
+            this.db.update({ _id: userId }, { $push: { following: followId } }, {}, function (err, numReplaced) {
+                if(err){
+                    reject(err);
+                } else {
+                    resolve(followId);
+                }
+            });
+        });
+    }
+
+    //ajoute un utilisateur dans la liste des followers d'un utilisateur
+    addFollower(userId, followerId){
+        return new Promise((resolve, reject) => {
+            this.db.update({ _id: userId }, { $push: { followers: followerId } }, {}, function (err, numReplaced) {
+                if(err){
+                    reject(err);
+                } else {
+                    resolve(followerId);
+                }
+            });
+        });
+    }
+
+    //renvoie true si le user userid follow deja la personne followid
+    checkAlreadyFollowing(userId, followId){
+        return new Promise( (resolve, reject) => {
+            this.db.find({ _id: userId }, {}, function(err, docs){
+                if(err){
+                    reject(err);
+                }
+                //console.log('docs in get: ', docs);
+                if(docs.length !== 1){
+                    reject("User doesn't exists");
+                }
+                const following = docs[0]['following'];
+                //console.log('retweeters: ', retweeters, '\nuserid: ', userid);
+                if(following.includes(followId)) {
+                    //erreur
+                    resolve(true);
+                } else {
+                    resolve(false);
                 }
             });
         });
