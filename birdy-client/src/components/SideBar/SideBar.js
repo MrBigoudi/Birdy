@@ -23,6 +23,13 @@ export default function SideBar(props){
                             //console.log('res.data: ', res.data);
                             setFollows(res.data);
                         })
+                    if(props.connectedUser){
+                        await axios
+                            .get(`/api/user/${props.connectedUser}`)
+                            .then( (res) => {
+                                setFollowed(res.data['following'].includes(props.user))
+                            })
+                    }
                 } else {
                     setFollows([]);
                 }
@@ -30,7 +37,7 @@ export default function SideBar(props){
 
             initFollows();
 
-        },[props.logged, props.user]
+        },[props.logged, props.user, props.connectedUser]
     );
 
     const listFollows = () => {
@@ -97,7 +104,7 @@ export default function SideBar(props){
                     </Link> 
                 </div>
             </div>
-            {props.connectedUser? followButton() : ''}
+            {(props.connectedUser && props.connectedUser!==props.user)? followButton() : ''}
             {props.logged? listFollows() : ''}
         </section>
     )
