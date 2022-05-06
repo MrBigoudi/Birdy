@@ -40,6 +40,17 @@ function init(dbtweets, dbusers){
             }
         })
 
+    //get all tweets
+    api
+    .get("/tweet/:authorId/:nbTweets", async (req, res) => {
+        try{
+            const nTweets = await tweets.getNTweetsFromUser(`${req.params.nbTweets}`, `${req.params.authorId}`);
+            res.send(nTweets);
+        } catch(e){
+            res.status(500).send("Internal error");
+        }
+    })
+
     //get tweet id
     api
         .post("/tweet/getTweetId", async (req, res) => {

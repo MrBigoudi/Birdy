@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 
 import NavBar from "../components/NavBar/NavBar.js";
@@ -22,18 +22,29 @@ import logoMoreOptions from "../images/icons/navBarIcons/outline_more_horiz_whit
 const MAX_NB_TWEETS = 100;
 
 export default function Profile(){
+    const {state} = useLocation();
     useEffect( () => {
         document.title = "Profile - Birdy";
         async function getListTweets() {
-            await axios
-                    .get(`/apiTweet/tweet/getNTweets/${MAX_NB_TWEETS}`)
+            const {alreadyLogged, userId} = state;
+            if(alreadyLogged){
+                console.log('test already logged');
+                await axios
+                    .get(`/apiTweet/tweet/${userId}/${MAX_NB_TWEETS}`)
                     .then( (res) => {
-                        //console.log('tweets: ', res.data);
                         setTweets(res.data);
                     });
+            } else {
+                await axios
+                        .get(`/apiTweet/tweet/getNTweets/${MAX_NB_TWEETS}`)
+                        .then( (res) => {
+                            //console.log('tweets: ', res.data);
+                            setTweets(res.data);
+                        });
+                }
             }
         getListTweets();
-    }, []);
+    }, [state]);
 
     const [tweets, setTweets] = useState([]);
 

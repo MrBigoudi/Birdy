@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import AutoLink from "react-native-autolink";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 
@@ -23,6 +24,7 @@ export default function Tweet(props){
     const [nbLikes, setNbLikes] = useState([props.tweet['nbLikes'],false]);
 
     const [deleted, setDeleted] = useState(props.deleted);
+    const navigate = useNavigate();
 
     const [author, setAuthor] = useState(
         async () => {
@@ -43,30 +45,30 @@ export default function Tweet(props){
         return props.id;
     }
 
-    function handleReplyChange(event){
-        setNbReplies( prev => {
-            let replied = nbReplies[1]
-            if(!replied)
-                props.tweet.addReply();
-            else
-                props.tweet.removeReply();
-            return [props.tweet.getNbReplies(), !replied];
-        });
-    }
+    // function handleReplyChange(event){
+    //     setNbReplies( prev => {
+    //         let replied = nbReplies[1]
+    //         if(!replied)
+    //             props.tweet.addReply();
+    //         else
+    //             props.tweet.removeReply();
+    //         return [props.tweet.getNbReplies(), !replied];
+    //     });
+    // }
 
     async function handleRetweetChange(event){
         event.preventDefault();
         //console.log('tweet: ', props.tweet);
         let userId = '';
-        let tweetId = '';
+        let tweetId = props.tweet['_id'];
         await Promise.all([
             axios
                 .get(`/api/user/getUserId/${props.user['username']}`)
                 .then( (res) => { userId = res.data; }),
 
-            axios
-                .post("/apiTweet/tweet/getTweetId", props.tweet)
-                .then( (res) => { tweetId = res.data; }),
+            // axios
+            //     .post("/apiTweet/tweet/getTweetId", props.tweet)
+            //     .then( (res) => { tweetId = res.data; }),
         ]);
         //console.log('tweetId: ', tweetId);
         //console.log('userId: ', userId);
@@ -146,6 +148,13 @@ export default function Tweet(props){
         }
     }
 
+    function handleCheckUserPage(event){
+        event.preventDefault();
+        const userId = props.tweet['author'];
+        //console.log('test handle check user page');
+        navigate(`/p/${userId}`, { state: { alreadyLogged: true, userId: userId }, replace: false, });
+    }
+
     const text = props.tweet['content'];
 
 
@@ -155,6 +164,8 @@ export default function Tweet(props){
                 <img src={author['profilePicture']==="" ? DEFAULT_PP : author['profilePicture']}
                     alt="tweet author's profile picture"
                     height="60" width="60"
+                    onClick={props.default? undefined : handleCheckUserPage}
+                    className={props.default? undefined : "pointer"}
                 />
             </div>
             <div className="tweet-container">
@@ -174,7 +185,7 @@ export default function Tweet(props){
                     />
                 </main>
                 <footer className="tweet-footer">
-                    <TweetIcon onClick={props.default? undefined : handleReplyChange} imageSrc={COMMENT_ICON} 
+                    <TweetIcon onClick={props.default? undefined : undefined/*handleReplyChange*/} imageSrc={COMMENT_ICON} 
                         name="comments" cpt={nbReplies[0]} action={nbReplies[1] && "commented"}/>
                     <TweetIcon onClick={props.default? undefined : handleRetweetChange} imageSrc={RETWEET_ICON} 
                         name="retweet" cpt={nbRetweets[0]} action={nbRetweets[1] && "retweeted"}/>

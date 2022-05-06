@@ -28,7 +28,7 @@ export default function Timeline(props){
             setTweetList( prev => {
                 //console.log("setTweetList");
                 const tweetListTmp = ( prev.map(item => {
-                    if(item[0]['index']===id)
+                    if(item[0]['_id']===id)
                     {
                         //console.log("hidden");
                         return [item[0], !item[1]];
@@ -48,7 +48,7 @@ export default function Timeline(props){
             //console.log('list to map: ', listToMap);
             const listResult = 
                 listToMap.map((item) => {
-                    const tweetId = item[0]['index']; 
+                    const tweetId = item[0]['_id']; 
                     if (!item[1])
                     {
                         return(
@@ -88,7 +88,7 @@ export default function Timeline(props){
         //console.log('list to map: ', listToMap);
         const listResult = 
             listToMap.map((item) => {
-                const tweetId = item[0]['index']; 
+                const tweetId = item[0]['_id']; 
                 if (!item[1])
                 {
                     return(
@@ -124,7 +124,7 @@ export default function Timeline(props){
         setTweetList( prev => {
             //console.log("setTweetList");
             const tweetListTmp = ( prev.map(item => {
-                if(item[0]['index']===id)
+                if(item[0]['_id']===id)
                 {
                     //console.log("hidden");
                     return [item[0], !item[1]];

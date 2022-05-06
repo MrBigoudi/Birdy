@@ -286,8 +286,22 @@ class Tweet{
     getNTweets(n) {
         return new Promise((resolve, reject) => {
             //console.log('test get, id: ', tweetid);
-            this.db.find({}, { _id: 0 }).sort({ dateCreated: -1 }).limit(n).exec(function(err, docs) {
+            this.db.find({}, ).sort({ dateCreated: -1 }).limit(n).exec(function(err, docs) {
                 //console.log('docs in getNTweets: ', docs);
+                if(err) {
+                    //erreur
+                    reject(err);
+                } else {
+                    resolve(docs);
+                }
+            });
+        });
+    }
+
+    // renvoie une liste de n tweets les plus recents de l'utilisateur passe en parametres
+    getNTweetsFromUser(n, authorId) {
+        return new Promise((resolve, reject) => {
+            this.db.find({ author: authorId }, ).sort({ dateCreated: -1 }).limit(n).exec(function(err, docs) {
                 if(err) {
                     //erreur
                     reject(err);
