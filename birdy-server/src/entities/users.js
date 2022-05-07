@@ -230,7 +230,8 @@ class User{
             // check format
             //console.log('check format');
             const birth = new Date(dateOfBirth);
-            let error = (birth instanceof Date && !isNaN(birth.value));
+            //console.log(birth.getDate());
+            let error = (birth instanceof Date && isNaN(birth.getDate()));
             if(error) {
                 resolve(false);
             }

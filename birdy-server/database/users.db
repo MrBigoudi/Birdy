@@ -1,0 +1,8 @@
+{"username":"testlogin","fullname":"fulltestlogin","dateOfBirth":{"$$date":958089600000},"emailAddress":"testlogin@test.com","passwd":"1234","following":[],"followers":[],"tweets":[],"tweetsLiked":[],"tweetsRetweeted":[],"tweetsReplied":[],"profilePicture":"","dateCreated":{"$$date":1651929949571},"_id":"9MeiSXPR8K412va4"}
+{"$$deleted":true,"_id":"9MeiSXPR8K412va4"}
+{"username":"testsignup","fullname":"fulltestsignup","dateOfBirth":{"$$date":958089600000},"emailAddress":"testsignup@test.com","passwd":"1234","following":[],"followers":[],"tweets":[],"tweetsLiked":[],"tweetsRetweeted":[],"tweetsReplied":[],"profilePicture":"","dateCreated":{"$$date":1651929949666},"_id":"QJF8dVCZaPDhbet9"}
+{"$$deleted":true,"_id":"QJF8dVCZaPDhbet9"}
+{"username":"testlogin","fullname":"fulltestlogin","dateOfBirth":{"$$date":958089600000},"emailAddress":"testlogin@test.com","passwd":"1234","following":[],"followers":[],"tweets":[],"tweetsLiked":[],"tweetsRetweeted":[],"tweetsReplied":[],"profilePicture":"","dateCreated":{"$$date":1651929954102},"_id":"j5GWR05zwGDbSQfl"}
+{"$$deleted":true,"_id":"j5GWR05zwGDbSQfl"}
+{"username":"testsignup","fullname":"fulltestsignup","dateOfBirth":{"$$date":958089600000},"emailAddress":"testsignup@test.com","passwd":"1234","following":[],"followers":[],"tweets":[],"tweetsLiked":[],"tweetsRetweeted":[],"tweetsReplied":[],"profilePicture":"","dateCreated":{"$$date":1651929954169},"_id":"Fc968kqO5zdkwpcA"}
+{"$$deleted":true,"_id":"Fc968kqO5zdkwpcA"}
