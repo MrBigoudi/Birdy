@@ -27,18 +27,18 @@ export default function Profile(){
 
     useEffect( () => {
         document.title = "Profile - Birdy";
-        async function getListTweets() {
+        function getListTweets() {
             let {alreadyLogged, userId} = state;
             setAlreadyLogged({alreadyLogged, userId});
             if(alreadyLogged){
                 //console.log('test already logged');
-                await axios
+                axios
                     .get(`/apiTweet/tweet/${userId}/${MAX_NB_TWEETS}`)
                     .then( (res) => {
                         setTweets(res.data);
                     });
             } else {
-                await axios
+                axios
                         .get(`/apiTweet/tweet/getNTweets/${MAX_NB_TWEETS}`)
                         .then( (res) => {
                             //console.log('tweets: ', res.data);

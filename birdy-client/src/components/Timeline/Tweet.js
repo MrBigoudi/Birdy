@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AutoLink from "react-native-autolink";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -20,11 +20,28 @@ import "../../stylesheets/components/tweet.css";
 
 //a tweet as a prop
 export default function Tweet(props){
+    const [nbRetweets, setNbRetweets] = useState([0, false]);
+    const [nbLikes, setNbLikes] = useState([0,false]);
+
+    useEffect( () => {
+            function initLikesAndRetweets() {
+                if(props.user && props.tweet){
+                    axios
+                        .get(`/api/user/${props.user['_id']}`)
+                        .then( (res) => {
+                            setNbRetweets([props.tweet['nbRetweets'], res.data['tweetsRetweeted'].includes(props.tweet['_id'])]);
+                            setNbLikes([props.tweet['nbLikes'], res.data['tweetsLiked'].includes(props.tweet['_id'])]);
+                        })
+                }
+            }
+            initLikesAndRetweets();
+
+        },[props.user, props.tweet]
+    );
+
 
     //const [nbReplies, setNbReplies] = useState([props.tweet['nbComments'], false]);
     const nbReplies = props.tweet['nbComments'];
-    const [nbRetweets, setNbRetweets] = useState([props.tweet['nbRetweets'], false]);
-    const [nbLikes, setNbLikes] = useState([props.tweet['nbLikes'],false]);
 
     const [deleted, setDeleted] = useState(props.deleted);
     const navigate = useNavigate();
@@ -108,17 +125,17 @@ export default function Tweet(props){
     async function handleLikeChange(event){
         event.preventDefault();
         //console.log('tweet: ', props.tweet);
-        let userId = '';
-        let tweetId = '';
-        await Promise.all([
-            axios
-                .get(`/api/user/getUserId/${props.user['username']}`)
-                .then( (res) => { userId = res.data; }),
+        let userId = props.user['_id'];
+        let tweetId = props.tweet['_id'];
+        // await Promise.all([
+        //     axios
+        //         .get(`/api/user/getUserId/${props.user['username']}`)
+        //         .then( (res) => { userId = res.data; }),
 
-            axios
-                .post("/apiTweet/tweet/getTweetId", props.tweet)
-                .then( (res) => { tweetId = res.data; }),
-        ]);
+        //     axios
+        //         .post("/apiTweet/tweet/getTweetId", props.tweet)
+        //         .then( (res) => { tweetId = res.data; }),
+        // ]);
         //console.log('tweetId: ', tweetId);
         //console.log('userId: ', userId);
         //console.log('liked? ', nbLikes[1]);

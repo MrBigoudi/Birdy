@@ -18,8 +18,8 @@ export default function Dashboard(){
 
     useEffect( () => {
         document.title = "Dashboard - Birdy";
-        async function getListTweets() {
-            await axios
+        function getListTweets() {
+            axios
                     .get(`/apiTweet/tweet/getNTweets/${MAX_NB_TWEETS}`)
                     .then( (res) => {
                         //console.log('tweets: ', res.data);

@@ -14,17 +14,17 @@ export default function SideBar(props){
     const navigate = useNavigate();
 
     useEffect( () => {
-            async function initFollows() {
+            function initFollows() {
                 if(props.logged){
                     setUserCurPage(props.user)
-                    await axios
+                    axios
                         .get(`/api/user/${props.user}/follows`)
                         .then( (res) => {
                             //console.log('res.data: ', res.data);
                             setFollows(res.data);
                         })
                     if(props.connectedUser){
-                        await axios
+                        axios
                             .get(`/api/user/${props.connectedUser}`)
                             .then( (res) => {
                                 setFollowed(res.data['following'].includes(props.user))
