@@ -89,7 +89,7 @@ $ npm run serve
 Then launch the script,<br>
 
 ```sh
-#Open a second terminal,<br>
+#Open a second terminal
 
 $ cd ./birdy-server
 $ npm run cleanDB #once again be sure you want to do it, as this is unrecoverable
