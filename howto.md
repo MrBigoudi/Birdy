@@ -102,7 +102,7 @@ $ npm run cleanDB #once again be sure you want to do it, as this is unrecoverabl
 
 If you want to initiate the databases with some random stuff you can use the script in <em>birdy-server/scripts/initDB.js</em> ( only works once to avoid redundancy in the database ).<br>
 If you then want to try the website there will be one user called <em>q</em> with the credentials :<br>
-emailAddress: <em>q&#064;q.q</em><br>
+emailAddress: <em>q&#064;<nolink>q.q</em><br>
 password: <em>q</em><br>
 This user is made as simple as that to perform fast tests without spending to much time on the login page ^^ .<br>
 
