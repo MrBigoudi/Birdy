@@ -127,6 +127,24 @@ function init(dbusers, dbtweets){
         .put(async (req, res) => {
             //console.log('test like tweet before try');
             try{
+                //console.log('check tweet exists');
+                if(!await tweets.exists(`${req.params._tweetId}`)){
+                    res.status(404).json({
+                        status: 404,
+                        message: "Tweet not found"
+                    });
+                    return;
+                }
+
+                //console.log('check user exists');
+                if(!await users.get(`${req.params._id}`)){
+                    res.status(404).json({
+                        status: 404,
+                        message: "Liker not found"
+                    });
+                    return;
+                }
+
                 //console.log('checkAlreadyLiked');
                 if(await tweets.checkAlreadyLiked(`${req.params._id}`, `${req.params._tweetId}`)){
                     res.status(409).json({
@@ -182,6 +200,24 @@ function init(dbusers, dbtweets){
         .put(async (req, res) => {
             //console.log('test unlike tweet before try');
             try{
+                //console.log('check tweet exists');
+                if(!await tweets.exists(`${req.params._tweetId}`)){
+                    res.status(404).json({
+                        status: 404,
+                        message: "Tweet not found"
+                    });
+                    return;
+                }
+
+                //console.log('check user exists');
+                if(!await users.get(`${req.params._id}`)){
+                    res.status(404).json({
+                        status: 404,
+                        message: "Unliker not found"
+                    });
+                    return;
+                }
+
                 //console.log('checkAlreadyUnliked');
                 if(!await tweets.checkAlreadyLiked(`${req.params._id}`, `${req.params._tweetId}`)){
                     res.status(400).json({
@@ -428,6 +464,24 @@ function init(dbusers, dbtweets){
         .put(async (req, res) => {
             //console.log('test retweet before try');
             try{
+                //console.log('check tweet exists');
+                if(!await tweets.exists(`${req.params._tweetId}`)){
+                    res.status(404).json({
+                        status: 404,
+                        message: "Tweet not found"
+                    });
+                    return;
+                }
+
+                //console.log('check user exists');
+                if(!await users.get(`${req.params._id}`)){
+                    res.status(404).json({
+                        status: 404,
+                        message: "Retweeter not found"
+                    });
+                    return;
+                }
+
                 //console.log('checkAlreadyRetweeted');
                 if(await tweets.checkAlreadyRetweeted(`${req.params._id}`, `${req.params._tweetId}`)){
                     res.status(409).json({
@@ -483,6 +537,24 @@ function init(dbusers, dbtweets){
         .put(async (req, res) => {
             //console.log('test unretweet tweet before try');
             try{
+                //console.log('check tweet exists');
+                if(!await tweets.exists(`${req.params._tweetId}`)){
+                    res.status(404).json({
+                        status: 404,
+                        message: "Tweet not found"
+                    });
+                    return;
+                }
+
+                //console.log('check user exists');
+                if(!await users.get(`${req.params._id}`)){
+                    res.status(404).json({
+                        status: 404,
+                        message: "Unretweeter not found"
+                    });
+                    return;
+                }
+
                 //console.log('checkAlreadyRetweeted');
                 if(!await tweets.checkAlreadyRetweeted(`${req.params._id}`, `${req.params._tweetId}`)){
                     res.status(400).json({
@@ -509,7 +581,7 @@ function init(dbusers, dbtweets){
                 if(!unretweetedInUsers){
                     res.status(404).json({
                         status: 404,
-                        message: "Unliker not found"
+                        message: "Unretweeter not found"
                     });
                     return;
                 } 

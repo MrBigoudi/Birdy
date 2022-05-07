@@ -16,7 +16,7 @@ class Tweet{
     get(tweetid) {
         return new Promise((resolve, reject) => {
             //console.log('test get, id: ', tweetid);
-            this.db.find({ _id: tweetid }, { _id: 0 }, function(err, docs) {
+            this.db.find({ _id: tweetid }, { }, function(err, docs) {
                 //console.log('docs in get: ', docs);
                 if(docs.length !== 1){
                     resolve(null);
@@ -29,6 +29,23 @@ class Tweet{
                     reject(err);
                 } else {
                     resolve(tweet);
+                }
+            });
+        });
+    }
+
+    // test si un tweet exists
+    exists(tweetid){
+        return new Promise((resolve, reject) => {
+            //console.log('test get, id: ', tweetid);
+            this.db.find({ _id: tweetid }, { }, function(err, docs) {
+                if(err){
+                    reject(err);
+                }
+                if(docs.length !== 1){
+                    resolve(false);
+                } else {
+                    resolve(true);
                 }
             });
         });
@@ -234,6 +251,9 @@ class Tweet{
     likeTweet(userid, tweetid){
         return new Promise( (resolve, reject) => {
             this.db.update( { _id: tweetid }, { $inc: { nbLikes: 1 },  $push: { likers: userid } }, function(err, numReplaced){
+                if(numReplaced===0){
+                    resolve(false);
+                }
                 if(err){
                     reject(err);
                 } else {
@@ -247,7 +267,9 @@ class Tweet{
     unlikeTweet(userid, tweetid){
         return new Promise( (resolve, reject) => {
             this.db.update( { _id: tweetid }, { $inc: { nbLikes: -1 },  $pull: { likers: userid } }, function(err, numReplaced){
-                if(err){
+                if(numReplaced===0){
+                    resolve(false);
+                }if(err){
                     reject(err);
                 } else {
                     resolve(true);

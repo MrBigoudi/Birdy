@@ -1,0 +1,20 @@
+{"index":1651962938168,"author":"PwmCRg5yPBNmZQwW","content":"This is a test tweet","image":"blob:http://localhost:3000/114c6775-2bea-48b9-90bf-2f3b1a86b08d","nbLikes":0,"likers":[],"nbRetweets":0,"retweeters":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651962938168},"_id":"wV4rPAc5OQ2iiKTc"}
+{"$$deleted":true,"_id":"wV4rPAc5OQ2iiKTc"}
+{"index":1651962938326,"author":"PwmCRg5yPBNmZQwW","content":"This is a test tweet","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeters":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651962938326},"_id":"o5ZrSUjUa2fEKich"}
+{"$$deleted":true,"_id":"o5ZrSUjUa2fEKich"}
+{"index":1651962938410,"author":"U3mjiJoZw4vXL7t1","content":"","image":"blob:http://localhost:3000/114c6775-2bea-48b9-90bf-2f3b1a86b08d","nbLikes":0,"likers":[],"nbRetweets":0,"retweeters":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651962938410},"_id":"aYSS1PMcWHestFis"}
+{"index":1651962938443,"author":"lW2samPnJwibxYlj","content":"This is a test tweet","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeters":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651962938443},"_id":"N0P0tQ17b8agCxHu"}
+{"$$deleted":true,"_id":"aYSS1PMcWHestFis"}
+{"$$deleted":true,"_id":"N0P0tQ17b8agCxHu"}
+{"index":1651962938525,"author":"L8pf0ZhYHF65KH1j","content":"","image":"blob:http://localhost:3000/114c6775-2bea-48b9-90bf-2f3b1a86b08d","nbLikes":0,"likers":[],"nbRetweets":0,"retweeters":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651962938525},"_id":"wVykn7rNp1x1Fvq3"}
+{"index":1651962938552,"author":"L8pf0ZhYHF65KH1j","content":"This is a test tweet","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeters":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651962938552},"_id":"qmHvPvS0DfB3MMhV"}
+{"$$deleted":true,"_id":"qmHvPvS0DfB3MMhV"}
+{"$$deleted":true,"_id":"wVykn7rNp1x1Fvq3"}
+{"index":1651962938648,"author":"NercR9s6OSPI0rfR","content":"This is a test tweet","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeters":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651962938648},"_id":"TStqJ7Pr9aiaw9sr"}
+{"index":1651962938648,"author":"NercR9s6OSPI0rfR","content":"This is a test tweet","image":"","nbLikes":1,"likers":["NercR9s6OSPI0rfR"],"nbRetweets":0,"retweeters":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651962938648},"_id":"TStqJ7Pr9aiaw9sr"}
+{"index":1651962938648,"author":"NercR9s6OSPI0rfR","content":"This is a test tweet","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeters":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651962938648},"_id":"TStqJ7Pr9aiaw9sr"}
+{"$$deleted":true,"_id":"TStqJ7Pr9aiaw9sr"}
+{"index":1651962938826,"author":"rPbYk6sYiCjRXAex","content":"This is a test tweet","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeters":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651962938826},"_id":"5uWftcTi5zb15QZL"}
+{"index":1651962938826,"author":"rPbYk6sYiCjRXAex","content":"This is a test tweet","image":"","nbLikes":0,"likers":[],"nbRetweets":1,"retweeters":["rPbYk6sYiCjRXAex"],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651962938826},"_id":"5uWftcTi5zb15QZL"}
+{"index":1651962938826,"author":"rPbYk6sYiCjRXAex","content":"This is a test tweet","image":"","nbLikes":0,"likers":[],"nbRetweets":0,"retweeters":[],"nbComments":0,"comments":[],"dateCreated":{"$$date":1651962938826},"_id":"5uWftcTi5zb15QZL"}
+{"$$deleted":true,"_id":"5uWftcTi5zb15QZL"}
