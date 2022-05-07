@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha tests/**",
-    "initDB": "mocha database/databaseScripts/initDB.js",
-    "cleanDB": "mocha database/databaseScripts/cleanDB.js",
+    "initDB": "mocha scripts/initDB.js",
+    "cleanDB": "mocha scripts/cleanDB.js",
     "serve": "node src/index.js"
   },
   "author": "",

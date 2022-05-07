@@ -99,16 +99,25 @@ function init(dbusers, dbtweets){
 
     //logout service
     api.delete('/user/logout', (req, res) => {
-        if(req.session){
-            req.session.destroy(err => {
-                if(err){
-                    res.status(400).send('Unable to logout');
-                }else{
-                    res.status(200).send('Logout successfully');
-                }
+        try{
+            if(req.session){
+                req.session.destroy(err => {
+                    if(err){
+                        res.status(400).send('Unable to logout');
+                    }else{
+                        res.status(200).send('Logout successfully');
+                    }
+                });
+            }else{
+                res.end();
+            }
+        }catch(e){
+            // Exception
+            res.status(500).json({
+                status: 500,
+                message: "Internal error",
+                details: (e || "Unknown error").toString()
             });
-        }else{
-            res.end();
         }
     });
 
@@ -272,7 +281,7 @@ function init(dbusers, dbtweets){
                     return;
                 }
                 const follows = await users.getFollows(user['following']);
-                console.log('follows in api: ', follows);
+                //console.log('follows in api: ', follows);
                 res.send(follows);
             }
             catch (e) {

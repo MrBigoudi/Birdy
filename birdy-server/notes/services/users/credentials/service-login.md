@@ -13,16 +13,16 @@
     </tr>
     <tr>
         <td>Login</td>
-        <td>api/user/login avec POST</td>
-        <td>Permet de récupérer une clef de connexion valable un certain temps</td>
+        <td>/api/user/login avec POST</td>
+        <td>Permet de récupérer une cle de connexion valable un certain temps</td>
         <td>
-            emailAddress: l'adresse email de l'utilisateur,<br>
+            emailAddress: l'adresse email de l'utilisateur<br>
             passwd: le mot de passe de l'utilisateur<br>
         <td>
             Succes: HTTP 200: Ok<br>
             {<br>
-            status: 200,<br>
-            message: "Email address and password accepted"<br>
+                "status": 200,<br>
+                "message": ${corresponding message}<br>
             }<br><br>
             Erreur: <br>
             {<br>
@@ -33,8 +33,8 @@
         <td>
             Succes: HTTP 200: Ok<br>
             {<br>
-            status: 200,<br>
-            message: "Email address and password accepted"<br>
+                "status": 200,<br>
+                "message": "Email address and password accepted"<br>
             }<br><br>
             Erreur: HTTP 401: Unauthorized<br>
             {<br>
@@ -55,19 +55,27 @@
             {<br>
                 "status": 500,<br>
                 "message": "Internal error"<br>
+                "details": `${error || "Unknown error"}`<br>
             }<br>
         </td>
         <td>
-            Données incomplètes -> 400,<br>
-            Mauvaise données d'authentification -> 401,<br>
+            Données incomplètes -> 400<br>
+            Mauvaise données d'authentification -> 401<br>
             Acces non authorise -> 403<br>
             Erreur interne -> 500<br>
         </td>
         <td>Fini</td>
         <td>
-            apiUser.js (in src/api/),<br>
-            users.js (in src/entities/),<br>
-            testLogin.js (in tests/)
+            Fichiers utilises par le service:<br>
+            apiUser.js (in src/api/)<br>
+            users.js (in src/entities/)<br>
+            <br>
+            Fichiers test:<br>
+            testLogin.js (in tests/testUsers/)<br>
+            <br>
+            Fichiers client:<br>
+            Login.js (in src/pages/)<br>
+            <br>
         </td>
         <td>...</td>
     </tr>

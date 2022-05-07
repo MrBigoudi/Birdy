@@ -153,10 +153,12 @@ export default function Tweet(props){
     async function handleCheckUserPage(event){
         event.preventDefault();
         //console.log('tweet: ', props.tweet);
-        let userId = '';
+        let userId = props.user['_id'];
+        /*
         await axios
                 .get(`/api/user/getUserId/${props.user['username']}`)
                 .then( (res) => { userId = res.data; });
+        */
 
         const author = props.tweet['author'];
         //console.log('test handle check user page');
