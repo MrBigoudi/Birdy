@@ -141,7 +141,7 @@ class User{
     //return true if email already exists
     checkEmailAddress(emailAddress){
         return new Promise((resolve, reject) => {
-            this.db.find({ emailAddress: emailAddress },function (err, docs) {
+            this.db.find({ emailAddress: emailAddress.toLowerCase() },function (err, docs) {
                 if(err){
                     reject(err);
                 }
@@ -161,7 +161,7 @@ class User{
     //renvoie une erreur si le mdp ne correspond pas
     checkPasswd(emailAddress, passwd){
         return new Promise((resolve, reject) => {
-            this.db.find({ emailAddress: emailAddress, passwd: passwd }, { _id: 1}, function (err, docs) {
+            this.db.find({ emailAddress: emailAddress.toLowerCase(), passwd: passwd }, { _id: 1}, function (err, docs) {
                 if(err){
                     reject(err);
                 }
@@ -183,7 +183,7 @@ class User{
     //renvoie true si le pseudo existe deja
     checkUsername(username){
         return new Promise((resolve, reject) => {
-            this.db.find({ username: username }, function (err, docs) {
+            this.db.find({ username: username.toLowerCase() }, function (err, docs) {
                 const exists = (docs.length!==0);
                 if(err){
                     reject(err);

@@ -12,33 +12,33 @@ describe("Test connection d'un utilisateur",  () => {
 		let id = 0;
 
 		const user = {
-    		username: "test",
-    		fullname: "fulltest",
+    		username: "testLogin",
+    		fullname: "fulltestLogin",
     		dateOfBirth: "2000-05-12",
-    		emailAddress: "test@test.com",
+    		emailAddress: "testLogin@test.com",
     		passwd: "1234"
 		}
 
         const login = {
-			emailAddress: "test@test.com",
+			emailAddress: "testLogin@test.com",
 			passwd: "1234"
 		}
 
 		const login2  = {
 			emailAddress: "nimportequoi@gg.com",
-			passwd: "ok"
+			passwd: "1234"
 		}
 
 		const login3  = {
-			passwd: "ok"
+			passwd: "1234"
 		}
 
 		const login4 = {
-			emailAddress: "nimportequoi@gg.com"
+			emailAddress: "testLogin@test.com",
 		}
 
 		const login5 = {
-			emailAddress: "test@test.com",
+			emailAddress: "testLogin@test.com",
 			passwd: "wrong passwd"
 		}
 

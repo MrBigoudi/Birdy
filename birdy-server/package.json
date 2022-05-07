@@ -4,9 +4,10 @@
   "description": "Birdy app server side",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests/**",
+    "test": "mocha tests/testUsers/testLogin.js",
     "initDB": "mocha scripts/initDB.js",
     "cleanDB": "mocha scripts/cleanDB.js",
+    "curlTests": "./scripts/curlTests.sh",
     "serve": "node src/index.js"
   },
   "author": "",
