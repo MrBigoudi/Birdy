@@ -21,7 +21,8 @@ import "../../stylesheets/components/tweet.css";
 //a tweet as a prop
 export default function Tweet(props){
 
-    const [nbReplies, setNbReplies] = useState([props.tweet['nbComments'], false]);
+    //const [nbReplies, setNbReplies] = useState([props.tweet['nbComments'], false]);
+    const nbReplies = props.tweet['nbComments'];
     const [nbRetweets, setNbRetweets] = useState([props.tweet['nbRetweets'], false]);
     const [nbLikes, setNbLikes] = useState([props.tweet['nbLikes'],false]);
 
@@ -42,7 +43,7 @@ export default function Tweet(props){
     function handleDelete(event){
         //console.log("handleDelete");
         setDeleted (prev => {
-            return !prev;
+            return !deleted;
         })
         return props.id;
     }
@@ -174,7 +175,7 @@ export default function Tweet(props){
         <article className="tweet">
             <div className="left-side-tweet">
                 <img src={author['profilePicture']==="" ? DEFAULT_PP : author['profilePicture']}
-                    alt="tweet author's profile picture"
+                    alt="author's profile"
                     height="60" width="60"
                 />
             </div>

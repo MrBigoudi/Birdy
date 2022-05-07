@@ -109,7 +109,7 @@ export default function Login(){
                         value={formData.passwd}                        
                     />
                     <input 
-                        className={`form-submit ${isInvalid && "submit-invalid" || "submit"}`}
+                        className={`form-submit ${(isInvalid && "submit-invalid") || "submit"}`}
                         type="submit" 
                         value="Log In"
                         disabled={isInvalid}

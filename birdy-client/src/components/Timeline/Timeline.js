@@ -123,7 +123,7 @@ export default function Timeline(props){
         //console.log("handleHideTweet");
         setTweetList( prev => {
             //console.log("setTweetList");
-            const tweetListTmp = ( prev.map(item => {
+            const tweetListTmp = ( tweetList.map(item => {
                 if(item[0]['_id']===id)
                 {
                     //console.log("hidden");

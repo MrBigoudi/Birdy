@@ -11,12 +11,14 @@ import "../stylesheets/form.css";
 // import { checkAlreadyExist, addUserFromSignup } from "../database/users.js";
 
 export default function Signup(){
+    /*
     const server_config = {
         headers: {
             'Access-Control-Allow-Origin': "*",
             'Content-Type': 'application/json:charset=UTF-8',
         }
     }
+    */
 
     useEffect( () => {
         document.title = "Signup - Birdy";
@@ -160,7 +162,7 @@ export default function Signup(){
                         value={formData.passwd}                   
                     />
                     <input 
-                        className={`form-submit ${isInvalid && "submit-invalid" || "submit"}`}
+                        className={`form-submit ${(isInvalid && "submit-invalid") || "submit"}`}
                         type="submit" 
                         value="Sign Up"
                         disabled={isInvalid}

@@ -95,7 +95,7 @@ export default function NewTweet(props){
         <div id="new-tweet" className="tweet new-tweet">
             <div className="left-side-tweet">
             <img src={props.user['profilePicture']!=="" ? props.user['profilePicture'] : DEFAULT_PP}
-                    alt="profile picture"
+                    alt="user's profile"
                     height="70" width="70"
                 />
             </div>

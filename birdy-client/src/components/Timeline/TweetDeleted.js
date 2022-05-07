@@ -9,7 +9,7 @@ export default function TweetDeleted(props){
     function handleDelete(event){
         //console.log("handleDelete");
         setDeleted (prev => {
-            return !prev;
+            return !deleted;
         })
         return props.id;
     }
