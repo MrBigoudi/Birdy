@@ -214,7 +214,7 @@ class User{
     //renvoie true si le nom est valide
     checkFullName(fullname){
         return new Promise((resolve, reject) => {
-            const regName = /^[a-zA-Z]+(\ *[a-zA-Z]*)*$/;
+            const regName = /^[a-zA-Z]+(\ *[a-zA-Z]+)*$/;
             if(!regName.test(filter.clean(fullname))) {
                 resolve(false);
             } else {
