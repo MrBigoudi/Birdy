@@ -34,7 +34,7 @@
                 "tweetsReplied": [ ${_idTweet1}, ${_idTweet2}, ... ],<br>
                 "profilePicture": ${profilePicture},<br>
                 "dateCreated": ${dateCreated},<br>
-                "_id": ${_id},<br>
+                "_id": ${_id}<br>
             }<br><br>
             Erreur: <br>
             {<br>

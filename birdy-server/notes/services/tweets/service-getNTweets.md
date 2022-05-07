@@ -12,47 +12,45 @@
         <th>INFOS SUPPLEMENTAIRES</th>
     </tr>
     <tr>        
-        <td>getFollows</td>
-        <td>/api/user/:_id/follows avec GET</td>
+        <td>getNTweets</td>
+        <td>/apiTweet/tweet/getNTweets/:nbTweets avec GET</td>
         <td>
-            Permet d'obtenir la liste des utilisateurs que suit un utilisateur dont on a l'identifiant
+            Permet d'obtenir la liste des nbTweets les plus recents
         </td>
         <td>
-            _id: l'identifiant de l'utilisateur<br>
+            nbTweets: le nombre de tweets a recuperer<br>
         </td>
         <td>
             Succes: HTTP 200: Ok<br>
-            retour : [${user1}, ${user2}, ... ]<br>
+            retour : [${tweet1}, ${tweet2}, ... ]<br>
             <br><br>
             Error: ${HTTP number}<br>
             retour: ${corresponding message}<br>
         </td>
         <td>
             Succes: HTTP 200: Ok<br>
-            retour : [${user1}, ${user2}, ... ]<br>
-            <br><br>
-            Error: HTTP 404: Not Found<br>
-            retour: `User not found`<br>
+            retour : [${tweet1}, ${tweet2}, ... ]<br>
             <br><br>
             Error: HTTP 500: Internal Error<br>
             retour: `Internal error`<br>
         </td>
         <td></td>
         <td>
-            Utilisateur inconnu -> 404<br>
             Erreur interne -> 500<br>
         </td>
         <td>Fini</td>
         <td>
             Fichiers utilises par le service:<br>
-            apiUser.js (in src/api/)<br>
-            users.js (in src/entities/)<br>
+            apiTweet.js (in src/api/)<br>
+            tweets.js (in src/entities/)<br>
             <br>
             Fichiers test:<br>
-            testFollows.js (in tests/testUsers/)<br>
+            testGetTweets (in tests/testTweets/)<br>
             <br>
             Fichiers client:<br>
-            SideBar.js (in src/components/SideBar/)<br>
+            Dashboard.js (in src/pages/)<br>
+            Profile.js (in src/pages/)<br>
+            Timeline.js (in src/components/Timeline/)<br>
             <br>
         </td>
         <td>...</td>

@@ -13,7 +13,7 @@
     </tr>
     <tr>        
         <td>NewTweet</td>
-        <td>apiTweet/tweet/newTweet avec POST</td>
+        <td>/apiTweet/tweet/newTweet avec POST</td>
         <td>
             Permet de creer un nouveau tweet et de le placer dans la liste des tweets de l'auteur
         </td>
@@ -26,8 +26,7 @@
             Succes: HTTP 201: Created<br>
             {<br>
                 "status": 201,<br>
-                "message": "New tweet created",<br>
-                "id": ${id}<br>
+                "message": ${corresponding message}<br>
             }<br><br>
             Erreur: <br>
             {<br>
@@ -40,7 +39,7 @@
             {<br>
                 "status": 201,<br>
                 "message": "New tweet created",<br>
-                "id": 1<br>
+                "id": ${_id}<br>
             }<br><br>
             Erreur: HTTP 40O: Bad Request<br>
             {<br>
@@ -75,13 +74,21 @@
             Autheur non reconnu -> 404<br>
             Erreur interne -> 500<br>
         </td>
-        <td>En cours</td>
+        <td>Fini</td>
         <td>
-            apiTweet.js (in src/api/),<br>
-            tweet.js (in src/entities/),<br>
-            apiUser.js (in src/api/),<br>
-            users.js (in src/entities/),<br>
-            testNewTweet.js (in tests/)
+            Fichiers utilises par le service:<br>
+            apiTweet.js (in src/api/)<br>
+            tweets.js (in src/entities/)<br>
+            <br>
+            Fichiers test:<br>
+            testLikeTweet.js (in tests/testUsers/)<br>
+            testDeleteTweets.js (in tests/testTweets/)<br>
+            testGetTweets.js (in tests/testTweets/)<br>
+            testNewTweet.js (in tests/testTweets/)<br>
+            <br>
+            Fichiers client:<br>
+            NewTweet.js (in src/components/Timeline/)<br>
+            <br>
         </td>
         <td>...</td>
     </tr>

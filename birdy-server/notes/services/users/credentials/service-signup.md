@@ -13,7 +13,7 @@
     </tr>
     <tr>
         <td>Signup</td>
-        <td>api/user/signup avec POST</td>
+        <td>/api/user/signup avec POST</td>
         <td>Permet de creer un nouvel utilisateur</td>
         <td>
             username: le pseudo de l'utilisateur,<br>
@@ -26,8 +26,7 @@
             Succes: HTTP 201: Created<br>
             {<br>
                 "status": 201,<br>
-                "message": "New user registered",<br>
-                "id": ${id}<br>
+                "message": ${corresponding message}<br>
             }<br><br>
             Erreur: <br>
             {<br>
@@ -40,7 +39,7 @@
             {<br>
                 "status": 201,<br>
                 "message": "New user registered",<br>
-                "id": 1<br>
+                "id": ${_id}<br>
             }<br><br>
             Erreur: HTTP 40O: Bad Request<br>
             {<br>
@@ -81,7 +80,7 @@
         <td>
             Champs manquant -> 400<br>
             Username existe déjà -> 409<br>
-            Username au format invalid -> 409<br>
+            Username au format invalid ou username inapproprie -> 422<br>
             Email existe déjà -> 409<br>
             Date de naissance au format invalide ou age < 13 ans -> 422<br>
             Nom au format invalide ou nom inapproprie -> 422<br>
@@ -89,9 +88,17 @@
         </td>
         <td>Fini</td>
         <td>
-            apiUser.js (in src/api/),<br>
-            users.js (in src/entities/),<br>
-            testSignup.js (in tests/)
+            Fichiers utilises par le service:<br>
+            apiUser.js (in src/api/)<br>
+            users.js (in src/entities/)<br>
+            <br>
+            Fichiers test:<br>
+            testSignup.js (in tests/testUsers/)<br>
+            testLogin.js (in tests/testUsers/)<br>
+            <br>
+            Fichiers client:<br>
+            Signup.js (in src/pages/)<br>
+            <br>
         </td>
         <td>...</td>
     </tr>

@@ -29,7 +29,7 @@ function init(dbtweets, dbusers){
         }
     })
 
-    //get all tweets
+    //get n tweets
     api
         .get("/tweet/getNTweets/:nbTweets", async (req, res) => {
             try{
@@ -40,7 +40,7 @@ function init(dbtweets, dbusers){
             }
         })
 
-    //get all tweets
+    //get n tweets from user
     api
     .get("/tweet/:authorId/:nbTweets", async (req, res) => {
         try{
@@ -51,18 +51,18 @@ function init(dbtweets, dbusers){
         }
     })
 
-    //get tweet id
-    api
-        .post("/tweet/getTweetId", async (req, res) => {
-            try{
-                //console.log('tweet in api getTweetId: ', req.body);
-                const tweetId = await tweets.getTweetId(req.body);
-                //console.log('tweetId in api getTweetId: ', tweetId);
-                res.status(200).send(tweetId);
-            } catch(e){
-                res.status(500).send("Internal error");
-            }
-        })
+    // //get tweet id
+    // api
+    //     .post("/tweet/getTweetId", async (req, res) => {
+    //         try{
+    //             //console.log('tweet in api getTweetId: ', req.body);
+    //             const tweetId = await tweets.getTweetId(req.body);
+    //             //console.log('tweetId in api getTweetId: ', tweetId);
+    //             res.status(200).send(tweetId);
+    //         } catch(e){
+    //             res.status(500).send("Internal error");
+    //         }
+    //     })
 
 
     api
@@ -84,7 +84,18 @@ function init(dbtweets, dbusers){
                 res.status(500).send("Internal error");
             }
         })
-        //delete tweet service
+        //delete twe//get tweet id
+    // api
+    //     .post("/tweet/getTweetId", async (req, res) => {
+    //         try{
+    //             //console.log('tweet in api getTweetId: ', req.body);
+    //             const tweetId = await tweets.getTweetId(req.body);
+    //             //console.log('tweetId in api getTweetId: ', tweetId);
+    //             res.status(200).send(tweetId);
+    //         } catch(e){
+    //             res.status(500).send("Internal error");
+    //         }
+    //     })et service
         .delete(async (req, res, next) => {
             //console.log('test api.delete');
             try{

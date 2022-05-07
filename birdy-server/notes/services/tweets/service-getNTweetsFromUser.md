@@ -12,37 +12,45 @@
         <th>INFOS SUPPLEMENTAIRES</th>
     </tr>
     <tr>        
-        <td>CleanDB</td>
-        <td>/api/user/clean avec DELETE</td>
-        <td>Permet de remettre a 0 la base de donnees users.db</td>
-        <td>Aucun</td>
+        <td>getNTweetsFromUser</td>
+        <td>/apiTweet/tweet/:authorId/:nbTweets avec GET</td>
+        <td>
+            Permet d'obtenir la liste des nbTweets les plus recents d'un utilisateur
+        </td>
+        <td>
+            authorId: l'auteur des tweets que l'on veut recuperer<br>
+            nbTweets: le nombre de tweets a recuperer<br>
+        </td>
         <td>
             Succes: HTTP 200: Ok<br>
-            retour: ${corresponding message}<br>
+            retour : [${tweet1}, ${tweet2}, ... ]<br>
             <br><br>
-            Error: HTTP 500: Internal Error<br>
+            Error: ${HTTP number}<br>
             retour: ${corresponding message}<br>
         </td>
         <td>
             Succes: HTTP 200: Ok<br>
-            retour: `${nbRemoved} users deleted successfully from the database`
+            retour : [${tweet1}, ${tweet2}, ... ]<br>
             <br><br>
             Error: HTTP 500: Internal Error<br>
             retour: `Internal error`<br>
         </td>
+        <td></td>
         <td>
             Erreur interne -> 500<br>
         </td>
         <td>Fini</td>
         <td>
             Fichiers utilises par le service:<br>
-            apiUser.js (in src/api/)<br>
-            users.js (in src/entities/)<br>
+            apiTweet.js (in src/api/)<br>
+            tweets.js (in src/entities/)<br>
             <br>
             Fichiers test:<br>
-            cleanDB.js (in scripts/)<br>
+            testGetTweets (in tests/testTweets/)<br>
             <br>
             Fichiers client:<br>
+            Profile.js (in src/pages/)<br>
+            Timeline.js (in src/components/Timeline/)<br>
             <br>
         </td>
         <td>...</td>

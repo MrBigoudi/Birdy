@@ -410,17 +410,17 @@ function init(dbusers, dbtweets){
         }
     });
 
-    //get user id
-    api.get("/user/getUserId/:username", async (req, res) => {
-        try{
-            //console.log('username in api getUserId: ', req.params.username);
-            const userId = await users.getUserId(req.params.username);
-            //console.log('userId in api getUserId: ', userId);
-            res.status(200).send(userId);
-        } catch(e){
-            res.status(500).send("Internal error");
-        }
-    })
+    // //get user id
+    // api.get("/user/getUserId/:username", async (req, res) => {
+    //     try{
+    //         //console.log('username in api getUserId: ', req.params.username);
+    //         const userId = await users.getUserId(req.params.username);
+    //         //console.log('userId in api getUserId: ', userId);
+    //         res.status(200).send(userId);
+    //     } catch(e){
+    //         res.status(500).send("Internal error");
+    //     }
+    // })
 
     // reTweet service
     api

@@ -13,7 +13,7 @@
     </tr>
     <tr>        
         <td>DeleteTweet</td>
-        <td>apiTweet/tweet/:_id avec DELETE</td>
+        <td>/apiTweet/tweet/:_id avec DELETE</td>
         <td>
             Permet de supprimer un tweet de la base de donnees a partir de son identifiant
         </td>
@@ -22,35 +22,35 @@
         </td>
         <td>
             Succes: HTTP 200: Ok<br>
-            {<br>
-                "delete tweet ${_id}"
-            }<br><br>
-            Erreur: <br>
-            {<br>
-                "status": ${HTTP number},<br>
-                "message": ${corresponding message}<br>
-            }<br>
+            retour: ${corresponding message}<br>
+            <br><br>
+            Error: ${HTTP number}<br>
+            retour: ${corresponding message}<br>
         </td>
         <td>
             Succes: HTTP 200: Ok<br>
-            {<br>
-                ...
-            }<br><br>
-            Erreur: HTTP 500: Internal Server Error<br>
-            {<br>
-                "status": 500,<br>
-                "message": "Internal error"<br>
-            }<br>
+            retour: `delete tweet ${_id}`
+            <br><br>
+            Error: HTTP 500: Internal Error<br>
+            retour: `Internal error`<br>
         </td>
         <td>
             Erreur interne -> 500<br>
         </td>
         <td>Fini</td>
         <td>
-            apiTweet.js (in src/api/),<br>
-            tweets.js (in src/entities/),<br>
-            testNewTweet.js (in tests/),<br>
-            testDeleteTweets.js (in tests/)
+            Fichiers utilises par le service:<br>
+            apiTweet.js (in src/api/)<br>
+            tweets.js (in src/entities/)<br>
+            <br>
+            Fichiers test:<br>
+            testLikeTweet.js (in tests/testUsers/)<br>
+            testDeleteTweets.js (in tests/testTweets/)<br>
+            testGetTweets.js (in tests/testTweets/)<br>
+            testNewTweet.js (in tests/testTweets/)<br>
+            <br>
+            Fichiers client:<br>
+            <br>
         </td>
         <td>...</td>
     </tr>
