@@ -75,7 +75,7 @@ $ npm run curlTests
 ### Clean Databases
 <br>
 
-If you want to empty the databases ( <strong>BE CAREFUL AS THIS IS NOT RECOVABLE</strong> ) you can use the script in <em>birdy-server/scripts/cleanDB.js</em>.
+If you want to empty the databases ( <strong>BE CAREFUL AS THIS IS NOT RECOVERABLE</strong> ) you can use the script in <em>birdy-server/scripts/cleanDB.js</em>.
 
 First launch the server,<br>
 
