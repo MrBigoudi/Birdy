@@ -29,7 +29,6 @@
             }<br>
         </td>
         <td></td>
-        <td></td>
         <td>
             Erreur interne -> 500<br>
         </td>
