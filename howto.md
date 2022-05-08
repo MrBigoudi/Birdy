@@ -22,7 +22,7 @@ $ npm start
 ## Node Modules
 <br>
 
-To install all the needed modules instead of getting them from github :
+To install all the needed modules :
 
 ```sh
 #Open a terminal
