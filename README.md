@@ -229,7 +229,7 @@ Users database's architecture
 ### Tweets
 <br>
 
-Users database's architecture
+Tweets database's architecture
 <br><br>
 
 <strong>Index</strong><em>(now obsolete)</em>
