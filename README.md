@@ -1,4 +1,4 @@
-# The Birdy Project test
+# The Birdy Project
 
 <em>Project UE LU3IN017: Web Technologies</em><br>
 <em>Made by KEDADRY Yannis ( [github MrBigoudi](https://github.com/MrBigoudi) ) 3808875</em>
