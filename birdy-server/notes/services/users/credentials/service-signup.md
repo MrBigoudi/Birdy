@@ -26,7 +26,8 @@
             Succes: HTTP 201: Created<br>
             {<br>
                 "status": 201,<br>
-                "message": ${corresponding message}<br>
+                "message": ${corresponding message},<br>
+                "id": ${_id}<br>
             }<br><br>
             Erreur: <br>
             {<br>
