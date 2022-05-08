@@ -57,7 +57,7 @@ export default function Signup(){
         //console.log('res.data: ', res.data);
         if(res.data['status'] !== 201){
             setError(res.data['message']);
-            console.log('error: ', error);
+            //console.log('error: ', error);
         }else{
             const _id = res.data['id'];
             //console.log('user_id: ', _id);
@@ -69,9 +69,9 @@ export default function Signup(){
         if (err.response) {
             // The request was made and the server responded with a status code
             // that falls out of the range of 2xx
-            console.log('err.response.data: ',    err.response.data);
-            console.log('err.response.status: ',  err.response.status);
-            console.log('err.response.headers: ', err.response.headers);
+            //console.log('err.response.data: ',    err.response.data);
+            //console.log('err.response.status: ',  err.response.status);
+            //console.log('err.response.headers: ', err.response.headers);
             setError(err.response.data['message']);
         } else if (err.request) {
             // The request was made but no response was received
