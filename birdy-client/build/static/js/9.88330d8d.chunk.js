@@ -1,2 +1,0 @@
-(this["webpackJsonpbirdy-client"]=this["webpackJsonpbirdy-client"]||[]).push([[9],{113:function(t,e,n){"use strict";n.r(e),n.d(e,"default",(function(){return s}));var c=n(0),i=n(2);function s(){return Object(c.useEffect)((function(){document.title="404 - Not Found"})),Object(i.jsx)("main",{className:"title-container",children:Object(i.jsx)("h1",{className:"page-title",children:"404 - Not\u2002Found"})})}}}]);
-//# sourceMappingURL=9.88330d8d.chunk.js.map

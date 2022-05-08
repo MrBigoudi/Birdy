@@ -3,6 +3,7 @@
 # dependencies
 /birdy-client/node_modules
 /birdy-server/node_modules
+/birdy-client/build
 /.pnp
 .pnp.js
 
