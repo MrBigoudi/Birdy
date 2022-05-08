@@ -26,7 +26,7 @@ The README.md inside of the folder is from the <em>create-react-app</em> documen
 
 <strong>Node Modules</strong>
 
->The modules needed for the client side of birdy to work (see [howto.md](./howto.md##node-modules) for more info)
+>The modules needed for the client side of birdy to work (see [howto.md](./howto.md#node-modules) for more info)
 
 
 <br>
@@ -92,7 +92,7 @@ It's actually a local server as it'll run on [http://localhost:4000](http://loca
 
 <strong>Node Modules</strong>
 
->The modules needed for the server side of birdy to work (see [howto.md](./howto.md##node-modules) for more info)
+>The modules needed for the server side of birdy to work (see [howto.md](./howto.md#node-modules) for more info)
 
 
 <br>
@@ -106,7 +106,7 @@ It's actually a local server as it'll run on [http://localhost:4000](http://loca
 
 <strong>Scripts</strong>
 
->Scripts for testing or initiate the server and the databases (see [howto.md](./howto.md##server-scripts) for more info)
+>Scripts for testing or initiate the server and the databases (see [howto.md](./howto.md#server-scripts) for more info)
 
 
 <br>
@@ -128,7 +128,7 @@ It's actually a local server as it'll run on [http://localhost:4000](http://loca
 
 <strong>Tests</strong>
 
->Mocha and chai tests for apis and databases (see [howto.md](./howto.md##server-tests) for more info)
+>Mocha and chai tests for apis and databases (see [howto.md](./howto.md#server-tests) for more info)
 
 
 <br>
