@@ -66,7 +66,8 @@ class User{
                     tweetsRetweeted: [],
                     tweetsReplied: [],
                     profilePicture: "",
-                    dateCreated: new Date()
+                    dateCreated: new Date(),
+                    blockedTerms: []
                 }
                 this.db.insert(newUser);
             }
@@ -300,7 +301,18 @@ class User{
                     reject(null);
                 }
 
-                const tweets = docs[0]['tweets'];
+                //const blockedTerms = docs[0]['blockedTerms'];
+                /*
+                const tweets = docs[0]['tweets'].filter((item) => {
+                    for(let word of item['content']){
+                        if(blockedTerms.includes(word))
+                            return false;
+                    }
+                    return true;
+                });
+                */
+               const tweets = docs[0]['tweets'];
+
 
                 if(!tweets) {
                     //erreur
@@ -465,6 +477,65 @@ class User{
                     reject(err);
                 } else {
                     resolve(unfollowerId);
+                }
+            });
+        });
+    }
+
+    /** TME Solo **/
+
+    //ajoute un mot bloque dans la liste des mots bloques de l'utilisateur
+    addBlockTerm(userId, newBlockTerm){
+        return new Promise( (resolve, reject) => {
+            this.db.update( {_id: userId }, { $push: { blockedTerms: newBlockTerm } }, {}, function (err, numReplaced) {
+                if(err){
+                    reject(err);
+                }
+                if(numReplaced === 0){
+                    //si le mot ne s'est pas ajoute correctement
+                    resolve(false);
+                } else {
+                    resolve(true);
+                }
+            });
+        });
+    }
+
+    //verif qu'un mot bloque existe deja
+    blockTermExists(userId, newBlockTerm){
+        return new Promise( (resolve, reject) => {
+            this.db.find( {_id: userId }, { _id: 0 }, function(err, docs) {
+                if(err){
+                    reject(err);
+                }
+                if(docs.length !== 1){
+                    reject(null);
+                }
+
+                const blockedTerms = docs[0]['blockedTerms'];
+
+                if(!blockedTerms) {
+                    //erreur
+                    reject(err);
+                } else {
+                    resolve(blockedTerms.includes(newBlockTerm));
+                }
+            });
+        });
+    }
+
+    //enleve un mot bloque dans la liste des mots bloques de l'utilisateur
+    removeBlockTerm(userId, newBlockTerm){
+        return new Promise( (resolve, reject) => {
+            this.db.update( {_id: userId }, { $pull: { blockedTerms: newBlockTerm } }, {}, function (err, numReplaced) {
+                if(err){
+                    reject(err);
+                }
+                if(numReplaced === 0){
+                    //si le mot ne s'est pas ajoute correctement
+                    resolve(false);
+                } else {
+                    resolve(true);
                 }
             });
         });

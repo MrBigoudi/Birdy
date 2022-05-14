@@ -604,6 +604,118 @@ function init(dbusers, dbtweets){
             }
         });
 
+
+    /** TME Solo **/
+    api
+        .route('user/:id/blockedTerms')
+        .post(async (req, res) => {
+            //console.log('test like tweet before try');
+            try{
+                const userId = req.params._id;
+                const { newBlockTerm } = req.body;
+
+                //console.log('check user exists');
+                if(!await users.get(userId)){
+                    res.status(404).json({
+                        status: 404,
+                        message: "User not found"
+                    });
+                    return;
+                }
+
+                // s'il n'y a pas le terme a ajouter
+                if(!newBlockTerm){
+                    res.status(400).json({
+                        status: 400,
+                        message: "Missing Field"
+                    });
+                    return;
+                }
+
+                if(await users.blockTermExists(userId, newBlockTerm)){
+                    res.status(409).json({
+                        status: 409,
+                        message: "Blocked Term already set"
+                    });
+                    return;
+                }
+
+                if(!await users.addBlockTerm(userId, newBlockTerm)){
+                    res.status(422).json({
+                        status: 422,
+                        message: "Can't add this block term"
+                    });
+                    return;
+                }
+
+                res.status(201).send('New blocked term added successfully');
+
+            } catch(e) {
+                //console.log('test like tweet in catch');
+                // Exception
+                res.status(500).json({
+                    status: 500,
+                    message: "Internal error",
+                    details: (e || "Unknown error").toString()
+                });
+            }
+        });
+
+    api
+        .route('user/:id/removeBlockedTerms')
+        .post(async (req, res) => {
+            //console.log('test like tweet before try');
+            try{
+                const userId = req.params._id;
+                const { newBlockTerm } = req.body;
+
+                //console.log('check user exists');
+                if(!await users.get(userId)){
+                    res.status(404).json({
+                        status: 404,
+                        message: "User not found"
+                    });
+                    return;
+                }
+
+                // s'il n'y a pas le terme a supprimer
+                if(!newBlockTerm){
+                    res.status(400).json({
+                        status: 400,
+                        message: "Missing Field"
+                    });
+                    return;
+                }
+
+                if(! await users.blockTermExists(userId, newBlockTerm)){
+                    res.status(404).json({
+                        status: 404,
+                        message: "Blocked Term wasn't set"
+                    });
+                    return;
+                }
+
+                if(!await users.removeBlockTerm(userId, newBlockTerm)){
+                    res.status(422).json({
+                        status: 422,
+                        message: "Can't remove this block term"
+                    });
+                    return;
+                }
+
+                res.status(201).send('New blocked term removed successfully');
+
+            } catch(e) {
+                //console.log('test like tweet in catch');
+                // Exception
+                res.status(500).json({
+                    status: 500,
+                    message: "Internal error",
+                    details: (e || "Unknown error").toString()
+                });
+            }
+        });
+
     return api;
 }
 

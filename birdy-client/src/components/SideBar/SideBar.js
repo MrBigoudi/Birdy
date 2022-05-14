@@ -11,6 +11,10 @@ export default function SideBar(props){
     const [follows, setFollows ] = useState([]);
     const [followed, setFollowed] = useState(false);
     const [userCurPage, setUserCurPage] = useState();
+    /* TME Solo */
+    const [formAddBlockTerm, setFormAddBlockTerm] = useState("");
+    const [formDelBlockTerm, setFormDelBlockTerm] = useState("");
+
     const navigate = useNavigate();
 
     useEffect( () => {
@@ -95,6 +99,27 @@ export default function SideBar(props){
                 </div>
             </div>
         );
+    }
+
+    /* TME Solo */
+    async function handleAddNewBlockTerm(event, userId){ 
+        if(!formAddBlockTerm!==""){
+            axios
+                .post(`/api/user/${props.connectedUser}/blockedTerms`, { newBlockTerm: formAddBlockTerm })
+                .then( () => {
+                    setFormAddBlockTerm("");
+                })
+        }
+    }
+
+    async function handleDeleteNewBlockTerm(event, userId){ 
+        if(!formDelBlockTerm!==""){
+            axios
+                .post(`/api/user/${props.connectedUser}/removeBlockedTerms`, { newBlockTerm: formDelBlockTerm })
+                .then( () => {
+                    setFormDelBlockTerm("");
+                })
+        }
     }
 
     return(
