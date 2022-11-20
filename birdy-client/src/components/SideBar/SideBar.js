@@ -12,8 +12,8 @@ export default function SideBar(props){
     const [followed, setFollowed] = useState(false);
     const [userCurPage, setUserCurPage] = useState();
     /* TME Solo */
-    const [formAddBlockTerm, setFormAddBlockTerm] = useState("");
-    const [formDelBlockTerm, setFormDelBlockTerm] = useState("");
+    // const [formAddBlockTerm, setFormAddBlockTerm] = useState("");
+    // const [formDelBlockTerm, setFormDelBlockTerm] = useState("");
 
     const navigate = useNavigate();
 
@@ -102,25 +102,25 @@ export default function SideBar(props){
     }
 
     /* TME Solo */
-    async function handleAddNewBlockTerm(event, userId){ 
-        if(!formAddBlockTerm!==""){
-            axios
-                .post(`/api/user/${props.connectedUser}/blockedTerms`, { newBlockTerm: formAddBlockTerm })
-                .then( () => {
-                    setFormAddBlockTerm("");
-                })
-        }
-    }
+    // async function handleAddNewBlockTerm(event, userId){ 
+    //     if(!formAddBlockTerm!==""){
+    //         axios
+    //             .post(`/api/user/${props.connectedUser}/blockedTerms`, { newBlockTerm: formAddBlockTerm })
+    //             .then( () => {
+    //                 setFormAddBlockTerm("");
+    //             })
+    //     }
+    // }
 
-    async function handleDeleteNewBlockTerm(event, userId){ 
-        if(!formDelBlockTerm!==""){
-            axios
-                .post(`/api/user/${props.connectedUser}/removeBlockedTerms`, { newBlockTerm: formDelBlockTerm })
-                .then( () => {
-                    setFormDelBlockTerm("");
-                })
-        }
-    }
+    // async function handleDeleteNewBlockTerm(event, userId){ 
+    //     if(!formDelBlockTerm!==""){
+    //         axios
+    //             .post(`/api/user/${props.connectedUser}/removeBlockedTerms`, { newBlockTerm: formDelBlockTerm })
+    //             .then( () => {
+    //                 setFormDelBlockTerm("");
+    //             })
+    //     }
+    // }
 
     return(
         <section className="side-bar">
